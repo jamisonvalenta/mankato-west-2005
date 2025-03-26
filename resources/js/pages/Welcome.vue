@@ -92,7 +92,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <div
-                    class="relative w-full bg-white overflow-hidden rounded-t-lglg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-r-lg lg:rounded-t-none"
+                    class="flex items-center w-full bg-white overflow-hidden rounded-t-lglg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-r-lg lg:rounded-t-none"
                 >
                     <img
                         class="w-full"
