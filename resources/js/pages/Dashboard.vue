@@ -41,16 +41,18 @@ const breadcrumbs: BreadcrumbItem[] = [
                                             </span>
                                         </dd>
                                     </div>
-                                    <div class="flex justify-between py-4 gap-x-4">
-                                        <dt class="text-gray-500">
-                                            Payment Status
-                                        </dt>
-                                        <dd class="text-gray-700">
-                                            <span class="mx-2 px-3 py-2 rounded-md bg-red-200 text-sm inline-block">
-                                                begin registration
-                                            </span>
-                                        </dd>
-                                    </div>
+                                    <template v-if="registrationFilled">
+                                        <div class="flex justify-between py-4 gap-x-4">
+                                            <dt class="text-gray-500">
+                                                Payment Status
+                                            </dt>
+                                            <dd class="text-gray-700">
+                                                <span class="mx-2 px-3 py-2 rounded-md bg-red-200 text-sm inline-block">
+                                                    begin registration
+                                                </span>
+                                            </dd>
+                                        </div>
+                                    </template>
                                 </dl>
                             </section>
                         </div>

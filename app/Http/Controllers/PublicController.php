@@ -15,8 +15,7 @@ class PublicController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('Public', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+        return Inertia::render('Welcome', [
         ]);
     }
 }
