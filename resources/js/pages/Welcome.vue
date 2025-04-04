@@ -7,9 +7,10 @@ import { Head, Link } from '@inertiajs/vue3';
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
-    <div class="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-gray-300 dark:bg-[#0a0a0a] lg:justify-center lg:p-8">
+    <div class="flex min-h-screen flex-col items-center bg-gray-200 p-6 text-gray-300 dark:bg-[#0a0a0a] lg:justify-center lg:p-8">
         <header class="not-has-[nav]:hidden mb-6 w-full max-w-[335px] lg:max-w-4xl">
             <nav class="flex items-center justify-end gap-4">
+                <!--
                 <Link
                     v-if="$page.props.auth.user"
                     :href="route('dashboard')"
@@ -31,6 +32,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         Register
                     </Link>
                 </template>
+                 -->
             </nav>
         </header>
         <div class="duration-750 starting:opacity-0 flex w-full items-center justify-center opacity-100 transition-opacity lg:grow">
@@ -38,16 +40,16 @@ import { Head, Link } from '@inertiajs/vue3';
                 <div
                     class="flex-1 rounded-bl-lg rounded-br-lg bg-white p-6 pb-12 leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:bg-gray-900 dark:text-gray-50 dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] lg:rounded-br-none lg:rounded-tl-lg lg:p-10"
                 >
-                    <h1 class="mb-4 text-xl font-semibold">Welcome Mankato West Class of 2005!</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-gray-200 text-base">
+                    <h1 class="text-gray-700 dark:text-gray-100 mb-4 text-xl font-semibold">Welcome Mankato West Class of 2005!</h1>
+                    <p class="mb-2 text-gray-800 dark:text-gray-200 text-base">
                         This is your one-stop-shop for all things reunion!
                     </p>
 
 
-                    <h2 class="mt-12 mb-4 text-lg font-semibold">
+                    <h2 class="text-gray-700 dark:text-gray-100 mt-12 mb-4 text-lg font-semibold">
                         Tenative Schedule
                     </h2>
-                    <dl class="grid grid-cols-[6em,1fr] md:grid-cols-[10em,1fr] gap-2 text-base">
+                    <dl class="grid grid-cols-[6em,1fr] md:grid-cols-[10em,1fr] gap-2 text-gray-700 dark:text-gray-100  text-base">
                         <dt class="uppercase text-sm font-semibold dark:text-gray-400">Location</dt>
                         <dd>
                             <a class="hover:text-blue-500 dark:hover:text-blue-200" href="https://www.thevenuemankato.com">
@@ -75,7 +77,11 @@ import { Head, Link } from '@inertiajs/vue3';
                         <dd>Event ends</dd>
                     </dl>
 
-                    <div class="mt-16 mb-4 text-[#706f6c] dark:text-gray-200 text-base grid grid-cols-2 gap-x-24">
+                    <p class="mt-8 mb-2 text-gray-700 dark:text-gray-100 text-base">
+                        Registration will open late April, 2005
+                    </p>
+<!--
+                    <div class="mt-16 mb-4 text-gray-800 dark:text-gray-200 text-base grid grid-cols-2 gap-x-24">
                         <Link
                             :href="route('login')"
                             class="inline-block rounded-sm border border-blue-600 px-5 py-3 text-base leading-normal text-gray-800 hover:border-blue-700 dark:border-gray-200 dark:text-gray-50 dark:hover:border-white text-center dark:hover:bg-gray-800"
@@ -88,7 +94,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         >
                             Register
                         </Link>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div
