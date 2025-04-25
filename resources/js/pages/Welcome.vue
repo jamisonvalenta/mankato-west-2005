@@ -47,7 +47,7 @@ import { Head, Link } from '@inertiajs/vue3';
 
 
                     <h2 class="text-gray-700 dark:text-gray-100 mt-12 mb-4 text-lg font-semibold">
-                        Tenative Schedule
+                        Tentative Schedule
                     </h2>
                     <dl class="grid grid-cols-[6em,1fr] md:grid-cols-[10em,1fr] gap-2 text-gray-700 dark:text-gray-100  text-base">
                         <dt class="uppercase text-sm font-semibold dark:text-gray-400">Location</dt>
