@@ -78,7 +78,7 @@ import { Head, Link } from '@inertiajs/vue3';
                     </dl>
 
                     <p class="mt-8 mb-2 text-gray-700 dark:text-gray-100 text-base">
-                        Registration will open late April, 2005
+                        Registration will open late April, 2025
                     </p>
 <!--
                     <div class="mt-16 mb-4 text-gray-800 dark:text-gray-200 text-base grid grid-cols-2 gap-x-24">
