@@ -94,7 +94,7 @@
 
                 <div class="flex items-center justify-between" >
                     <Label for="show_attendance" class="flex items-center space-x-3">
-                        <Checkbox id="remember" v-model:checked="form.remember" :tabindex="6" />
+                        <Checkbox id="show_attendance" v-model:checked="form.show_attendance" :tabindex="6" />
                         <span>I give my permission to publish my name, original name, and bio to other verified registrants</span>
                     </Label>
                 </div>
@@ -138,12 +138,12 @@ const formData = {
 
 const form = useForm({
     name: user.name,
-    original_name: '',
-    show_attendance: false,
-    phone: '',
-    city: '',
-    state: '',
-    country: 'USA',
+    original_name: props.registration.original_name,
+    show_attendance: props.registration.show_attendance,
+    phone: props.registration.phone,
+    city: props.registration.city,
+    state: props.registration.state,
+    country: props.registration.country,
 });
 
 const submit = () => {

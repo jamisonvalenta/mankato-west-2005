@@ -17,11 +17,7 @@ class RegistrationController extends Controller
 {
     public function create(): Response
     {
-        $registration = auth()->user()->registration;
-
-        return Inertia::render('registration/Create', [
-            'registration' => $registration,
-        ]);
+        return Inertia::render('registration/CreateRegistration');
     }
 
     public function store(RegistrationStoreRequest $request): RedirectResponse
@@ -41,7 +37,7 @@ class RegistrationController extends Controller
     {
         $registration = auth()->user()->registrations()->mostRecent()->first();
 
-        return Inertia::render('registration/Edit', [
+        return Inertia::render('registration/EditRegistration', [
             'registration' => $registration,
         ]);
     }

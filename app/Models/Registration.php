@@ -20,6 +20,6 @@ class Registration extends Model
 
     public function scopeMostRecent($query)
     {
-        $query->orderBy('created_at');
+        $query->orderBy('created_at', 'desc');
     }
 }

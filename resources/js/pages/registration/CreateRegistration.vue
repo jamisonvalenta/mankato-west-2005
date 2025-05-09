@@ -6,7 +6,7 @@
           :registration="{}"
           :post-route="route('registration.store')"
           _method="POST"
-          success-message="Thank you for completing your registration. Go back to the dashboard to compete additional tasks.">
+          success-message="Thank you for completing your registration. Go back to the dashboard to complete additional tasks.">
         </RegistrationForm>
     </AppLayout>
 </template>
@@ -23,6 +23,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
         href: route('dashboard'),
+    },
+    {
+        title: 'Registration',
+        href: route('registration.create'),
     },
 ];
 
