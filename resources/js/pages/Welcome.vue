@@ -10,7 +10,7 @@ import { Head, Link } from '@inertiajs/vue3';
     <div class="flex min-h-screen flex-col items-center bg-gray-200 p-6 text-gray-300 dark:bg-[#0a0a0a] lg:justify-center lg:p-8">
         <header class="not-has-[nav]:hidden mb-6 w-full max-w-[335px] lg:max-w-4xl">
             <nav class="flex items-center justify-end gap-4">
-                <!--
+
                 <Link
                     v-if="$page.props.auth.user"
                     :href="route('dashboard')"
@@ -32,7 +32,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         Register
                     </Link>
                 </template>
-                 -->
+
             </nav>
         </header>
         <div class="duration-750 starting:opacity-0 flex w-full items-center justify-center opacity-100 transition-opacity lg:grow">
@@ -80,7 +80,7 @@ import { Head, Link } from '@inertiajs/vue3';
                     <p class="mt-8 mb-2 text-gray-700 dark:text-gray-100 text-base">
                         Registration will open late April, 2025
                     </p>
-<!--
+
                     <div class="mt-16 mb-4 text-gray-800 dark:text-gray-200 text-base grid grid-cols-2 gap-x-24">
                         <Link
                             :href="route('login')"
@@ -94,7 +94,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         >
                             Register
                         </Link>
-                    </div> -->
+                    </div>
                 </div>
 
                 <div
