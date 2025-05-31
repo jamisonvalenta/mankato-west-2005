@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function index(Request $request): Response
     {
         return Inertia::render('Dashboard', [
-            'registrationFilled' => false,
+            'registrationFilled' => $request->user()->registrations()->exists(),
             'registrationVerified' => false,
         ]);
     }

@@ -5,7 +5,7 @@
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div class="grid auto-rows-min gap-4 md:grid-cols-2 xl:grid-cols-3">
                 <div class="relative aspect-video rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <section class="overflow-hidden bg-red-50">
+                    <section class="overflow-hidden">
                         <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                             <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                             <div class="text-md font-medium leading-6 text-gray-900">Tasks</div>
@@ -14,45 +14,100 @@
                             </div>
                         </div>
                         <div class="divide-y divide-gray-100">
-                            <section class="px-6">
+                            <section class="px-4">
                                 <dl class="divide-y divide-gray-100 text-sm leading-6">
-                                    <div class="flex justify-between py-4 gap-x-4">
-                                        <dt class="text-gray-500">
-                                            Registration
-                                        </dt>
-                                        <dd class="grid grid-cols-2 text-gray-700">
-
-                                            <template
-                                                v-if="! registrationFilled"
-                                                >
-                                                <span
-                                                    class="mx-2 px-2 py-1 rounded-sm bg-red-200 text-xs inline-block">
-                                                    not started
-                                                </span>
-                                                <Link
-                                                    :href="route('registration.create')"
-                                                    class="mx-2 px-3 py-2 rounded-md bg-blue-200 outline outline-blue-400 text-sm inline-block"
-                                                    >
-                                                    Begin
-                                                </Link>
-                                            </template>
+                                    <div class="grid grid-cols-[1fr,10em] py-4 gap-4">
+                                        <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
-                                                v-else
-                                                class="mx-2 px-3 py-2 rounded-sm bg-red-200 text-sm inline-block"/>
+                                                v-if="registrationFilled"
+                                                class="text-green-500 w-5 h-5 inline-block mr-2"
+                                                />
+                                            <div v-else class="w-5 h-5 mr-2 inline-block"></div>
+                                            Class Registration
+                                        </dt>
+                                        <dd class="text-gray-700">
+
+                                                <Link :href="registrationFilled ? route('registration.edit') : route('registration.create')">
+                                                    <Button
+                                                        v-if="! registrationFilled"
+                                                        variant="default"
+                                                        size="default"
+                                                        class="mr-2 hover:bg-gray-600"
+                                                        >
+
+                                                        Begin
+                                                    </Button>
+                                                    <div v-else class="mt-2 text-gray-600 hover:text-blue-500 ">
+                                                    edit</div>
+                                                </Link>
+                                        </dd>
+                                        <dt class="text-gray-500 text-lg leading-loose">
+                                            <CheckCircleIcon
+                                                v-if="verified"
+                                                class="text-green-500 w-5 h-5 inline-block mr-2"
+                                                />
+                                            <div v-else class="w-5 h-5 mr-2 inline-block"></div>
+                                            Verification Status
+                                        </dt>
+                                        <dd class="text-gray-700 pt-3">
+
+                                                <span v-if="verified" class="mx-2 px-3 py-2 rounded-md bg-green-200 text-green-800 text-sm block">
+                                                    Verified <CheckIcon class="w-4 h-4 text-green-600"/>
+                                                </span>
+                                                <span v-else class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">Pending Approval </span>
+                                        </dd>
+                                        <dt class="text-gray-500 text-lg leading-loose">
+                                            <CheckCircleIcon
+                                                v-if="eventRegistrationFilled"
+                                                class="text-green-500 w-5 h-5 inline-block mr-2"
+                                                />
+                                            <div v-else class="w-5 h-5 mr-2 inline-block"></div>
+                                            Reunion Registration
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <Link
+                                                v-if="verified"
+                                                :href="eventRegistrationFilled ? route('registration.edit') : route('registration.create')"
+                                                >
+                                                <Button
+                                                    v-if="! eventRegistrationFilled"
+                                                    variant="default"
+                                                    size="default"
+                                                    class="mr-2 hover:bg-gray-600"
+                                                    >
+
+                                                    Begin
+                                                </Button>
+                                                <div v-else class="mt-2 text-gray-600 hover:text-blue-500 ">
+                                                edit</div>
+                                            </Link>
+                                        </dd>
+                                        <dt class="text-gray-500 text-lg leading-loose">
+                                            <CheckCircleIcon
+                                                v-if="registrationFilled"
+                                                class="text-green-500 w-5 h-5 inline-block mr-2"
+                                                />
+                                            <div v-else class="w-5 h-5 mr-2 inline-block"></div>
+                                            Payment Status
+                                        </dt>
+                                        <dd class="text-gray-700">
+
+                                                <span v-if="true" class="mx-2 px-3 py-2 rounded-md bg-green-200 text-green-800 text-sm inline-block">
+                                                    Received <CheckIcon class="ml-2 w-4 h-4 text-green-600"/>
+                                                </span>
+                                                <span v-else class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+                                                    Waiting
+                                                </span>
                                         </dd>
                                     </div>
-                                    <template v-if="registrationVerified">
+
                                         <div class="flex justify-between py-4 gap-x-4">
                                             <dt class="text-gray-500">
-                                                Payment Status
+
                                             </dt>
-                                            <dd class="text-gray-700">
-                                                <span class="mx-2 px-3 py-2 rounded-md bg-red-200 text-sm inline-block">
-                                                    begin registration
-                                                </span>
+                                            <dd>
                                             </dd>
                                         </div>
-                                    </template>
                                 </dl>
                             </section>
                         </div>
@@ -74,10 +129,12 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
+import { Button } from '@/components/ui/button';
 import { Head } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon } from '@heroicons/vue/24/outline';
-import { Link } from '@inertiajs/vue3';
+import { CheckIcon } from '@heroicons/vue/24/solid';
 
 defineProps<{
     registrationFilled?: boolean;
