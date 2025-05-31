@@ -47,7 +47,7 @@
                                                 class="text-green-500 w-5 h-5 inline-block mr-2"
                                                 />
                                             <div v-else class="w-5 h-5 mr-2 inline-block"></div>
-                                            Verification Status
+                                            Verification
                                         </dt>
                                         <dd class="text-gray-700 pt-3">
 
@@ -84,19 +84,19 @@
                                         </dd>
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
-                                                v-if="registrationFilled"
-                                                class="text-green-500 w-5 h-5 inline-block mr-2"
+                                                v-if="payment.received"
+                                                class="text-green-500 w-5 h-5 inline-block mr-4"
                                                 />
-                                            <div v-else class="w-5 h-5 mr-2 inline-block"></div>
-                                            Payment Status
+                                                <div v-else class="w-5 h-5 mr-2 inline-block"></div>
+                                            Payment
                                         </dt>
                                         <dd class="text-gray-700">
 
-                                                <span v-if="true" class="mx-2 px-3 py-2 rounded-md bg-green-200 text-green-800 text-sm inline-block">
-                                                    Received <CheckIcon class="ml-2 w-4 h-4 text-green-600"/>
+                                                <span v-if="payment.received" class="mx-2 px-3 py-2 rounded-md bg-green-200 text-green-800 text-sm inline-block">
+                                                    Received {{ payment.amount }} on {{ payment.date }}
                                                 </span>
-                                                <span v-else class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
-                                                    Waiting
+                                                <span v-else-if="eventRegistrationFilled" class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+                                                    Not Received
                                                 </span>
                                         </dd>
                                     </div>
@@ -138,7 +138,9 @@ import { CheckIcon } from '@heroicons/vue/24/solid';
 
 defineProps<{
     registrationFilled?: boolean;
-    canResetPassword: boolean;
+    verified?: boolean;
+    eventRegistrationFilled?: boolean;
+    payment?: object;
 }>();
 
 const breadcrumbs: BreadcrumbItem[] = [

@@ -17,7 +17,14 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard', [
             'registrationFilled' => $request->user()->registrations()->exists(),
-            'registrationVerified' => false,
+            'verified' => false,
+            'eventRegistrationFilled' => false,
+
+            'payment' => [
+                'received' => false,
+                'amount' => null,
+                'date' => null,
+            ]
         ]);
     }
 }
