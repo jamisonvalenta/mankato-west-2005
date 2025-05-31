@@ -41,6 +41,7 @@
                                                     edit</div>
                                                 </Link>
                                         </dd>
+
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
                                                 v-if="verified"
@@ -51,11 +52,12 @@
                                         </dt>
                                         <dd class="text-gray-700 pt-3">
 
-                                                <span v-if="verified" class="mx-2 px-3 py-2 rounded-md bg-green-200 text-green-800 text-sm block">
-                                                    Verified <CheckIcon class="w-4 h-4 text-green-600"/>
+                                                <span v-if="verified" class="px-3 py-2 rounded-md text-green-800 text-sm block">
+
                                                 </span>
                                                 <span v-else class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">Pending Approval </span>
                                         </dd>
+
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
                                                 v-if="eventRegistrationFilled"
@@ -82,6 +84,7 @@
                                                 edit</div>
                                             </Link>
                                         </dd>
+
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
                                                 v-if="payment.received"

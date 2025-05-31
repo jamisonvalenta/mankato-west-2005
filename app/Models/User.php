@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Registration::class);
     }
+
+    public function verifications() : HasMany
+    {
+        return $this->hasMany(Verification::class);
+    }
 }
