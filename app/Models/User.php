@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Registration;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,6 +36,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = [
+        'roles',
+        'can_see_admin_dashboard',
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -53,8 +59,30 @@ class User extends Authenticatable
         return $this->hasMany(Registration::class);
     }
 
+    public function roles() : HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
+
     public function verifications() : HasMany
     {
         return $this->hasMany(Verification::class);
+    }
+
+    protected function getRolesAttribute(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->roles()->pluck('type'),
+        );
+
+    }
+
+    protected function canSeeAdminDashboard(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->can('admin')
+                || $this->can('super-admin')
+                || $this->can('verify'),
+        );
     }
 }

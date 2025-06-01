@@ -6,11 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('verifications', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->string('type');
             $table->string('created_by')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
@@ -18,8 +22,11 @@ return new class extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('verifications');
+        Schema::dropIfExists('roles');
     }
 };

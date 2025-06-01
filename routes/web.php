@@ -18,5 +18,19 @@ Route::middleware(['auth', 'verified'])
             ->name('registration.edit');
 });
 
+Route::middleware(['auth', 'verified', 'can:admin'])
+    ->name('admin.')
+    ->prefix('admin/')
+    ->group(function () {
+        Route::get('dashboard', [App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::get('users', [App\Http\Controllers\Admin\UsersController::class, 'index'])
+            ->name('users.index');
+
+        Route::get('verifications', [App\Http\Controllers\Admin\VerificationsController::class, 'index'])
+            ->name('verifications.index');
+});
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

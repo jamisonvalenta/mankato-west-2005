@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -20,10 +22,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define('super-admin', function (User $user) {
+            return $user->roles()->where('type', 'super-admin')->exists();
+        });
+
+        Gate::define('admin', function (User $user) {
+            return $user->roles()->whereIn('type', ['super-admin', 'admin'])->exists();
+        });
+
+        Gate::define('verify', function (User $user) {
+            return $user->roles()->whereIn('type', ['super-admin', 'verify'])->exists();
+        });
+
         Inertia::share([
             'auth' => function () {
                 return [
                     'user' => auth()->user(),
+                    'can' => [
+                        'super-admin' => auth()->user()->can('super-admin'),
+                        'admin' => auth()->user()->can('admin'),
+                        'verify' => auth()->user()->can('verify'),
+                    ]
                 ];
             },
         ]);
