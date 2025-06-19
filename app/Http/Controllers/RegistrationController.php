@@ -30,7 +30,8 @@ class RegistrationController extends Controller
 
         $request->user()->registrations()->save(new Registration($request->validated()));
 
-        return to_route('registration.edit');
+        return to_route('dashboard')
+            ->with('success', "Registration saved!  If you haven't been approved yet, please wait for an admin to approve you.");
     }
 
     public function edit(): Response

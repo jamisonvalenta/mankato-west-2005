@@ -15,7 +15,8 @@
         <p class="my-4">You are welcome to modify these details after submission.</p>
 
         <form @submit.prevent="submit" class="flex flex-col gap-6 mt-24">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
                 <div class="grid gap-2">
                     <Label for="name">Full Name</Label>
                     <Input
@@ -24,7 +25,7 @@
                         disabled
                         v-model="form.name"
                     />
-                    <span class="italic text-gray-700">to modify your name go to
+                    <span class="text-sm italic text-gray-500">to modify go to
                         <TextLink
                             :href="route('profile.edit')"
                         >user settings</TextLink>
@@ -91,14 +92,29 @@
                     />
                     <InputError :message="form.errors.country" />
                 </div>
+            </div>
 
-                <div class="flex items-center justify-between" >
-                    <Label for="show_attendance" class="flex items-center space-x-3">
+            <div class="grid grid-cols-1 gap-8 mt-8">
+                <div class="grid gap-2">
+                    <Label for="bio">Bio (a few sentences, what have you been up to?)</Label>
+                    <Textarea
+                        id="bio"
+                        :tabindex="5"
+                        autocomplete="bio"
+                        v-model="form.bio"
+                        class=""
+                    />
+                    <InputError :message="form.errors.bio" />
+                </div>
+
+                <div class="flex items-center justify-between " >
+                    <Label for="show_attendance" class="flex items-center space-x-3 text-gray-600">
                         <Checkbox id="show_attendance" v-model:checked="form.show_attendance" :tabindex="6" />
                         <span>I give my permission to publish my name, original name, and bio to other verified registrants</span>
                     </Label>
                 </div>
             </div>
+
 
             <Button type="submit" class="mt-4 w-full md:max-w-[30em]" :disabled="form.processing" :tabindex="7">
                 <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
@@ -116,6 +132,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
@@ -144,6 +161,7 @@ const form = useForm({
     city: props.registration.city,
     state: props.registration.state,
     country: props.registration.country,
+    bio: props.registration.bio,
 });
 
 const submit = () => {

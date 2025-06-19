@@ -13,6 +13,13 @@ class Registration extends Model
         'id',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'show_attendance' => 'boolean',
+        ];
+    }
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);

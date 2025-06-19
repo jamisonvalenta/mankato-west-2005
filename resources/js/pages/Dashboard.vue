@@ -27,9 +27,10 @@
                                         </dt>
                                         <dd class="text-gray-700">
 
-                                                <Link :href="registrationFilled ? route('registration.edit') : route('registration.create')">
+                                                <Link
+                                                    v-if="! registrationFilled"
+                                                    :href="registrationFilled ? route('registration.edit') : route('registration.create')">
                                                     <Button
-                                                        v-if="! registrationFilled"
                                                         variant="default"
                                                         size="default"
                                                         class="mr-2 hover:bg-gray-600"
@@ -37,9 +38,14 @@
 
                                                         Begin
                                                     </Button>
-                                                    <div v-else class="mt-2 text-gray-600 hover:text-blue-500 ">
-                                                    edit</div>
                                                 </Link>
+
+                                                <TextLink v-else
+                                                    :href="route('registration.edit')"
+                                                    class="leading-9 text-gray-600 hover:text-black "
+                                                    >
+                                                    edit
+                                                </TextLink>
                                         </dd>
 
                                         <dt class="text-gray-500 text-lg leading-loose">
@@ -138,6 +144,7 @@ import { Link } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
+import TextLink from '@/components/TextLink.vue';
 
 defineProps<{
     registrationFilled?: boolean;
