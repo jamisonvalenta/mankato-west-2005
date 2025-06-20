@@ -25,10 +25,10 @@ Route::middleware(['auth', 'verified', 'can:admin'])
         Route::get('dashboard', [App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])
             ->name('dashboard');
 
-        Route::get('users', [App\Http\Controllers\Admin\UsersController::class, 'index'])
+        Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])
             ->name('users.index');
 
-        Route::get('verifications', [App\Http\Controllers\Admin\VerificationsController::class, 'index'])
+        Route::get('verifications', [App\Http\Controllers\Admin\VerificationController::class, 'index'])
             ->name('verifications.index');
 });
 

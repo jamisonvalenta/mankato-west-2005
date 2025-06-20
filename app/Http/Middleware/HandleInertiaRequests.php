@@ -43,6 +43,11 @@ class HandleInertiaRequests extends Middleware
 
             'auth' => [
                 'user' => $request->user(),
+                'can' => [
+                    'super-admin' => auth()->user()->can('super-admin'),
+                    'admin' => auth()->user()->can('admin'),
+                    'verify' => auth()->user()->can('verify'),
+                ]
             ],
 
             'flash' => [

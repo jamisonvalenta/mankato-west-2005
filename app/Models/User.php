@@ -37,6 +37,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
+        'registration',
         'roles',
         'can_see_admin_dashboard',
     ];
@@ -75,6 +76,13 @@ class User extends Authenticatable
             get: fn () => $this->roles()->pluck('type'),
         );
 
+    }
+
+    protected function registration(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->registrations()->orderBy('id', 'desc')->first(),
+        );
     }
 
     protected function canSeeAdminDashboard(): Attribute
