@@ -7,9 +7,8 @@
             <GridList
                 class="grid-cols-4"
                 >
-                <GridHeading> Name </GridHeading>
-                <GridHeading> </GridHeading>
-                <GridHeading> Status </GridHeading>
+                <GridHeading > Name </GridHeading>
+                <GridHeading class="col-span-2"> Status </GridHeading>
                 <GridHeading> Actions </GridHeading>
 
                 <template
@@ -17,28 +16,73 @@
                     :key="user.id"
                     >
                     <GridCell class="bg-gray-100 border-t border-t-gray-400 "> {{ user.name }}</GridCell>
-                    <GridCell class="bg-gray-100 border-t border-t-gray-400 "> {{ user.registration.original_name }}</GridCell>
                     <GridCell
-                        class="bg-gray-100 border-t border-t-gray-400 text-center"
+                        class="col-span-2 grid grid-cols-6 gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
                         >
-                        <template v-if="user.verifications?.length > 0">
-                            <Pill variant="green"> verified </Pill>
-                        </template>
+                        <Pill v-if="user.registration" variant="green">
+                            registered
+                        </Pill>
+                        <Pill v-else variant="amber">
+                            registered
+                        </Pill>
 
-                        <template v-else-if="user.registration">
-                            <Pill variant="amber"> awaiting verification </Pill>
-                        </template>
+                        <Pill v-if="user.verifications?.length > 0" variant="green">
+                            verified
+                        </Pill>
+                        <Pill v-else variant="amber">
+                            verified
+                        </Pill>
 
-                        <template v-else>
-                            <Pill variant="violet"> unregistered </Pill>
-                        </template>
+
+                        <Pill v-if="user.attendees?.length > 0" variant="green">
+                            attending
+                        </Pill>
+                        <Pill v-else variant="amber">
+                            attending
+                        </Pill>
+
+                        <Pill v-if="user.payments?.length > 0" variant="green">
+                            paid
+                        </Pill>
+                        <Pill v-else variant="amber">
+                            paid
+                        </Pill>
 
                     </GridCell>
                     <GridCell
                         class="bg-gray-100 border-t border-t-gray-400 text-center"
                         >
-                        <Pill> Actions go here</Pill>
+
+                        <Dialog v-if="user.verifications?.length == 0 && user.registration">
+                            <DialogTrigger as-child>
+                                <Button variant="outline">Verify User</Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <form class="space-y-6"
+                                    @submit.prevent="submit"
+                                    @submit="verifyUser(user)"
+                                    >
+                                    <input type="hidden" name="id" :value="user.id">
+                                    <DialogHeader class="space-y-3">
+                                        <DialogDescription>
+                                            Verify user is a member of the class of 2005
+                                        </DialogDescription>
+                                    </DialogHeader>
+
+                                    <DialogFooter class="gap-2">
+                                        <DialogClose as-child>
+                                            <Button variant="outline" @click="closeModal"> Cancel </Button>
+                                        </DialogClose>
+
+                                        <Button variant="default" :disabled="form.processing">
+                                            <button type="submit">Verify User</button>
+                                        </Button>
+                                    </DialogFooter>
+                                </form>
+                            </DialogContent>
+                        </Dialog>
                     </GridCell>
+
                     <GridDl
                         class="col-span-4 grid-cols-4 grid-flow-row-dense p-4 "
                         >
@@ -117,14 +161,23 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
-import { GridCell, GridHeading, GridList, GridDl, GridDt, GridDd,  } from '@/components/ui/gridlist';
-import { Head } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
-import { Label } from '@inertiajs/vue3';
+import { GridCell, GridHeading, GridList, GridDl, GridDlCell, GridDt, GridDd,  } from '@/components/ui/gridlist';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Label } from '@/components/ui/label';
 import { Pill } from '@/components/ui/pill';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon, CheckCircleIcon, ExclamationCircleIcon, UsersIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 
 defineProps<{
     users: array;
@@ -144,4 +197,26 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: route('admin.users.index'),
     },
 ];
+
+const form = useForm({
+    verify: true,
+    user_id: null,
+});
+
+const verifyUser = (user) => {
+
+    form.user_id = user.id
+
+    form.post(route('admin.verifications.store'), {
+        preserveScroll: true,
+        onSuccess: () =>  closeModal(),
+        onError: () => page.props.flash.error = 'There was an issue processing your request',
+        onFinish: () => closeModal(),
+    });
+};
+
+const closeModal = () => {
+    // probably refresh users, somehow?
+};
+
 </script>

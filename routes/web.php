@@ -28,8 +28,8 @@ Route::middleware(['auth', 'verified', 'can:admin'])
         Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])
             ->name('users.index');
 
-        Route::get('verifications', [App\Http\Controllers\Admin\VerificationController::class, 'index'])
-            ->name('verifications.index');
+        Route::post('verifications', [App\Http\Controllers\Admin\VerificationController::class, 'store'])
+            ->name('verifications.store');
 });
 
 require __DIR__.'/settings.php';

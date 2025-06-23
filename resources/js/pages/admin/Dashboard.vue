@@ -52,7 +52,7 @@
                                             Users awaiting verification
                                         </dt>
                                         <dd class="">
-                                            <Link :href="route('admin.verifications.index')">
+                                            <!-- <Link :href="route('admin.verifications.index')"> -->
                                                 <span
                                                     :class='{
                                                         "bg-yellow-50 text-yellow-800 ring-yellow-600/20": usersAwaitingVerificationCount > 0,
@@ -61,7 +61,7 @@
                                                 class="inline-flex items-center rounded-md  px-3 py-2 text-xs font-medium ring-1 ring-inset ">
                                                     {{ usersAwaitingVerificationCount }}
                                                 </span>
-                                            </Link>
+                                            <!-- </Link> -->
                                         </dd>
                                     </div>
 

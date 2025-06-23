@@ -7,11 +7,7 @@ export const pillVariants = cva(
     {
         variants: {
             variant: {
-                default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-                destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-                outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-                secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-                ghost: 'hover:bg-accent hover:text-accent-foreground',
+                gray: 'text-primary bg-gray-100 text-gray-600 border border-gray-200',
                 green: 'text-primary bg-green-100 text-green-600 border border-green-200',
                 amber: 'text-primary bg-amber-100 text-amber-600 border border-amber-200',
                 red: 'text-primary bg-red-100 text-red-600 border border-red-200',

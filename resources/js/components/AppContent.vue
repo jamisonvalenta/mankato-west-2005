@@ -27,10 +27,10 @@ const success = computed(() => page.props.flash?.success);
     </SidebarInset>
 
 
-    <main v-else class="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col gap-4 rounded-xl" :class="className">
+    <main v-else class=" mx-auto flex h-full w-full max-w-7xl flex-1 flex-col gap-4 rounded-xl" :class="className">
         <div
             v-if="error || message || success"
-            class="mt-8 m-4">
+            class="sticky top-4 mt-8 m-4 ">
 
             <div v-if="success" class="text-green-800 border border-green-200 bg-green-50 rounded-md p-4">
                 <CheckCircleIcon class="h-6 w-6 mr-2  -mt-1 text-green-600 inline-block " />

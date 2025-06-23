@@ -12,7 +12,7 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-    <div :class="cn('font-semibold text-gray-700 text-center p-2', props.class)" >
+    <div :class="cn('font-semibold text-gray-700 text-left p-2', props.class)" >
         <slot />
     </div>
 </template>
