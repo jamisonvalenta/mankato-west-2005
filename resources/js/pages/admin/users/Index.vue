@@ -71,7 +71,7 @@
 
                                     <DialogFooter class="gap-2">
                                         <DialogClose as-child>
-                                            <Button variant="outline" @click="closeModal"> Cancel </Button>
+                                            <Button variant="outline" > Cancel </Button>
                                         </DialogClose>
 
                                         <Button variant="default" :disabled="form.processing">
@@ -213,10 +213,6 @@ const verifyUser = (user) => {
         onError: () => page.props.flash.error = 'There was an issue processing your request',
         onFinish: () => closeModal(),
     });
-};
-
-const closeModal = () => {
-    // probably refresh users, somehow?
 };
 
 </script>

@@ -75,19 +75,19 @@
                                         <dd class="text-gray-700">
                                             <Link
                                                 v-if="verified"
-                                                :href="eventRegistrationFilled ? route('registration.edit') : route('registration.create')"
+                                                :href="route('attendee.index')"
                                                 >
                                                 <Button
-                                                    v-if="! eventRegistrationFilled"
+                                                    v-if="! attendeesFilled"
                                                     variant="default"
                                                     size="default"
                                                     class="mr-2 hover:bg-gray-600"
                                                     >
 
-                                                    Begin
+                                                    Add Attendees
                                                 </Button>
                                                 <div v-else class="mt-2 text-gray-600 hover:text-blue-500 ">
-                                                edit</div>
+                                                {{ attendeeCount }} attendees ... edit</div>
                                             </Link>
                                         </dd>
 
@@ -150,6 +150,8 @@ defineProps<{
     registrationFilled?: boolean;
     verified?: boolean;
     eventRegistrationFilled?: boolean;
+    attendeesFilled?: boolean;
+    countAttendees?: integer;
     payment?: object;
 }>();
 

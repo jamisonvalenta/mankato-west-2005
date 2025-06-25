@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Attendee;
 use App\Models\Registration;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -42,17 +44,16 @@ class User extends Authenticatable
         'can_see_admin_dashboard',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function attendees(): HasManyThrough
+    {
+        return $this->hasManyThrough(Attendee::class, Registration::class);
     }
 
     public function registrations() : HasMany
