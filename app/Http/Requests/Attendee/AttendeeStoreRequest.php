@@ -18,6 +18,7 @@ class AttendeeStoreRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'nametag' => ['max:100'],
+            'pronouns' => ['max:20'],
             'accommodation_requests' => ['max:3000'],
             'emergency_contact_name' => ['required', 'max:255'],
             'emergency_contact_phone' => ['required', 'max:15'],

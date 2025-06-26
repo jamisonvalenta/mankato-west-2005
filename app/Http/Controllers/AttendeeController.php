@@ -24,19 +24,46 @@ class AttendeeController extends Controller
             ->with('attendees', $request->user()->attendees);
     }
 
+    public function create(Request $request): Response
+    {
+        $attendee = [
+            'id' => null,
+            'name' => $request->user()->attendees->isEmpty() ? $request->user()->name : null,
+            'nametag' => null,
+            'pronouns' => null,
+            'accommodation_requests' => null,
+            'emergency_contact_name' => null,
+            'emergency_contact_phone' => null,
+            'emergency_contact_relationship' => null,
+        ];
+
+        return Inertia::render('attendee/Edit')
+            ->with('registration', $request->user()->registration)
+            ->with('attendees', $request->user()->attendees)
+            ->with('attendee', $attendee);
+    }
+
     public function store(AttendeeStoreRequest $request): RedirectResponse
     {
         $request->user()->registration->attendees()->save(new Attendee($request->validated()));
 
-        return redirect()->back()
+        return redirect()->route('attendee.index')
             ->with('success', "Attendee saved");
+    }
+
+    public function edit(Request $request, Attendee $attendee): Response
+    {
+        return Inertia::render('attendee/Edit')
+            ->with('registration', $request->user()->registration)
+            ->with('attendees', $request->user()->attendees)
+            ->with('attendee', $attendee);
     }
 
     public function update(AttendeeStoreRequest $request, Attendee $attendee): RedirectResponse
     {
         $attendee->update($request->validated());
 
-        return redirect()->back()
+        return redirect()->route('attendee.index')
             ->with('success', "Attendee saved");
     }
 

@@ -53,8 +53,6 @@ import {
 
 const props = defineProps([
     'attendee',
-    'postRoute',
-    '_method',
 ]);
 
 const form = useForm(props.attendee)

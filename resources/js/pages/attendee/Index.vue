@@ -13,32 +13,38 @@
                     Please list everyone who will be attending the 20th reunion event, <span class="italic">including yourself</span>. Attendees must be 21+.
                 </div>
 
-                <AttendeeForm
-                    :attendee="newAttendee"
-                    />
+                <Link :href="route('attendee.create')">
+                    <Button variant='default'>
+                        <Plus class="h-5 w-5" /> Add Attendee
+                    </Button>
+                </Link>
             </div>
 
 
             <GridList
-                class="grid-cols-1 md:grid-cols-4 mt-8"
+                class="grid-cols-1 md:grid-cols-2 md:grid-cols-4 mt-8"
                 >
                 <template
                     v-for="attendee in attendees"
                     :key="attendee.id"
                     >
 
-                    <div class="grid grid-cols-[1fr,10em] md:col-span-4 bg-gray-100 border-b border-b-gray-400">
+                    <div class="grid grid-cols-[1fr,10em] sm:col-span-2 md:col-span-4 bg-gray-100 border-b border-b-gray-400">
                         <GridHeading class="leading-10 pl-4">
                             {{ attendee.name }}
                         </GridHeading>
 
                         <GridHeading class="mt-1">
-                            <AttendeeForm :attendee="attendee" />
+                            <Link :href="route('attendee.edit', attendee)">
+                                <Button variant='outline'>
+                                    Edit
+                                </Button>
+                            </Link>
                         </GridHeading>
                     </div>
 
                     <GridDl
-                        class="md:col-span-4 md:grid-cols-4 grid-flow-row-dense p-4 "
+                        class="md:col-span-4 sm:grid-cols-2 md:grid-cols-4 grid-flow-row-dense p-4 "
                         >
 
                         <GridDlCell>
@@ -54,8 +60,13 @@
                             <GridDt>
                                 Perferred Pronouns
                             </GridDt>
-                            <GridDd>
-                                {{ attendee.pronouns }}
+                            <GridDd >
+                                <template v-if="attendee.pronouns">
+                                    {{ attendee.pronouns }}
+                                </template>
+                                <template v-else>
+                                    <span class="text-gray-400">not entered</span>
+                                </template>
                             </GridDd>
                         </GridDlCell>
 
@@ -118,6 +129,7 @@ import { Pill } from '@/components/ui/pill';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon, CheckCircleIcon, ExclamationCircleIcon, UsersIcon, PlusIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
+import { Plus } from 'lucide-vue-next';
 import {
     Dialog,
     DialogClose,
@@ -146,33 +158,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: route('attendee.index'),
     },
 ];
-
-const newAttendee = computed( () => {
-    if (props.attendees.length === 0) {
-        return {
-            id: null,
-            name: user.name,
-            nametag: null,
-            pronouns: null,
-            accommodation_requests: null,
-            emergency_contact_name: null,
-            emergency_contact_phone: null,
-            emergency_contact_relationship:null,
-        }
-    }
-
-    return {
-        id: null,
-        name: null,
-        nametag: null,
-        pronouns: null,
-        accommodation_requests: null,
-        emergency_contact_name: null,
-        emergency_contact_phone: null,
-        emergency_contact_relationship:null,
-    }
-})
-
 
 
 

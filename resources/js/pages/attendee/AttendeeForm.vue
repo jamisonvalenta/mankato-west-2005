@@ -1,34 +1,12 @@
 <template>
-    <Dialog v-model:open="open">
-        <DialogTrigger as-child>
-            <Button :variant="isUpdating ? 'outline' : 'default'">
-                <template v-if="isUpdating">
-                    Edit
-                </template>
-                <template v-else>
-                    <Plus class="h-5 w-5" /> Add Attendee
-                </template>
-            </Button>
-        </DialogTrigger>
-
-        <DialogContent>
-            <DialogHeader>
-                <DialogTitle>
-                    <template v-if="isUpdating">
-                        Edit Attendee
-                    </template>
-                    <template v-else>
-                        Create Attendee
-                    </template>
-                </DialogTitle>
-                <DialogDescription class="text-sm my-4">
-                    You are welcome to modify these details after submission.
-                </DialogDescription>
-            </DialogHeader>
-
-            <form class="space-y-6"
-                @submit.prevent="save"
-                >
+    <form class="space-y-6"
+        @submit.prevent="save"
+        >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+                <h4 class="text-lg mb-4 text-gray-500">
+                    Attendee Details
+                </h4>
                 <div class="grid grid-cols-1 gap-8">
 
                     <div class="grid gap-2">
@@ -87,11 +65,15 @@
                         <InputError :message="form.errors.accommodation_requests" />
                     </div>
 
-                    <hr>
+                </div>
+            </div>
 
-                    <h4 class="text-lg">
-                        Emergency Contact
-                    </h4>
+
+            <div>
+                <h4 class="text-lg mb-4 text-gray-500">
+                    Emergency Contact
+                </h4>
+                <div class="grid grid-cols-1 gap-8">
                     <div class="grid gap-2">
                         <Label for="emergency_contact_name">
                             Name *
@@ -128,36 +110,34 @@
                         />
                         <InputError :message="form.errors.emergency_contact_relationship" />
                     </div>
-
                 </div>
+            </div>
+        </div>
 
-                <DialogFooter class="gap-6 sm:gap-2 sm:justify-between">
-                    <div class="grid grid-cols-2 gap-4">
-                        <DeleteAttendee
-                            :attendee="attendee"
-                            @deleted="closeModal()"
-                            />
-                        <DialogClose as-child >
-                            <Button variant="outline" @click="closeModal" :tabindex="8" class=""> Cancel </Button>
-                        </DialogClose>
-                    </div>
+        <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-8 sm:gap-x-2 sm:gap-2 sm:justify-between">
+            <div class="grid grid-cols-2 gap-4">
+                <DeleteAttendee
+                    :attendee="attendee"
+                    @deleted="deleted"
+                    />
+                <Link :href="route('attendee.index')">
+                    <Button variant="outline" @click="closeModal" :tabindex="8" class=""> Cancel </Button>
+                </Link>
+            </div>
 
-                    <div class="grid grid-cols-1">
-                        <Button
-                            variant="default"
-                            :disabled="form.processing"
-                            :tabindex="7"
-                            >
-                            <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
-                            <button type="submit">Save</button>
-                        </Button>
-                    </div>
+            <div class="grid grid-cols-1">
+                <Button
+                    variant="default"
+                    :disabled="form.processing"
+                    :tabindex="7"
+                    >
+                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
+                    <button type="submit">Save</button>
+                </Button>
+            </div>
 
-                </DialogFooter>
-        </form>
-
-        </DialogContent>
-    </Dialog>
+        </div>
+    </form>
 
 
 </template>
@@ -171,7 +151,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useForm, usePage } from '@inertiajs/vue3';
+import { useForm, usePage, Link } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import { LoaderCircle, Plus } from 'lucide-vue-next';
 import { type SharedData, type User } from '@/types';
@@ -210,6 +190,10 @@ const save = () => {
 };
 
 const closeModal = () => {
+    form.clearErrors()
+    open.value = false
+};
+const deleted = () => {
     form.clearErrors()
     open.value = false
 };

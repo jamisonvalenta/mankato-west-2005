@@ -21,10 +21,16 @@ Route::middleware(['auth', 'verified'])
 
         Route::get('attendee', [App\Http\Controllers\AttendeeController::class, 'index'])
             ->name('attendee.index');
+        Route::get('attendee/create', [App\Http\Controllers\AttendeeController::class, 'create'])
+            ->name('attendee.create');
         Route::post('attendee', [App\Http\Controllers\AttendeeController::class, 'store'])
             ->name('attendee.store');
+
+        Route::get('attendee/{attendee}/edit', [App\Http\Controllers\AttendeeController::class, 'edit'])
+            ->name('attendee.edit');
         Route::post('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'update'])
             ->name('attendee.update');
+
         Route::delete('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'destroy'])
             ->name('attendee.destroy');
 });

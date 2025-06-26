@@ -39,6 +39,7 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 
+
 defineProps<{
     registrationFilled?: boolean;
 }>();
