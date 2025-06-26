@@ -2,16 +2,21 @@
     <Head title="Attendees" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-
         <div class="flex h-full flex-1 flex-col rounded-xl p-4">
-            <p class="">
-                Please list everyone who will be attending the 20th reunion event, <span class="italic">including yourself</span>. Attendees must be 21+.
-            </p>
+            <Heading
+                class="mt-4 md:mt-8"
+                title="2025 20-year Reunion Attendee Registration"
+            />
 
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-[1fr,15em] md:gap-8">
+                <div class="">
+                    Please list everyone who will be attending the 20th reunion event, <span class="italic">including yourself</span>. Attendees must be 21+.
+                </div>
 
-            <AttendeeForm
-                :attendee="newAttendee"
-                />
+                <AttendeeForm
+                    :attendee="newAttendee"
+                    />
+            </div>
 
 
             <GridList
@@ -93,6 +98,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import AttendeeForm from '@/pages/attendee/AttendeeForm.vue';
 import { type BreadcrumbItem } from '@/types';
+import Heading from '@/components/Heading.vue';
 import { Button } from '@/components/ui/button';
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';

@@ -1,12 +1,12 @@
 <template>
     <Dialog v-model:open="open">
         <DialogTrigger as-child>
-            <Button variant="outline">
+            <Button :variant="isUpdating ? 'outline' : 'default'">
                 <template v-if="isUpdating">
                     Edit
                 </template>
                 <template v-else>
-                    Add Attendee
+                    <Plus class="h-5 w-5" /> Add Attendee
                 </template>
             </Button>
         </DialogTrigger>
@@ -119,13 +119,23 @@
                 </div>
 
                 <DialogFooter class="gap-2 sm:justify-between">
-                    <DialogClose as-child >
-                        <Button variant="outline" @click="closeModal" :tabindex="8" class=""> Cancel </Button>
-                    </DialogClose>
+                    <div class="grid grid-cols-2 gap-4">
+                        <DeleteAttendee
+                            :attendee="attendee"
+                            @deleted="closeModal()"
+                            />
+                        <DialogClose as-child >
+                            <Button variant="outline" @click="closeModal" :tabindex="8" class=""> Cancel </Button>
+                        </DialogClose>
+                    </div>
 
-                    <Button variant="default" :disabled="form.processing" :tabindex="7">
-                        <button type="submit">Save</button>
-                    </Button>
+                    <div>
+                        <Button variant="default" :disabled="form.processing" :tabindex="7">
+                            <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
+                            <button type="submit">Save</button>
+                        </Button>
+                    </div>
+
                 </DialogFooter>
         </form>
 
@@ -136,6 +146,7 @@
 </template>
 
 <script setup lang="ts">
+import DeleteAttendee from '@/pages/attendee/DeleteAttendee.vue';
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
@@ -145,7 +156,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
-import { LoaderCircle } from 'lucide-vue-next';
+import { LoaderCircle, Plus } from 'lucide-vue-next';
 import { type SharedData, type User } from '@/types';
 
 import {
@@ -161,8 +172,7 @@ import {
 
 const props = defineProps([
     'attendee',
-    'postRoute',
-    '_method',
+    'open',
 ]);
 
 const form = useForm(props.attendee)
@@ -171,7 +181,6 @@ const open = ref(false)
 const isUpdating = computed( () => props.attendee.id !== null )
 
 const save = () => {
-
     if (isUpdating.value === true) {
         form.post(route('attendee.update', props.attendee.id), {
             onSuccess: () =>  closeModal(),
@@ -180,16 +189,10 @@ const save = () => {
         form.post(route('attendee.store'), {
         });
     }
-
 };
-
-const page = usePage<SharedData>();
-const user = page.props.auth.user as User;
 
 const closeModal = () => {
     form.clearErrors()
     open.value = false
 };
-
-
 </script>

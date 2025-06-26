@@ -40,4 +40,12 @@ class AttendeeController extends Controller
             ->with('success', "Attendee saved");
     }
 
+    public function destroy(Attendee $attendee): RedirectResponse
+    {
+        $attendee->delete();
+
+        return redirect()->route('attendee.index')
+            ->with('success', "Attendee deleted");
+    }
+
 }

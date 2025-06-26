@@ -23,8 +23,10 @@ Route::middleware(['auth', 'verified'])
             ->name('attendee.index');
         Route::post('attendee', [App\Http\Controllers\AttendeeController::class, 'store'])
             ->name('attendee.store');
-        Route::post('attendee/edit/{attendee}', [App\Http\Controllers\AttendeeController::class, 'update'])
+        Route::post('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'update'])
             ->name('attendee.update');
+        Route::delete('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'destroy'])
+            ->name('attendee.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'can:admin'])
