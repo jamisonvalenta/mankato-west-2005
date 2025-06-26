@@ -21,6 +21,8 @@ class DashboardController extends Controller
             'registrationFilled' => $user->registrations()->exists(),
             'verified' => $user->verifications()->exists(),
             'eventRegistrationFilled' => false,
+            'attendeesFilled' => $user->attendees()->exists(),
+            'attendeeCount' => $user->attendees()->count(),
 
             'payment' => [
                 'received' => false,

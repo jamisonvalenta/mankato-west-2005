@@ -66,7 +66,7 @@
 
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
-                                                v-if="eventRegistrationFilled"
+                                                v-if="attendeesFilled"
                                                 class="text-green-500 w-5 h-5 inline-block mr-2"
                                                 />
                                             <div v-else class="w-5 h-5 mr-2 inline-block"></div>
@@ -87,7 +87,8 @@
                                                     Add Attendees
                                                 </Button>
                                                 <div v-else class="mt-2 text-gray-600 hover:text-blue-500 ">
-                                                {{ attendeeCount }} attendees ... edit</div>
+                                                    <Pill variant="green" class="hover:bg-green-200 hover:border-green-300">edit {{ attendeeCount }} attendees </Pill>
+                                                </div>
                                             </Link>
                                         </dd>
 
@@ -139,6 +140,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
+import { Pill } from '@/components/ui/pill';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
@@ -151,7 +153,7 @@ defineProps<{
     verified?: boolean;
     eventRegistrationFilled?: boolean;
     attendeesFilled?: boolean;
-    countAttendees?: integer;
+    attendeeCount?: integer;
     payment?: object;
 }>();
 
