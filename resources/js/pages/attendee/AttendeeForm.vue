@@ -118,7 +118,7 @@
 
                 </div>
 
-                <DialogFooter class="gap-2 sm:justify-between">
+                <DialogFooter class="gap-6 sm:gap-2 sm:justify-between">
                     <div class="grid grid-cols-2 gap-4">
                         <DeleteAttendee
                             :attendee="attendee"
@@ -129,8 +129,12 @@
                         </DialogClose>
                     </div>
 
-                    <div>
-                        <Button variant="default" :disabled="form.processing" :tabindex="7">
+                    <div class="grid grid-cols-1">
+                        <Button
+                            variant="default"
+                            :disabled="form.processing"
+                            :tabindex="7"
+                            >
                             <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
                             <button type="submit">Save</button>
                         </Button>
@@ -182,11 +186,12 @@ const isUpdating = computed( () => props.attendee.id !== null )
 
 const save = () => {
     if (isUpdating.value === true) {
-        form.post(route('attendee.update', props.attendee.id), {
+        form.post(route('attendee.update', props.attendee), {
             onSuccess: () =>  closeModal(),
         });
     } else {
         form.post(route('attendee.store'), {
+            onSuccess: () =>  closeModal(),
         });
     }
 };

@@ -4,7 +4,7 @@
             <Button variant="destructive" :tabindex="9" class=""> Delete </Button>
         </DialogTrigger>
 
-        <DialogContent>
+        <DialogContent class="max-w-md">
             <DialogHeader>
                 <DialogTitle>
                         Delete Attendee
@@ -14,7 +14,7 @@
                 </DialogDescription>
             </DialogHeader>
 
-            <DialogFooter class="gap-2 sm:justify-between">
+            <DialogFooter class="grid grid-cols-2 gap-4 sm:gap-8 sm:gap-2 sm:flex sm:justify-between">
                 <DialogClose as-child >
                     <Button variant="outline" class="" :tabindex="11"> Cancel </Button>
                 </DialogClose>
