@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
+import { Button } from '@/components/ui/button';
 </script>
 
 <template>
@@ -14,9 +15,10 @@ import { Head, Link } from '@inertiajs/vue3';
                 <Link
                     v-if="$page.props.auth.user"
                     :href="route('dashboard')"
-                    class="inline-block rounded-sm border border-gray-300 px-5 py-1.5 text-sm leading-normal text-gray-300 hover:border-gray-200 dark:border-gray-300 dark:text-gray-50 dark:hover:border-gray-200"
                 >
-                    Dashboard
+                    <Button variant="default" class="inline-block ">
+                        Dashboard
+                    </Button>
                 </Link>
                 <template v-else>
                     <Link
