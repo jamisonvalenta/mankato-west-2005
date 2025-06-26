@@ -46,7 +46,6 @@
                     <div class="grid gap-2">
                         <Label for="nametag">
                             Name for Name Tag
-                            <div class="mt-2  text-xs text-gray-500 font-regular">if different from name</div>
                         </Label>
                         <Input
                             id="nametag"
@@ -55,6 +54,20 @@
                             v-model="form.nametag"
                         />
                         <InputError :message="form.errors.nametag" />
+                    </div>
+
+                    <div class="grid gap-2">
+                        <Label for="pronouns">
+                            Preferred Pronouns
+                            <div class="mt-2  text-xs text-gray-500 font-regular"> they/them/theirs, she/her/hers, he/him/his, they/she, etc</div>
+                        </Label>
+                        <Input
+                            id="pronouns"
+                            type="text"
+                            :tabindex="2"
+                            v-model="form.pronouns"
+                        />
+                        <InputError :message="form.errors.pronouns" />
                     </div>
 
                     <div class="grid gap-2">

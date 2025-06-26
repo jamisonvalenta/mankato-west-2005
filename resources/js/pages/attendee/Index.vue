@@ -50,6 +50,15 @@
                             </GridDd>
                         </GridDlCell>
 
+                        <GridDlCell>
+                            <GridDt>
+                                Perferred Pronouns
+                            </GridDt>
+                            <GridDd>
+                                {{ attendee.pronouns }}
+                            </GridDd>
+                        </GridDlCell>
+
                         <GridDlCell class="md:col-span-3">
                             <GridDt>
                                 Accommodation Requests
@@ -144,7 +153,7 @@ const newAttendee = computed( () => {
             id: null,
             name: user.name,
             nametag: null,
-            relationship: 'self',
+            pronouns: null,
             accommodation_requests: null,
             emergency_contact_name: null,
             emergency_contact_phone: null,
@@ -156,7 +165,7 @@ const newAttendee = computed( () => {
         id: null,
         name: null,
         nametag: null,
-        relationship: 'spouse',
+        pronouns: null,
         accommodation_requests: null,
         emergency_contact_name: null,
         emergency_contact_phone: null,
