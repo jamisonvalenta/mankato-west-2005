@@ -29,28 +29,19 @@ class VerificationController extends Controller
             return json(['message' => 'There was an issue processing your request'], 422);
         }
 
-        $user = User::find($request->input('user_id'));
+        $verifiedUser = User::findOrFail($request->input('user_id'));
+        $registration = $verifiedUser->registration;
 
-        $user->verifications()->save(new Verification([
+        $verifiedUser->verifications()->save(new Verification([
+            'registration_id' => $registration->id,
             'created_by' => $request->user()->id,
         ]));
 
-        // return response()->json(['message' => "User has been verified"]);
-
-
-        // return to_route('admin.users.index')
-        //     ->with('success', "User has been verified");
-
         return redirect()->back()
             ->with('success', "User has been verified");
-
-        // return Inertia::render('admin/users/Index');
-
-        // return to_route('admin.users.index')
-        //     ->with('success', "User has been verified");
     }
 
-    public function edit(): Response
+    public function delete(): Response
     {
         // $registration = auth()->user()->registrations()->mostRecent()->first();
 

@@ -22,12 +22,6 @@ class RegistrationController extends Controller
 
     public function store(RegistrationStoreRequest $request): RedirectResponse
     {
-        // $request->user()->fill($request->validated());
-
-        // if ($request->user()->isDirty('email')) {
-        //     $request->user()->email_verified_at = null;
-        // }
-
         $request->user()->registrations()->save(new Registration($request->validated()));
 
         return to_route('dashboard')

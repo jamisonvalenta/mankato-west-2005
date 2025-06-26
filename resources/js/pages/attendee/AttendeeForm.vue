@@ -117,6 +117,7 @@
         <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-8 sm:gap-x-2 sm:gap-2 sm:justify-between">
             <div class="grid grid-cols-2 gap-4">
                 <DeleteAttendee
+                    v-if="isUpdating"
                     :attendee="attendee"
                     @deleted="deleted"
                     />

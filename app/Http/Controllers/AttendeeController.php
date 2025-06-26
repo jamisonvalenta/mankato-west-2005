@@ -45,7 +45,7 @@ class AttendeeController extends Controller
 
     public function store(AttendeeStoreRequest $request): RedirectResponse
     {
-        $request->user()->registration->attendees()->save(new Attendee($request->validated()));
+        $request->user()->attendees()->save(new Attendee($request->validated()));
 
         return redirect()->route('attendee.index')
             ->with('success', "Attendee saved");

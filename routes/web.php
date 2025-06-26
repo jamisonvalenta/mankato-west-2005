@@ -33,6 +33,21 @@ Route::middleware(['auth', 'verified'])
 
         Route::delete('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'destroy'])
             ->name('attendee.destroy');
+
+        Route::get('payments', [App\Http\Controllers\PaymentController::class, 'index'])
+            ->name('payments.index');
+        Route::get('payments/create', [App\Http\Controllers\PaymentController::class, 'create'])
+            ->name('payments.create');
+        Route::post('payments', [App\Http\Controllers\PaymentController::class, 'store'])
+            ->name('payments.store');
+
+        Route::get('payments/{payments}/edit', [App\Http\Controllers\PaymentController::class, 'edit'])
+            ->name('payments.edit');
+        Route::post('payments/{payments}', [App\Http\Controllers\PaymentController::class, 'update'])
+            ->name('payments.update');
+
+        Route::delete('payments/{payments}', [App\Http\Controllers\PaymentController::class, 'destroy'])
+            ->name('payments.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'can:admin'])

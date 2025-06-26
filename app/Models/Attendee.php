@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Attendee extends Model
@@ -15,13 +16,8 @@ class Attendee extends Model
         'id',
     ];
 
-    public function user(): HasOneThrough
+    public function user(): HasOne
     {
-        return $this->hasOneThrough(User::class, Registration::class);
-    }
-
-    public function registration() : BelongsTo
-    {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 }

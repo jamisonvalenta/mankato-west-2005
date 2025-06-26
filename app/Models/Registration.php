@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\Attendee;
+use App\Models\Payment;
 use App\Models\User;
+use App\Models\Verification;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +32,16 @@ class Registration extends Model
     public function attendees() : HasMany
     {
         return $this->hasMany(Attendee::class);
+    }
+
+    public function verifications() : HasMany
+    {
+        return $this->hasMany(Verification::class);
+    }
+
+    public function payments() : HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function scopeMostRecent($query)

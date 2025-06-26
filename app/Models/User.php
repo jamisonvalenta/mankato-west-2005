@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Attendee;
 use App\Models\Registration;
+use App\Models\Verification;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,9 +52,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function attendees(): HasManyThrough
+    public function attendees(): HasMany
     {
-        return $this->hasManyThrough(Attendee::class, Registration::class);
+        return $this->hasMany(Attendee::class);
     }
 
     public function registrations() : HasMany
@@ -76,7 +77,6 @@ class User extends Authenticatable
         return new Attribute(
             get: fn () => $this->roles()->pluck('type'),
         );
-
     }
 
     protected function registration(): Attribute

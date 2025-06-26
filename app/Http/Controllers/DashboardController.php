@@ -16,19 +16,16 @@ class DashboardController extends Controller
     public function index(Request $request): Response
     {
         $user = $request->user();
+        $registration = $user->registration;
+        $payment = $registration->payments()->exists() ? $registration->payments->first() : null;
 
         return Inertia::render('Dashboard', [
-            'registrationFilled' => $user->registrations()->exists(),
+            'registrationFilled' => $registration !== null,
             'verified' => $user->verifications()->exists(),
             'eventRegistrationFilled' => false,
             'attendeesFilled' => $user->attendees()->exists(),
             'attendeeCount' => $user->attendees()->count(),
-
-            'payment' => [
-                'received' => false,
-                'amount' => null,
-                'date' => null,
-            ]
+            'payment' => $payment,
         ]);
     }
 }

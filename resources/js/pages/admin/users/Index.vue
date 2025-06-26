@@ -53,7 +53,9 @@
                         class="bg-gray-100 border-t border-t-gray-400 text-center"
                         >
 
-                        <Dialog v-if="user.verifications?.length == 0 && user.registration">
+                        <Dialog
+                            v-if="user.verifications?.length == 0 && user.registration"
+                            >
                             <DialogTrigger as-child>
                                 <Button variant="outline">Verify User</Button>
                             </DialogTrigger>
@@ -65,11 +67,11 @@
                                     <input type="hidden" name="id" :value="user.id">
                                     <DialogHeader class="space-y-3">
                                         <DialogDescription>
-                                            Verify user is a member of the class of 2005
+                                            <span class="font-semibold">{{ user.registration.name }}</span> is a member of the class of 2005?
                                         </DialogDescription>
                                     </DialogHeader>
 
-                                    <DialogFooter class="gap-2">
+                                    <DialogFooter class="gap-2 sm:justify-between">
                                         <DialogClose as-child>
                                             <Button variant="outline" > Cancel </Button>
                                         </DialogClose>
@@ -178,10 +180,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { ref } from 'vue';
 
 defineProps<{
     users: array;
 }>();
+
+const open = ref(false)
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -209,9 +214,7 @@ const verifyUser = (user) => {
 
     form.post(route('admin.verifications.store'), {
         preserveScroll: true,
-        onSuccess: () =>  closeModal(),
         onError: () => page.props.flash.error = 'There was an issue processing your request',
-        onFinish: () => closeModal(),
     });
 };
 
