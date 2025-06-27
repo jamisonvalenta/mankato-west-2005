@@ -41,12 +41,10 @@ Route::middleware(['auth', 'verified'])
         Route::post('payments', [App\Http\Controllers\PaymentController::class, 'store'])
             ->name('payments.store');
 
-        Route::get('payments/{payments}/edit', [App\Http\Controllers\PaymentController::class, 'edit'])
-            ->name('payments.edit');
-        Route::post('payments/{payments}', [App\Http\Controllers\PaymentController::class, 'update'])
+        Route::post('payments/{payment}', [App\Http\Controllers\PaymentController::class, 'update'])
             ->name('payments.update');
 
-        Route::delete('payments/{payments}', [App\Http\Controllers\PaymentController::class, 'destroy'])
+        Route::delete('payments/{payment}', [App\Http\Controllers\PaymentController::class, 'destroy'])
             ->name('payments.destroy');
 });
 

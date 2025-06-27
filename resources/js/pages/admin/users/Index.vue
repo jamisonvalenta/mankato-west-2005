@@ -4,6 +4,11 @@
     <AppLayout :breadcrumbs="breadcrumbs">
 
         <div class="flex h-full flex-1 flex-col rounded-xl p-4">
+            <Heading
+                class="mt-4 md:mt-8"
+                :title="'Users (' + users.length + ')'"
+            />
+
             <GridList
                 class="grid-cols-4"
                 >
@@ -17,19 +22,22 @@
                     >
                     <GridCell class="bg-gray-100 border-t border-t-gray-400 "> {{ user.name }}</GridCell>
                     <GridCell
-                        class="col-span-2 grid grid-cols-6 gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
+                        class="col-span-2 flex flex-dense gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
                         >
                         <Pill v-if="user.registration" variant="green">
                             registered
                         </Pill>
-                        <Pill v-else variant="amber">
+                        <Pill v-else variant="gray" class="text-gray-400">
                             registered
                         </Pill>
 
                         <Pill v-if="user.verifications?.length > 0" variant="green">
                             verified
                         </Pill>
-                        <Pill v-else variant="amber">
+                        <Pill v-else-if="user.registration" variant="amber">
+                            awating verification
+                        </Pill>
+                        <Pill v-else variant="gray" class="text-gray-400">
                             verified
                         </Pill>
 
@@ -37,14 +45,14 @@
                         <Pill v-if="user.attendees?.length > 0" variant="green">
                             attending
                         </Pill>
-                        <Pill v-else variant="amber">
+                        <Pill v-else variant="gray" class="text-gray-400">
                             attending
                         </Pill>
 
                         <Pill v-if="user.payments?.length > 0" variant="green">
                             paid
                         </Pill>
-                        <Pill v-else variant="amber">
+                        <Pill v-else variant="gray" class="text-gray-400">
                             paid
                         </Pill>
 
@@ -86,6 +94,7 @@
                     </GridCell>
 
                     <GridDl
+                        v-if="user.registration"
                         class="col-span-4 grid-cols-4 grid-flow-row-dense p-4 "
                         >
 
@@ -152,6 +161,14 @@
                             </GridDd>
                         </GridDlCell>
                     </GridDl>
+                    <GridCell
+                        v-else
+                        class="col-span-4 justify-center"
+                        >
+                        <div class="text-center text-gray-400">
+                            registration not filled
+                        </div>
+                    </GridCell>
                 </template>
 
             </GridList>
@@ -164,6 +181,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
 import { GridCell, GridHeading, GridList, GridDl, GridDlCell, GridDt, GridDd,  } from '@/components/ui/gridlist';
+import Heading from '@/components/Heading.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { Label } from '@/components/ui/label';
 import { Pill } from '@/components/ui/pill';

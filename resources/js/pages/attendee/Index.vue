@@ -111,7 +111,7 @@
 
             </GridList>
 
-            <div v-if="attendees.length > 0" class="grid grid-cols-1 justify-center gap-4 text-center">
+            <div v-if="attendees.length > 0" class="grid grid-cols-1 justify-center gap-4 text-center mt-24">
                 <div class="text-gray-500 inline-block variant-smallcaps">Is that everyone?</div>
 
                 <Link :href="route('dashboard')" class="text-center">

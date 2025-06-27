@@ -7,10 +7,10 @@
         <DialogContent class="max-w-md">
             <DialogHeader>
                 <DialogTitle>
-                        Delete Attendee
+                        Delete Payment
                 </DialogTitle>
                 <DialogDescription class="text-sm my-4">
-                    You are about to delete this attendee from the 2025 Reunion.
+                    You are about to delete this payment
                 </DialogDescription>
             </DialogHeader>
 
@@ -21,7 +21,7 @@
 
                 <Button
                     variant="destructive"
-                    @click="deleteAttendee"
+                    @click="deletePayment"
                     :disabled="form.processing"
                     :tabindex="12"
                     >
@@ -52,16 +52,16 @@ import {
 } from '@/components/ui/dialog';
 
 const props = defineProps([
-    'attendee',
+    'payment',
 ]);
 
-const form = useForm(props.attendee)
+const form = useForm(props.payment)
 const open = ref(false)
 const emit = defineEmits(['deleted'])
 
 
-const deleteAttendee = () => {
-    form.delete(route('attendee.destroy', props.attendee.id), {
+const deletePayment = () => {
+    form.delete(route('payments.destroy', props.payment), {
         onSuccess: () => closeModals(),
     });
 };

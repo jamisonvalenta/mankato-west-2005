@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('created_by')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
-            $table->string('deleted_by')->nullable();
+            $table->softDeletes();
         });
     }
 

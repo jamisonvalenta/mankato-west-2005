@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $user = $request->user();
         $registration = $user->registration;
-        $payment = $registration->payments()->exists() ? $registration->payments->first() : null;
+        $payment = $user->payments->first();
 
         return Inertia::render('Dashboard', [
             'registrationFilled' => $registration !== null,

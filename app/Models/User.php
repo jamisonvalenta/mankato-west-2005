@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Attendee;
+use App\Models\Payment;
 use App\Models\Registration;
 use App\Models\Verification;
 use Illuminate\Auth\MustVerifyEmail;
@@ -10,13 +11,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, MustVerifyEmail;
+    use HasFactory, Notifiable, MustVerifyEmail, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -65,6 +67,11 @@ class User extends Authenticatable
     public function roles() : HasMany
     {
         return $this->hasMany(Role::class);
+    }
+
+    public function payments() : HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function verifications() : HasMany
