@@ -24,7 +24,7 @@ class Payment extends Model
     {
         return [
             'amount' => 'float',
-            'recieved_at' => 'datetime',
+            'received_at' => 'datetime',
         ];
     }
 
@@ -33,8 +33,8 @@ class Payment extends Model
         return $this->hasOne(User::class);
     }
 
-    public function recieved_by(): BelongsTo
+    public function received_by(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'recieved_by');
+        return $this->belongsTo(User::class, 'id', 'received_by');
     }
 }

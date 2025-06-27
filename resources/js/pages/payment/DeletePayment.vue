@@ -62,6 +62,7 @@ const emit = defineEmits(['deleted'])
 
 const deletePayment = () => {
     form.delete(route('payments.destroy', props.payment), {
+        preserveScroll: true,
         onSuccess: () => closeModals(),
     });
 };

@@ -10,10 +10,10 @@
             />
 
             <GridList
-                class="grid-cols-4"
+                class="grid-cols-5"
                 >
                 <GridHeading > Name </GridHeading>
-                <GridHeading class="col-span-2"> Status </GridHeading>
+                <GridHeading class="col-span-3"> Status </GridHeading>
                 <GridHeading> Actions </GridHeading>
 
                 <template
@@ -22,7 +22,7 @@
                     >
                     <GridCell class="bg-gray-100 border-t border-t-gray-400 "> {{ user.name }}</GridCell>
                     <GridCell
-                        class="col-span-2 flex flex-dense gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
+                        class="col-span-3 flex flex-dense gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
                         >
                         <Pill v-if="user.registration" variant="green">
                             registered
@@ -35,7 +35,7 @@
                             verified
                         </Pill>
                         <Pill v-else-if="user.registration" variant="amber">
-                            awating verification
+                            awaiting verification
                         </Pill>
                         <Pill v-else variant="gray" class="text-gray-400">
                             verified
@@ -49,8 +49,11 @@
                             attending
                         </Pill>
 
-                        <Pill v-if="user.payments?.length > 0" variant="green">
+                        <Pill v-if="user.payments?.length > 0 && user.payments.filter((payment) => payment.received_at).length > 0" variant="green">
                             paid
+                        </Pill>
+                        <Pill v-else-if="user.payments?.length > 0" variant="amber">
+                            awaiting payment
                         </Pill>
                         <Pill v-else variant="gray" class="text-gray-400">
                             paid
@@ -65,7 +68,7 @@
                             v-if="user.verifications?.length == 0 && user.registration"
                             >
                             <DialogTrigger as-child>
-                                <Button variant="outline">Verify User</Button>
+                                <Button variant="default" size="sm">Verify User</Button>
                             </DialogTrigger>
                             <DialogContent>
                                 <form class="space-y-6"
@@ -85,17 +88,24 @@
                                         </DialogClose>
 
                                         <Button variant="default" :disabled="form.processing">
-                                            <button type="submit">Verify User</button>
+                                            <button type="submit">Yep, sure is!</button>
                                         </Button>
                                     </DialogFooter>
                                 </form>
                             </DialogContent>
                         </Dialog>
+
+                        <AdminPaymentForm
+                            v-if="user.payments.length > 0"
+                            v-for="payment in user.payments"
+                            :key="payment.id"
+                            :payment="payment"
+                            />
                     </GridCell>
 
                     <GridDl
                         v-if="user.registration"
-                        class="col-span-4 grid-cols-4 grid-flow-row-dense p-4 "
+                        class="col-span-5 grid-cols-4 grid-flow-row-dense p-4 "
                         >
 
                         <GridDlCell>
@@ -152,7 +162,7 @@
                             </GridDd>
                         </GridDlCell>
 
-                        <GridDlCell class="col-span-2">
+                        <GridDlCell class="col-span-3" v-if="user.registration.bio">
                             <GridDt>
                                 Bio
                             </GridDt>
@@ -163,7 +173,7 @@
                     </GridDl>
                     <GridCell
                         v-else
-                        class="col-span-4 justify-center"
+                        class="col-span-5 justify-center"
                         >
                         <div class="text-center text-gray-400">
                             registration not filled
@@ -178,6 +188,7 @@
 
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
+import AdminPaymentForm from '@/pages/admin/payments/AdminPaymentForm.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
 import { GridCell, GridHeading, GridList, GridDl, GridDlCell, GridDt, GridDd,  } from '@/components/ui/gridlist';

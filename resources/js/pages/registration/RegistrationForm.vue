@@ -115,12 +115,10 @@
                 </div>
             </div>
 
-
             <Button type="submit" class="mt-4 w-full md:max-w-[30em]" :disabled="form.processing" :tabindex="7">
                 <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
                 Save
             </Button>
-
         </form>
     </div>
 </template>

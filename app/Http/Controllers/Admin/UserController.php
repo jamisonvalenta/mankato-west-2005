@@ -20,7 +20,7 @@ class UserController extends Controller
 
         return Inertia::render('admin/users/Index', [
             'users' => User::query()
-                ->with(['roles', 'verifications'])
+                ->with(['roles', 'verifications', 'attendees', 'payments'])
                 ->orderBy('name')
                 ->get(),
         ]);

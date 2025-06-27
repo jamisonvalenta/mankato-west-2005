@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PaymentStoreRequest extends FormRequest
+class AdminPaymentStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -19,6 +19,7 @@ class PaymentStoreRequest extends FormRequest
             'amount' => ['required', 'numeric'],
             'user_notes' => [''],
             'admin_notes' => [''],
+            'set_received' => ['optional', 'boolean'],
         ];
     }
 

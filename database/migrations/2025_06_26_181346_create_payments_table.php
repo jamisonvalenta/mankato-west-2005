@@ -17,8 +17,8 @@ return new class extends Migration
             $table->float('amount')->nullable();
             $table->string('user_notes')->nullable();
             $table->string('admin_notes')->nullable();
-            $table->bigInteger('recieved_by')->unsigned()->nullable();
-            $table->datetime('recieved_at')->nullable();
+            $table->bigInteger('received_by')->unsigned()->nullable();
+            $table->datetime('received_at')->nullable();
             $table->timestamps();
         });
     }

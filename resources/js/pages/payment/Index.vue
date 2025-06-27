@@ -125,7 +125,7 @@
                                             v-else
                                             variant="gray"
                                         >
-                                            waiting for payment
+                                            not yet received
                                         </Pill>
                                 </GridDd>
                             </GridDlCell>

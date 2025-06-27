@@ -48,7 +48,11 @@ Route::middleware(['auth', 'verified'])
             ->name('payments.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'can:admin'])
+Route::middleware([
+        'auth',
+        'verified',
+        'can:admin',
+    ])
     ->name('admin.')
     ->prefix('admin/')
     ->group(function () {
@@ -60,6 +64,10 @@ Route::middleware(['auth', 'verified', 'can:admin'])
 
         Route::post('verifications', [App\Http\Controllers\Admin\VerificationController::class, 'store'])
             ->name('verifications.store');
+
+
+        Route::post('payments/{payment}', [App\Http\Controllers\Admin\PaymentController::class, 'update'])
+            ->name('payments.update');
 });
 
 require __DIR__.'/settings.php';
