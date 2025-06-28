@@ -28,7 +28,7 @@ class RegistrationController extends Controller
             ->with('success', "Registration saved!  If you haven't been approved yet, please wait for an admin to approve you.");
     }
 
-    public function edit(): Response
+    public function edit(Registration $registration): Response
     {
         $registration = auth()->user()->registrations()->mostRecent()->first();
 

@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Attendee;
+use App\Models\Payment;
+use App\Models\Registration;
+use App\Models\Verification;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,40 +16,55 @@ Route::middleware(['auth', 'verified'])
             ->name('dashboard');
 
         Route::get('registration/create', [App\Http\Controllers\RegistrationController::class, 'create'])
-            ->name('registration.create');
+            ->name('registration.create')
+            ->can('create', Registration::class);
         Route::post('registration', [App\Http\Controllers\RegistrationController::class, 'store'])
-            ->name('registration.store');
-        Route::get('registration/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])
-            ->name('registration.edit');
+            ->name('registration.store')
+            ->can('create', Registration::class);
+        Route::get('registration/{registration}/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])
+            ->name('registration.edit')
+            ->can('update', 'registration')
+            ;
 
 
         Route::get('attendee', [App\Http\Controllers\AttendeeController::class, 'index'])
             ->name('attendee.index');
         Route::get('attendee/create', [App\Http\Controllers\AttendeeController::class, 'create'])
-            ->name('attendee.create');
+            ->name('attendee.create')
+            ->can('create', Attendee::class);
+
         Route::post('attendee', [App\Http\Controllers\AttendeeController::class, 'store'])
-            ->name('attendee.store');
+            ->name('attendee.store')
+            ->can('create', Attendee::class);
 
         Route::get('attendee/{attendee}/edit', [App\Http\Controllers\AttendeeController::class, 'edit'])
-            ->name('attendee.edit');
+            ->name('attendee.edit')
+            ->can('update', 'attendee');
         Route::post('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'update'])
-            ->name('attendee.update');
+            ->name('attendee.update')
+            ->can('update', 'attendee');
 
         Route::delete('attendee/{attendee}', [App\Http\Controllers\AttendeeController::class, 'destroy'])
-            ->name('attendee.destroy');
+            ->name('attendee.destroy')
+            ->can('delete', 'attendee');
 
         Route::get('payments', [App\Http\Controllers\PaymentController::class, 'index'])
-            ->name('payments.index');
+            ->name('payments.index')
+            ->can('viewAny', Payment::class);
         Route::get('payments/create', [App\Http\Controllers\PaymentController::class, 'create'])
-            ->name('payments.create');
+            ->name('payments.create')
+            ->can('create', Payment::class);
         Route::post('payments', [App\Http\Controllers\PaymentController::class, 'store'])
-            ->name('payments.store');
+            ->name('payments.store')
+            ->can('create', Payment::class);
 
         Route::post('payments/{payment}', [App\Http\Controllers\PaymentController::class, 'update'])
-            ->name('payments.update');
+            ->name('payments.update')
+            ->can('update', 'payment');
 
         Route::delete('payments/{payment}', [App\Http\Controllers\PaymentController::class, 'destroy'])
-            ->name('payments.destroy');
+            ->name('payments.destroy')
+            ->can('delete', 'payment');
 });
 
 Route::middleware([
@@ -63,11 +82,13 @@ Route::middleware([
             ->name('users.index');
 
         Route::post('verifications', [App\Http\Controllers\Admin\VerificationController::class, 'store'])
-            ->name('verifications.store');
+            ->name('verifications.store')
+            ->can('create', Verification::class);
 
 
         Route::post('payments/{payment}', [App\Http\Controllers\Admin\PaymentController::class, 'update'])
-            ->name('payments.update');
+            ->name('payments.update')
+            ->can('update', 'payment');
 });
 
 require __DIR__.'/settings.php';

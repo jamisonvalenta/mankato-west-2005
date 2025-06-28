@@ -76,7 +76,7 @@
                 <div class="grid grid-cols-1 gap-8">
                     <div class="grid gap-2">
                         <Label for="emergency_contact_name">
-                            Name *
+                            Emergency Contact Name *
                         </Label>
                         <Input
                             id="emergency_contact_name"
@@ -88,7 +88,7 @@
                     </div>
                     <div class="grid gap-2">
                         <Label for="emergency_contact_phone">
-                            Phone *
+                            Emergency Contact Phone *
                         </Label>
                         <Input
                             id="emergency_contact_phone"
@@ -100,7 +100,7 @@
                     </div>
                     <div class="grid gap-2">
                         <Label for="emergency_contact_relationship">
-                            Relationship
+                            Emergency Contact Relationship
                         </Label>
                         <Input
                             id="emergency_contact_relationship"

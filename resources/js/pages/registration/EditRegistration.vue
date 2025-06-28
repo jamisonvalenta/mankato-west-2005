@@ -27,7 +27,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
     {
         title: 'Registration',
-        href: route('registration.edit'),
+        href: route('registration.create'),
     },
 ];
 
