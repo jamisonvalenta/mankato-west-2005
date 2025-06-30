@@ -27,7 +27,7 @@
                                         </dt>
                                         <dd class="text-gray-700">
                                             Reunion Registration and Payments are live!
-                                            <span v-if="user.registration">
+                                            <span v-if="user.registration && ! user.registration.bio">
                                                 Please <TextLink :href="route('registration.edit', registration)">fill in your bio </TextLink> .
                                             </span>
                                         </dd>
@@ -226,7 +226,7 @@
                         </div>
                     </div>
                     <div class="text-gray-700 p-4 overflow-y-auto">
-                        <ul>
+                        <ul v-if="verified">
                             <li
                                 v-for="verifiedUser in usersVerified"
                                 class="list-none"
@@ -235,6 +235,9 @@
                                 <span v-if="verifiedUser.registration.original_name"> ({{ verifiedUser.registration.original_name }})</span>
                             </li>
                         </ul>
+                        <p v-else class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
+                            You need to be verified before you can view this section
+                        </p>
                     </div>
                 </div>
 
@@ -329,8 +332,8 @@
                 </div>
 
                 <div
-                    v-if="userSpotlight"
-                    class="sm:col-span-2 relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    v-if="userSpotlight && verified"
+                    class="sm:col-span-2 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                         <UsersRound class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                         <div class="text-md font-medium leading-6 text-gray-900">
@@ -344,15 +347,20 @@
                         </div>
                     </div>
                     <div class="text-gray-700 p-4">
-                        <h3 class="text-md font-semibold font-gray-600">
+                        <template v-if="verified">
+                            <h3 class="text-md font-semibold font-gray-600">
                             {{ userSpotlight.name }}
                             <span v-if="userSpotlight.registration.original_name" class=""> (formerly {{ userSpotlight.registration.original_name }}) </span>
 
-                        </h3>
-                        <p class="my-4 leading-loose">
-                            {{ userSpotlight.registration.bio }}
-                        </p>
+                            </h3>
+                            <p class="my-4 leading-loose">
+                                {{ userSpotlight.registration.bio }}
+                            </p>
+                        </template>
 
+                        <p v-else class="mt-4 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
+                            You need to be verified before you can view this section
+                        </p>
                     </div>
                 </div>
 
