@@ -180,9 +180,13 @@
                                                     <Pill v-if="payment?.received_at" variant="green">
                                                         Received ${{ payment.amount }}
                                                     </Pill>
-                                                    <Pill v-else variant="amber">
-                                                        Not Received
-                                                    </Pill>
+                                                    <Link
+                                                        v-else
+                                                        :href="route('payments.index')">
+                                                        <Pill  variant="amber">
+                                                            Not Received
+                                                        </Pill>
+                                                    </Link>
                                                 </div>
 
                                             </div>
