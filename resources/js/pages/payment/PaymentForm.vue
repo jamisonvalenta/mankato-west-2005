@@ -24,7 +24,7 @@
                         </template>
                     </DialogTitle>
                     <DialogDescription>
-                        Refund Policy: In the event you are unable to attend, we can no offer a refund. However, if we have a budget surplus, we may be able to accommodate your following the close of the reunion.
+                        <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to accommodate you following the close of the reunion.
                     </DialogDescription>
 
                 </DialogHeader>
@@ -39,6 +39,7 @@
                         <Input
                             id="amount"
                             type="number"
+                            step=".01"
                             :tabindex="1"
                             autofocus
                             v-model="form.amount"

@@ -34,6 +34,7 @@
                         <Input
                             id="amount"
                             type="number"
+                            step=".01"
                             :tabindex="1"
                             autofocus
                             v-model="form.amount"
