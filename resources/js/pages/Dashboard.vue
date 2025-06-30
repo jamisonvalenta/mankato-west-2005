@@ -4,12 +4,55 @@
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div class="grid auto-rows-min gap-4 md:grid-cols-2 xl:grid-cols-3">
-                <div class="relative aspect-video rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <section class="overflow-hidden">
+
+
+                <!-- Announcements -->
+                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
+                    <section class="overflow-scroll-y">
                         <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                             <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                             <div class="text-md font-medium leading-6 text-gray-900">
-                                Your Tasks
+                                Announcements
+                            </div>
+                            <div class="relative ml-auto">
+                                <!-- <ellipsis-menu></ellipsis-menu> -->
+                            </div>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <section class="px-4">
+                                <dl class="divide-y divide-gray-100 text-sm leading-6">
+                                    <div class="grid grid-cols-[4em,1fr] py-4 gap-4">
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            July 1
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            Reunion Registration and Payments are live!
+                                            <span v-if="user.registration">
+                                                Please <TextLink :href="route('registration.edit', registration)">fill in your bio </TextLink> .
+                                            </span>
+                                        </dd>
+
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            April 30
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <span class="font-bold">Not able to attend?</span> You can still register and join in the fun of answering questions and reading through your classmates' responses.
+                                        </dd>
+
+                                    </div>
+                                </dl>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tasks -->
+                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
+                    <section class="overflow-hidden">
+                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                            <ListBulletIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                            <div class="text-md font-medium leading-6 text-gray-900">
+                                My Tasks
                             </div>
                             <div class="relative ml-auto">
                                 <!-- <ellipsis-menu></ellipsis-menu> -->
@@ -148,6 +191,7 @@
                                     </div>
                                 </dl>
                                 <div v-if="payment?.received_at" class="w-full grid grid-cols-1 justify-center gap-4 text-center my-4">
+                                    <hr>
                                     <div>
                                         <StarIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
                                         <span class="text-lg text-gray-500 inline-block variant-smallcaps leading-loose">
@@ -166,13 +210,150 @@
                 </div>
 
 
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <div class="col-span-1 relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <PartyPopper class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Who's Registered
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4 overflow-y-auto">
+                        <ul>
+                            <li
+                                v-for="verifiedUser in usersVerified"
+                                class="list-none"
+                                >
+                                {{ verifiedUser.name }}
+                                <span v-if="verifiedUser.registration.original_name"> ({{ verifiedUser.registration.original_name }})</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+
+
+
+                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <HomeModernIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Hotel Information
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <p class="my-4 leading-loose">
+                            We will likely be reserving a room block at the Fairfield Inn and Suites in Mankato, walking distance from The Venue
+                        </p>
+                    </div>
                 </div>
+
+                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <Baby class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Childcare
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <p class="my-4 leading-loose">
+                            If you have a child who would like to offer babysitting services during the event, either at a private home or hotel, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current dark:decoration-neutral-500"> email us</a>.
+                        </p>
+                        <p class="my-4 leading-loose">
+                            Note: Being listed is in no way a recommendation. Parents are responsible for vetting any services offered.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Reunion Financials
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <p class="my-4 leading-loose">
+                            It is our goal to utilize your money efficiently. Between your generosity and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
+                        </p>
+                        <p class="my-4 leading-loose">
+                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current dark:decoration-neutral-500"> email us</a>.
+                        </p>
+                        <p class="my-4 leading-loose">
+                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to accommodate your following the close of the reunion.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <Camera class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Photo Uploads
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <p class="my-4 leading-loose">
+                            Have some beloved images from high school? Find a scanner and upload them here!
+                        </p>
+
+                        <p class="my-4 leading-loose">
+                            We'll build a slideshow for the reunion, and/or use them as inspiration for event festivities!
+                        </p>
+
+                        <p class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
+                            Uploader coming soon!
+                        </p>
+
+                    </div>
+                </div>
+
+                <div
+                    v-if="userSpotlight"
+                    class="sm:col-span-2 relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <UsersRound class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            What have your classmates been up to?
+                            <TextLink v-if="user.registration" :href="route('registration.edit', registration)" class="text-gray-400">
+                                edit my bio
+                            </TextLink>
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <h3 class="text-md font-semibold font-gray-600">
+                            {{ userSpotlight.name }}
+                            <span v-if="userSpotlight.registration.original_name" class=""> (formerly {{ userSpotlight.registration.original_name }}) </span>
+
+                        </h3>
+                        <p class="my-4 leading-loose">
+                            {{ userSpotlight.registration.bio }}
+                        </p>
+
+                    </div>
+                </div>
+
+
             </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min">
-            </div>
+
         </div>
     </AppLayout>
 </template>
@@ -182,12 +363,12 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Pill } from '@/components/ui/pill';
-import { Head } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
-import { BellIcon,CheckCircleIcon,StarIcon } from '@heroicons/vue/24/outline';
+import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
-import { ClockIcon } from '@heroicons/vue/24/outline';
+import { ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline';
+import { Baby, Camera, PiggyBank, UsersRound, PartyPopper } from 'lucide-vue-next';
 import TextLink from '@/components/TextLink.vue';
 import { computed } from 'vue';
 
@@ -198,6 +379,9 @@ const props = defineProps([
     'attendeesFilled',
     'attendeeCount',
     'payment',
+    'usersVerified',
+    'userSpotlight',
+    'biosCount',
 ]);
 
 
@@ -207,5 +391,8 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: route('dashboard'),
     },
 ];
+
+const page = usePage();
+const user = page.props.auth.user as User;
 
 </script>

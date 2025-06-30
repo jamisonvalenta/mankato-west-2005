@@ -23,6 +23,10 @@
                             Add Payment
                         </template>
                     </DialogTitle>
+                    <DialogDescription>
+                        Refund Policy: In the event you are unable to attend, we can no offer a refund. However, if we have a budget surplus, we may be able to accommodate your following the close of the reunion.
+                    </DialogDescription>
+
                 </DialogHeader>
 
                 <div class="grid grid-cols-1 gap-12 mt-12">

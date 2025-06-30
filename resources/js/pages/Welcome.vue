@@ -79,23 +79,23 @@ import { Button } from '@/components/ui/button';
                         <dd>Event ends</dd>
                     </dl>
 
-                    <p class="mt-8 mb-2 text-gray-700 dark:text-gray-100 text-base">
-                        Registration will open late April, 2025
-                    </p>
-
                     <div class="mt-16 mb-4 text-gray-800 dark:text-gray-200 text-base grid grid-cols-2 gap-x-24">
-                        <Link
-                            :href="route('login')"
-                            class="inline-block rounded-sm border border-blue-600 px-5 py-3 text-base leading-normal text-gray-800 hover:border-blue-700 dark:border-gray-200 dark:text-gray-50 dark:hover:border-white text-center dark:hover:bg-gray-800"
-                        >
-                            Log in
-                        </Link>
-                        <Link
-                            :href="route('register')"
-                            class="inline-block rounded-sm border border-blue-600 px-5 py-3 text-base leading-normal text-gray-800 hover:border-blue-700 dark:border-gray-200 dark:text-gray-50 dark:hover:border-white text-center dark:hover:bg-gray-800"
-                        >
-                            Register
-                        </Link>
+                        <Button variant="outline" size="lg">
+                            <Link
+                                :href="route('login')"
+                                class=""
+                            >
+                                Log in
+                            </Link>
+                        </Button>
+                        <Button variant="outline" size="lg">
+                            <Link
+                                :href="route('register')"
+                                class=""
+                            >
+                                Register
+                            </Link>
+                        </Button>
                     </div>
                 </div>
 

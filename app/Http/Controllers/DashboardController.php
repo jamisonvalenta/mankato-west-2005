@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,6 +20,13 @@ class DashboardController extends Controller
         $registration = $user->registration;
         $payment = $user->payments->first();
 
+        $usersHavingBios = User::whereHas('registrations', fn ($query) => $query->where('bio', "!=", "")->where('show_attendance', true))->get();
+
+        $usersVerified = User::whereHas('verifications')->orderBy('name', 'asc')->get()
+            ->filter(function ($user) {
+                return $user->registration->show_attendance;
+            });
+
         return Inertia::render('Dashboard', [
             'registration' => $registration,
             'verified' => $user->verifications()->exists(),
@@ -26,6 +34,9 @@ class DashboardController extends Controller
             'attendeesFilled' => $user->attendees()->exists(),
             'attendeeCount' => $user->attendees()->count(),
             'payment' => $payment,
+            'biosCount' => $usersHavingBios->count(),
+            'userSpotlight' => $usersHavingBios->random(),
+            'usersVerified' => $usersVerified,
         ]);
     }
 }

@@ -18,7 +18,7 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { Boxes, BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { Boxes, BookOpen, Folder, LayoutGrid, Menu, Search, GlobeLock } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
@@ -45,6 +45,13 @@ const mainNavItems: NavItem[] = computed(function () {
             href: route('dashboard'),
             icon: LayoutGrid,
         },
+
+        {
+            title: 'Privacy Statement',
+            href: route('privacy'),
+            icon: GlobeLock,
+        },
+
     ]
 
     if (page.props.auth.user.can_see_admin_dashboard) {
