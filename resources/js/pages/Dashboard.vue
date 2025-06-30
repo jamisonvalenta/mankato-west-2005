@@ -182,7 +182,8 @@
                                                     </Pill>
                                                     <Link
                                                         v-else
-                                                        :href="route('payments.index')">
+                                                        :href="route('payments.index')"
+                                                        class="cursor-pointer">
                                                         <Pill  variant="amber">
                                                             Not Received
                                                         </Pill>
