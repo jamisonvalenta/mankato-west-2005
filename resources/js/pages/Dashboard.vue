@@ -293,13 +293,13 @@
                     </div>
                     <div class="text-gray-700 p-4">
                         <p class="my-4 leading-loose">
-                            It is our goal to utilize your money efficiently. Between your generosity and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
+                            It is our goal to utilize your money efficiently. Between your donations and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
                         </p>
                         <p class="my-4 leading-loose">
                             If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current dark:decoration-neutral-500"> email us</a>.
                         </p>
                         <p class="my-4 leading-loose">
-                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to accommodate your following the close of the reunion.
+                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to offer a refund following the close of the reunion.
                         </p>
 
                     </div>
