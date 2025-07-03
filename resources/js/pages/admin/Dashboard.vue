@@ -101,7 +101,7 @@
                             <section class="px-4">
                                 <dl class="text-sm leading-6 grid grid-cols-[1fr,5em] py-4 gap-4">
                                     <dt class="text-gray-500 text-lg leading-loose">
-                                        <DollarSign
+                                        <MessageCircleDashed
                                             class="text-gray-500 w-5 h-5 inline-block mr-2"
                                             />
                                         Total Promised
@@ -133,8 +133,6 @@
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
                 </div>
             </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min">
-            </div>
         </div>
     </AppLayout>
 </template>
@@ -147,7 +145,7 @@ import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon, CheckCircleIcon, ExclamationCircleIcon, UsersIcon } from '@heroicons/vue/24/outline';
-import { Baby, Camera, DollarSign, PiggyBank, UsersRound, PartyPopper } from 'lucide-vue-next';
+import { Baby, Camera, DollarSign, PiggyBank, UsersRound, PartyPopper, MessageCircleDashed } from 'lucide-vue-next';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 
 defineProps<{
