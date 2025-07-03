@@ -4,7 +4,7 @@
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div class="grid auto-rows-min gap-4 md:grid-cols-2 xl:grid-cols-3">
-                <div class="relative aspect-video rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
                     <section class="overflow-hidden">
                         <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                             <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
@@ -79,12 +79,12 @@
                 </div>
 
 
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
                 </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
                 </div>
             </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min">
+            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min">
             </div>
         </div>
     </AppLayout>

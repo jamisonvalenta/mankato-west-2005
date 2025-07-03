@@ -6,45 +6,6 @@
             <div class="grid auto-rows-min gap-4 md:grid-cols-2 xl:grid-cols-3">
 
 
-                <!-- Announcements -->
-                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
-                    <section class="overflow-scroll-y">
-                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                            <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                            <div class="text-md font-medium leading-6 text-gray-900">
-                                Announcements
-                            </div>
-                            <div class="relative ml-auto">
-                                <!-- <ellipsis-menu></ellipsis-menu> -->
-                            </div>
-                        </div>
-                        <div class="divide-y divide-gray-100">
-                            <section class="px-4">
-                                <dl class="divide-y divide-gray-100 text-sm leading-6">
-                                    <div class="grid grid-cols-[4em,1fr] py-4 gap-4">
-                                        <dt class="text-gray-500 text-md leading-loose">
-                                            July 1
-                                        </dt>
-                                        <dd class="text-gray-700">
-                                            Reunion Registration and Payments are live!
-                                            <span v-if="user.registration && ! user.registration.bio">
-                                                Please <TextLink :href="route('registration.edit', registration)">fill in your bio </TextLink> .
-                                            </span>
-                                        </dd>
-
-                                        <dt class="text-gray-500 text-md leading-loose">
-                                            April 30
-                                        </dt>
-                                        <dd class="text-gray-700">
-                                            <span class="font-bold">Not able to attend?</span> You can still register and join in the fun of answering questions and reading through your classmates' responses.
-                                        </dd>
-
-                                    </div>
-                                </dl>
-                            </section>
-                        </div>
-                    </section>
-                </div>
 
                 <!-- Tasks -->
                 <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
@@ -78,7 +39,7 @@
                                                     <Button
                                                         variant="default"
                                                         size="default"
-                                                        class="mr-2 hover:bg-gray-600"
+                                                        class="mr-2"
                                                         >
 
                                                         Begin
@@ -117,7 +78,7 @@
 
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
-                                                v-if="attendeesFilled && verified && registration"
+                                                v-if="attendeesFilled && registration"
                                                 class="text-green-500 w-5 h-5 inline-block mr-2"
                                                 />
                                             <div v-else class="w-5 h-5 mr-2 inline-block"></div>
@@ -125,14 +86,14 @@
                                         </dt>
                                         <dd class="text-gray-700">
                                             <Link
-                                                v-if="verified"
+                                                v-if="registration"
                                                 :href="route('attendee.index')"
                                                 >
                                                 <Button
                                                     v-if="! attendeesFilled"
                                                     variant="default"
                                                     size="default"
-                                                    class="mr-2 hover:bg-gray-600"
+                                                    class="mr-2"
                                                     >
 
                                                     Add Attendees
@@ -159,14 +120,14 @@
                                             Payment
                                         </dt>
                                         <dd class="text-gray-700">
-                                            <div v-if="attendeesFilled && verified && registration">
+                                            <div v-if="attendeesFilled && registration">
                                                 <Link
                                                     v-if="attendeesFilled && ! payment"
                                                     :href="route('payments.index')">
                                                     <Button
                                                         variant="default"
                                                         size="default"
-                                                        class="mr-2 hover:bg-gray-600"
+                                                        class="mr-2"
                                                         >
 
                                                         Pay Now
@@ -199,7 +160,7 @@
                                     <hr>
                                     <div>
                                         <StarIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
-                                        <span class="text-lg text-gray-500 inline-block variant-smallcaps leading-loose">
+                                        <span class="font-semibold text-lg text-gray-500 inline-block variant-smallcaps leading-loose">
                                             Registration Complete
                                         </span>
                                         <StarIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
@@ -209,6 +170,65 @@
                                         Check back occasionally as we continue to add information and features!
                                     </span>
                                 </div>
+                                <div v-else class="w-full grid grid-cols-1 justify-center gap-4 text-center my-4">
+                                    <hr>
+                                    <div>
+                                        <ExclamationCircleIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
+                                        <span class="font-semibold text-lg text-gray-500 inline-block variant-smallcaps leading-loose">
+                                            Registration Incomplete
+                                        </span>
+                                        <ExclamationCircleIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
+                                    </div>
+
+                                    <span class="text-gray-500">
+                                        <template v-if="payment && ! payment.received_at">
+                                            Please send your payment (<TextLink :href="route('payments.index')">review instructions</TextLink>)
+                                        </template>
+                                        <template v-else>
+                                            Please fill out your class registration, add attendees, payment forms!
+                                        </template>
+                                    </span>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Announcements -->
+                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
+                    <section class="overflow-scroll-y">
+                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                            <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                            <div class="text-md font-medium leading-6 text-gray-900">
+                                Announcements
+                            </div>
+                            <div class="relative ml-auto">
+                                <!-- <ellipsis-menu></ellipsis-menu> -->
+                            </div>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <section class="px-4">
+                                <dl class="divide-y divide-gray-100 text-sm leading-6">
+                                    <div class="grid grid-cols-[4em,1fr] py-4 gap-4">
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            July 1
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            Reunion Registration and Payments are live!
+                                            <span v-if="user.registration && ! user.registration.bio">
+                                                Please <TextLink :href="route('registration.edit', registration)">fill in your bio </TextLink> .
+                                            </span>
+                                        </dd>
+
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            April 30
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <span class="font-bold">Not able to attend?</span> You can still register and join in the fun of answering questions and reading through your classmates' responses.
+                                        </dd>
+
+                                    </div>
+                                </dl>
                             </section>
                         </div>
                     </section>
@@ -272,7 +292,7 @@
                     </div>
                     <div class="text-gray-700 p-4">
                         <p class="my-4 leading-loose">
-                            If you have a child who would like to offer babysitting services during the event, either at a private home or hotel, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current dark:decoration-neutral-500"> email us</a>.
+                            If you have a child who would like to offer babysitting services during the event, either at a private home or hotel, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current "> email us</a>.
                         </p>
                         <p class="my-4 leading-loose">
                             Note: Being listed is in no way a recommendation. Parents are responsible for vetting any services offered.
@@ -296,7 +316,7 @@
                             It is our goal to utilize your money efficiently. Between your donations and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
                         </p>
                         <p class="my-4 leading-loose">
-                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current dark:decoration-neutral-500"> email us</a>.
+                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current"> email us</a>.
                         </p>
                         <p class="my-4 leading-loose">
                             <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to offer a refund following the close of the reunion.
@@ -380,7 +400,7 @@ import { Head, Link, usePage } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
-import { ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline';
+import { ClockIcon, ListBulletIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
 import { Baby, Camera, PiggyBank, UsersRound, PartyPopper } from 'lucide-vue-next';
 import TextLink from '@/components/TextLink.vue';
 import { computed } from 'vue';
