@@ -20,6 +20,44 @@ class UserController extends Controller
 
         return Inertia::render('admin/users/Index', [
             'users' => User::query()
+                ->when($request->input('filter') === 'unregistered', function ($query) {
+                    $query->whereDoesntHave('registrations');
+                })
+                ->when($request->input('filter') === 'registered', function ($query) {
+                    $query->whereHas('registrations');
+                })
+                ->when($request->input('filter') === 'unverified', function ($query) {
+                    $query->whereDoesntHave('verifications')
+                        ->whereHas('registrations');
+                })
+                ->when($request->input('filter') === 'verified', function ($query) {
+                    $query->whereHas('verifications');
+                })
+                ->when($request->input('filter') === 'attendeesfilled', function ($query) {
+                    $query->whereHas('attendees');
+                })
+                ->when($request->input('filter') === 'awaitingpayment', function ($query) {
+                    $query->where(function ($query) {
+                        $query->where(function ($query) {
+                            $query->whereHas('attendees')
+                                ->whereHas('payments', function ($query) {
+                                    $query->whereNull('received_at');
+                                });
+                        })->orWhere(function ($query) {
+                            $query->whereHas('attendees')
+                                ->whereDoesntHave('payments');
+                        });
+                    })->orWhereHas('payments', function ($query) {
+                        $query->whereNull('received_at');
+                    });
+                })
+                ->when($request->input('filter') === 'complete', function ($query) {
+                    $query->where(function ($query) {
+                        $query->whereHas('payments', function ($query) {
+                            $query->whereNotNull('received_at');
+                        });
+                    });
+                })
                 ->with(['roles', 'verifications', 'attendees', 'payments'])
                 ->orderBy('name')
                 ->get(),

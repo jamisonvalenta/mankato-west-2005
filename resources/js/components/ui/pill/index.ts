@@ -9,6 +9,7 @@ export const pillVariants = cva(
             variant: {
                 gray: 'text-primary bg-gray-100 text-gray-600 border border-gray-200',
                 green: 'text-primary bg-green-100 text-green-700 border border-green-300',
+                indigo: 'text-primary bg-indigo-100 text-indigo-700 border border-indigo-300',
                 amber: 'text-primary bg-amber-100 text-amber-600 border border-amber-200',
                 red: 'text-primary bg-red-100 text-red-600 border border-red-200',
                 violet: 'text-primary bg-violet-100 text-violet-600 border border-violet-200',
