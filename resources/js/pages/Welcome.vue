@@ -80,22 +80,22 @@ import { Button } from '@/components/ui/button';
                     </dl>
 
                     <div class="mt-16 mb-4 text-gray-800 text-base grid grid-cols-2 gap-x-24">
-                        <Button variant="outline" size="lg">
-                            <Link
-                                :href="route('login')"
-                                class=""
-                            >
+                        <Link
+                            :href="route('login')"
+                            class=""
+                        >
+                            <Button variant="outline" size="lg">
                                 Log in
-                            </Link>
-                        </Button>
-                        <Button variant="outline" size="lg">
-                            <Link
-                                :href="route('register')"
-                                class=""
-                            >
+                            </Button>
+                        </Link>
+                        <Link
+                            :href="route('register')"
+                            class=""
+                        >
+                            <Button variant="outline" size="lg">
                                 Register
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                     </div>
                 </div>
 
