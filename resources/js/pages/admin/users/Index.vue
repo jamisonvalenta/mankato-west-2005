@@ -36,9 +36,9 @@
                             unverified
                         </Pill>
                     </Link>
-                    <Link :href="route('admin.users.index', {filter: 'verified'})">
-                        <Pill :variant="filter === 'verified' ? 'indigo' : 'gray'">
-                            verified
+                    <Link :href="route('admin.users.index', {filter: 'verifiednotattending'})">
+                        <Pill :variant="filter === 'verifiednotattending' ? 'indigo' : 'gray'">
+                            verified, not attending
                         </Pill>
                     </Link>
                     <Link :href="route('admin.users.index', {filter: 'attendeesfilled'})">

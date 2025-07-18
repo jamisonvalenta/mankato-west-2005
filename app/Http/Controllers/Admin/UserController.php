@@ -30,6 +30,10 @@ class UserController extends Controller
                     $query->whereDoesntHave('verifications')
                         ->whereHas('registrations');
                 })
+                ->when($request->input('filter') === 'verifiednotattending', function ($query) {
+                    $query->whereHas('verifications')
+                        ->whereDoesntHave('attendees');
+                })
                 ->when($request->input('filter') === 'verified', function ($query) {
                     $query->whereHas('verifications');
                 })
