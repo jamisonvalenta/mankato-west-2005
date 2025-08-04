@@ -17,12 +17,15 @@ class DashboardController extends Controller
     public function index(Request $request): Response
     {
         $user = $request->user();
+        $user->load('attendees');
         $registration = $user->registration;
         $payment = $user->payments->first();
 
         $usersHavingBios = User::whereHas('registrations', fn ($query) => $query->where('bio', "!=", "")->where('show_attendance', true))->get();
 
-        $usersVerified = User::whereHas('verifications')->orderBy('name', 'asc')->get()
+        $usersAttending = User::whereHas('verifications')->orderBy('name', 'asc')
+            ->with('attendees')
+            ->get()
             ->filter(function ($user) {
                 return $user->registration->show_attendance;
             });
@@ -36,7 +39,7 @@ class DashboardController extends Controller
             'payment' => $payment,
             'biosCount' => $usersHavingBios->count(),
             'userSpotlight' => $usersHavingBios->random(),
-            'usersVerified' => $usersVerified,
+            'usersAttending' => $usersAttending,
         ]);
     }
 }

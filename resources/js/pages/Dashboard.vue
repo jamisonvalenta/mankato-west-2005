@@ -235,7 +235,7 @@
                 </div>
 
 
-                <div class="col-span-1 relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                <div class="col-span-1 relative min-h-[20em] rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                         <PartyPopper class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                         <div class="text-md font-medium leading-6 text-gray-900">
@@ -245,14 +245,20 @@
                             <!-- <ellipsis-menu></ellipsis-menu> -->
                         </div>
                     </div>
-                    <div class="text-gray-700 p-4 overflow-y-auto">
+                    <div class="text-gray-700 p-4 overflow-y-auto max-h-[25em]">
                         <ul v-if="verified">
                             <li
-                                v-for="verifiedUser in usersVerified"
+                                v-for="userAttending in usersAttending"
                                 class="list-none"
                                 >
-                                {{ verifiedUser.name }}
-                                <span v-if="verifiedUser.registration.original_name"> ({{ verifiedUser.registration.original_name }})</span>
+                                {{ userAttending.name }}
+                                <span v-if="userAttending.registration.original_name">
+                                    ({{ userAttending.registration.original_name }})
+                                </span>
+                                <span v-if="userAttending.attendees.length > 1"
+                                    class="">
+                                     +{{ userAttending.attendees.length - 1 }}
+                                </span>
                             </li>
                         </ul>
                         <p v-else class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
@@ -345,7 +351,16 @@
                         </p>
 
                         <p class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
-                            Uploader coming soon!
+                            <Link :href="route('media.create')">
+                                <Button
+                                    variant="default"
+                                    size="default"
+                                    class=""
+                                    >
+
+                                    Start Uploading
+                                </Button>
+                            </Link>
                         </p>
 
                     </div>
@@ -412,7 +427,7 @@ const props = defineProps([
     'attendeesFilled',
     'attendeeCount',
     'payment',
-    'usersVerified',
+    'usersAttending',
     'userSpotlight',
     'biosCount',
 ]);
