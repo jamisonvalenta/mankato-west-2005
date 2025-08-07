@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Attendee;
+use App\Models\Media;
 use App\Models\Payment;
 use App\Models\Registration;
 use App\Models\Verification;
@@ -28,7 +29,6 @@ Route::middleware(['auth', 'verified'])
             ->name('registration.edit')
             ->can('update', 'registration')
             ;
-
 
         Route::get('attendee', [App\Http\Controllers\AttendeeController::class, 'index'])
             ->name('attendee.index');
@@ -68,6 +68,14 @@ Route::middleware(['auth', 'verified'])
         Route::delete('payments/{payment}', [App\Http\Controllers\PaymentController::class, 'destroy'])
             ->name('payments.destroy')
             ->can('delete', 'payment');
+
+        Route::get('media/create', [App\Http\Controllers\MediaController::class, 'create'])
+            ->name('media.create')
+            ->can('create', Media::class);
+
+        Route::post('media-batch', [App\Http\Controllers\MediaBatchController::class, 'store'])
+            ->name('media-batch.store')
+            ->can('create', Media::class);
 });
 
 Route::middleware([
