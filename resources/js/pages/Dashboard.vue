@@ -351,7 +351,8 @@
                         </p>
 
                         <p class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
-                            <Link :href="route('media.create')">
+                            Uploader coming soon!
+                            <!-- <Link :href="route('media.create')">
                                 <Button
                                     variant="default"
                                     size="default"
@@ -360,7 +361,7 @@
 
                                     Start Uploading
                                 </Button>
-                            </Link>
+                            </Link> -->
                         </p>
 
                     </div>
