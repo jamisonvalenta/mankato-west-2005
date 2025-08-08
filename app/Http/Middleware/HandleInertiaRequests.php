@@ -37,9 +37,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        if ($request->user()) {
+            $request->user()->loadMissing('verifications');
+        }
 
         return [
             ...parent::share($request),
+
 
             'auth' => [
                 'user' => $request->user(),
@@ -47,7 +51,8 @@ class HandleInertiaRequests extends Middleware
                     'super-admin' => auth()->user()?->can('super-admin') ?: false,
                     'admin' => auth()->user()?->can('admin') ?: false,
                     'verify' => auth()->user()?->can('verify') ?: false,
-                ]
+                ],
+                'csrfToken' => csrf_token(),
             ],
 
             'flash' => [

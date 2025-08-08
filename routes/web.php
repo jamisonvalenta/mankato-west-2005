@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Attendee;
+use App\Models\Event;
 use App\Models\Media;
 use App\Models\Payment;
 use App\Models\Registration;
@@ -16,6 +17,10 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
             ->name('dashboard');
+        Route::get('events/twenty-year', [App\Http\Controllers\EventController::class, 'show'])
+            ->name('events.twenty-year')
+            ->can('viewAny', Event::class);
+
         Route::get('privacy', [App\Http\Controllers\PrivacyController::class, 'index'])
             ->name('privacy');
 

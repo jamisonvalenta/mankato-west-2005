@@ -45,14 +45,16 @@ const mainNavItems: NavItem[] = computed(function () {
             href: route('dashboard'),
             icon: LayoutGrid,
         },
-
-        {
-            title: 'Privacy Statement',
-            href: route('privacy'),
-            icon: GlobeLock,
-        },
-
     ]
+
+    if (page.props.auth.user.verifications.length > 0) {
+        nav.push({
+            title: 'Event Details',
+            href: route('events.twenty-year'),
+            icon: Boxes,
+
+        })
+    }
 
     if (page.props.auth.user.can_see_admin_dashboard) {
         nav.push({
@@ -62,6 +64,13 @@ const mainNavItems: NavItem[] = computed(function () {
 
         })
     }
+
+    nav.push({
+        title: 'Privacy',
+        href: route('privacy'),
+        icon: GlobeLock,
+    })
+
     return nav
 })
 
