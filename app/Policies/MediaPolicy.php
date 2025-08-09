@@ -22,7 +22,7 @@ class MediaPolicy
 
     public function viewAny(User $user): ?Response
     {
-        return Response::deny();
+        return Response::allow();
     }
 
     public function view(User $user, Media $media): Response
@@ -46,6 +46,10 @@ class MediaPolicy
 
     public function delete(User $user, Media $media): Response
     {
+        if ($user->media()->where('id', $media->id)->exists()) {
+            return Response::allow();
+        }
+
         return Response::deny();
     }
 

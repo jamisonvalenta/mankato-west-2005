@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -36,12 +37,14 @@ class MediaController extends Controller
         ]);
     }
 
-    public function edit(Registration $registration): Response
+    public function destroy(Media $media): RedirectResponse
     {
-        $registration = auth()->user()->registrations()->mostRecent()->first();
+        Storage::disk('public')->delete($media->filename);
+        Storage::disk('cloudinary')->delete($media->cloudinary_public_id);
 
-        return Inertia::render('registration/EditRegistration', [
-            'registration' => $registration,
-        ]);
+        $media->delete();
+
+        return redirect()->back()
+            ->with('success', "Image deleted");
     }
 }

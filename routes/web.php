@@ -81,6 +81,10 @@ Route::middleware(['auth', 'verified'])
             ->name('media.create')
             ->can('create', Media::class);
 
+        Route::delete('media/{media}', [App\Http\Controllers\MediaController::class, 'destroy'])
+            ->name('media.destroy')
+            ->can('delete', 'media');
+
         Route::post('media-batch', [App\Http\Controllers\MediaBatchController::class, 'store'])
             ->name('media-batch.store')
             ->can('create', Media::class);
