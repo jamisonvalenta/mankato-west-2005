@@ -9,15 +9,17 @@
                         class=""
                         :title="'Your Photos (' + countImages + ')'"
                     />
-                <Link :href="route('media.create')" class="text-right">
-                    <Button
-                        variant="default"
-                        size="default"
-                        class=""
-                        >
-                        Upload Photos
-                    </Button>
-                </Link>
+                <div  class="text-right">
+                    <Link :href="route('media.create')">
+                        <Button
+                            variant="default"
+                            size="default"
+                            class=""
+                            >
+                            Upload Photos
+                        </Button>
+                    </Link>
+                </div>
             </div>
 
 
