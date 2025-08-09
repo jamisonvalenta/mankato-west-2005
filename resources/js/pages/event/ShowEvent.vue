@@ -3,7 +3,7 @@
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
 
                 <div
                     class="sm:col-span-1 relative  overflow-hidden rounded-xl border border-sidebar-border/70">

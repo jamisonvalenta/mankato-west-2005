@@ -220,8 +220,6 @@ const updateGallery = (event) => {
 
 const onTemplatedUpload = () => {
     toast.add({ severity: "info", summary: "Success", detail: "File Uploaded", life: 3000 });
-
-
 };
 
 const formatSize = (bytes) => {
