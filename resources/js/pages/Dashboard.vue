@@ -202,14 +202,34 @@
                             <div class="text-md font-medium leading-6 text-gray-900">
                                 Announcements
                             </div>
-                            <div class="relative ml-auto">
-                                <!-- <ellipsis-menu></ellipsis-menu> -->
-                            </div>
                         </div>
                         <div class="divide-y divide-gray-100">
                             <section class="px-4">
                                 <dl class="divide-y divide-gray-100 text-sm leading-6">
                                     <div class="grid grid-cols-[4em,1fr] py-4 gap-4">
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            Aug 9
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <span v-if="user.verifications.length > 0" >
+                                                Photo Uploader active.
+                                                <TextLink :href="route('media.create', registration)"> Please upload current or archival photos!</TextLink>
+                                            </span>
+
+                                            <span v-else> Event Details page Published (<TextLink :href="registration.create">register</TextLink> with the class to upload or view photos)</span>
+                                        </dd>
+
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            Aug 8
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <span v-if="user.verifications.length > 0">
+                                                <TextLink  :href="route('events.twenty-year')">Event details  </TextLink> published
+                                            </span>
+
+                                            <span v-else> Event details published </span>
+                                        </dd>
+
                                         <dt class="text-gray-500 text-md leading-loose">
                                             July 1
                                         </dt>
@@ -241,9 +261,6 @@
                         <div class="text-md font-medium leading-6 text-gray-900">
                             Who's Registered
                         </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
-                        </div>
                     </div>
                     <div class="text-gray-700 p-4 overflow-y-auto max-h-[25em]">
                         <ul v-if="verified">
@@ -255,10 +272,6 @@
                                 <span v-if="userAttending.registration.original_name">
                                     ({{ userAttending.registration.original_name }})
                                 </span>
-                                <span v-if="userAttending.attendees.length > 1"
-                                    class="">
-                                     +{{ userAttending.attendees.length - 1 }}
-                                </span>
                             </li>
                         </ul>
                         <p v-else class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
@@ -269,14 +282,11 @@
 
 
 
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
+                <!-- <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                         <HomeModernIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                         <div class="text-md font-medium leading-6 text-gray-900">
                             Hotel Information
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
                         </div>
                     </div>
                     <div class="text-gray-700 p-4">
@@ -284,16 +294,13 @@
                             We will likely be reserving a room block at the Fairfield Inn and Suites in Mankato, walking distance from The Venue
                         </p>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                <!-- <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                         <Baby class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                         <div class="text-md font-medium leading-6 text-gray-900">
                             Childcare
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
                         </div>
                     </div>
                     <div class="text-gray-700 p-4">
@@ -305,31 +312,7 @@
                         </p>
 
                     </div>
-                </div>
-
-                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Reunion Financials
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
-                        </div>
-                    </div>
-                    <div class="text-gray-700 p-4">
-                        <p class="my-4 leading-loose">
-                            It is our goal to utilize your money efficiently. Between your donations and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
-                        </p>
-                        <p class="my-4 leading-loose">
-                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current"> email us</a>.
-                        </p>
-                        <p class="my-4 leading-loose">
-                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to offer a refund following the close of the reunion.
-                        </p>
-
-                    </div>
-                </div>
+                </div> -->
 
                 <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
@@ -350,9 +333,8 @@
                             We'll build a slideshow for the reunion, and/or use them as inspiration for event festivities!
                         </p>
 
-                        <p class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
-                            Uploader coming soon!
-                            <!-- <Link :href="route('media.create')">
+                        <div class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
+                            <Link :href="route('media.create')">
                                 <Button
                                     variant="default"
                                     size="default"
@@ -361,8 +343,62 @@
 
                                     Start Uploading
                                 </Button>
-                            </Link> -->
-                        </p>
+                            </Link>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div
+                    v-if="verified"
+                    class="sm:col-span-1 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <AlignJustify class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            20-year Reunion Schedule
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <dl class="grid grid-cols-[6em,1fr] gap-2 text-gray-700 text-base">
+                            <dt class="uppercase text-sm font-semibold">Date</dt>
+                            <dd>Saturday August 16, 2025</dd>
+                            <dt class="uppercase text-sm font-semibold ">Location</dt>
+                            <dd>
+                                <a class="hover:text-blue-500 " href="https://www.thevenuemankato.com">
+                                    The Venue
+                                </a>
+                                <br>
+                                1850 Madison Ave
+                                <br>
+                                Mankato MN 56001
+                            </dd>
+
+
+                            <dt class="uppercase text-sm font-semibold">6:00pm</dt>
+                            <dd>Guests arrive, mingling &amp; appetizers</dd>
+
+                            <dt class="uppercase text-sm font-semibold">6:30pm</dt>
+                            <dd>Welcomes and introductions, presentations, activities, etc</dd>
+
+                            <dt class="uppercase text-sm font-semibold">7:30pm</dt>
+                            <dd>Live music begins, activities continue</dd>
+
+                            <dt class="uppercase text-sm font-semibold">10:30pm</dt>
+                            <dd>Event ends</dd>
+                        </dl>
+
+                        <div class="my-4 flex items-center justify-center">
+                            <Link :href="route('events.twenty-year')">
+                                <Button
+                                    variant="default"
+                                    size="default"
+                                    class=""
+                                    >
+
+                                    20-year Reunion Details
+                                </Button>
+                            </Link>
+                        </div>
 
                     </div>
                 </div>
@@ -401,6 +437,34 @@
                 </div>
 
 
+
+
+
+                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Reunion Financials
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <p class="my-4 leading-loose">
+                            It is our goal to utilize your money efficiently. Between your donations and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
+                        </p>
+                        <p class="my-4 leading-loose">
+                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current"> email us</a>.
+                        </p>
+                        <p class="my-4 leading-loose">
+                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to offer a refund following the close of the reunion.
+                        </p>
+
+                    </div>
+                </div>
+
+
             </div>
 
         </div>
@@ -417,7 +481,7 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 import { ClockIcon, ListBulletIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
-import { Baby, Camera, PiggyBank, UsersRound, PartyPopper } from 'lucide-vue-next';
+import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify } from 'lucide-vue-next';
 import TextLink from '@/components/TextLink.vue';
 import { computed } from 'vue';
 

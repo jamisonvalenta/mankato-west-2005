@@ -44,40 +44,6 @@
                     </div>
                 </div>
 
-                <!-- Entertainment -->
-                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
-                    <section class="overflow-scroll-y">
-                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                            <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                            <div class="text-md font-medium leading-6 text-gray-900">
-                                Entertainment
-                            </div>
-                        </div>
-                        <div class="divide-y divide-gray-100">
-                            <section class="px-4">
-                                <dl class="divide-y divide-gray-100 text-sm leading-6">
-                                    <div class="grid grid-cols-[8em,1fr] py-4 gap-4">
-                                        <dt class="text-gray-500 text-md leading-loose">
-                                            Neon-LIVE
-                                        </dt>
-                                        <dd class="text-gray-700">
-                                            <TextLink href="https://neonlivemusic.wixsite.com/neonlive"> Website </TextLink>
-                                            <TextLink href="https://www.facebook.com/neonliveentertainment?rdid=JCvrXX6ImzhIqpt7">(facebook)</TextLink>
-                                        </dd>
-
-                                        <dt class="text-gray-500 text-md leading-loose">
-                                            Emcee
-                                        </dt>
-                                        <dd class="text-gray-700">
-                                            Cara Gorman
-                                        </dd>
-                                    </div>
-                                </dl>
-                            </section>
-                        </div>
-                    </section>
-                </div>
-
                 <!-- Food and Libations -->
                 <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
                     <section class="overflow-scroll-y">
@@ -102,18 +68,18 @@
                                             Dessert
                                         </dt>
                                         <dd class="text-gray-700">
-                                            hand helds: cookies, cupcakes?
+                                            cookies, cupcakes, brownies?
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
-                                            Drink Ticket
+                                            Drink Tickets
                                         </dt>
                                         <dd class="text-gray-700">
                                             1 ticket per attendee, good for soda, beer, or wine
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
-                                            Cash Bar libations
+                                            Cash Bar
                                         </dt>
                                         <dd class="text-gray-700">
                                             Sodas, Beer, Wine, Mixed drinks
@@ -156,6 +122,40 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <!-- Entertainment -->
+            <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
+                <section class="overflow-scroll-y">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Entertainment
+                        </div>
+                    </div>
+                    <div class="divide-y divide-gray-100">
+                        <section class="px-4">
+                            <dl class="divide-y divide-gray-100 text-sm leading-6">
+                                <div class="grid grid-cols-[8em,1fr] py-4 gap-4">
+                                    <dt class="text-gray-500 text-md leading-loose">
+                                        Neon-LIVE
+                                    </dt>
+                                    <dd class="text-gray-700">
+                                        <TextLink href="https://neonlivemusic.wixsite.com/neonlive"> Website </TextLink>
+                                        <TextLink href="https://www.facebook.com/neonliveentertainment?rdid=JCvrXX6ImzhIqpt7">(facebook)</TextLink>
+                                    </dd>
+
+                                    <dt class="text-gray-500 text-md leading-loose">
+                                        Emcee
+                                    </dt>
+                                    <dd class="text-gray-700">
+                                        Cara Gorman
+                                    </dd>
+                                </div>
+                            </dl>
+                        </section>
+                    </div>
+                </section>
             </div>
 
         </div>
