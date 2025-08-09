@@ -119,7 +119,7 @@
                                         <Pill
                                             v-if="payment.received_at"
                                             variant="green">
-                                            received: payment.received_at
+                                            received: {{ payment.received_at.substring(0, 10) }}
                                         </Pill>
                                         <Pill
                                             v-else
