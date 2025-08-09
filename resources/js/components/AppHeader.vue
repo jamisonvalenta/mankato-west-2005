@@ -18,7 +18,7 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { Boxes, BookOpen, Folder, LayoutGrid, Menu, Search, GlobeLock } from 'lucide-vue-next';
+import { Boxes, BookOpen, Folder, LayoutGrid, Menu, Search, GlobeLock, FileImage, PartyPopper } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
@@ -51,7 +51,14 @@ const mainNavItems: NavItem[] = computed(function () {
         nav.push({
             title: '20-year Reunion Details',
             href: route('events.twenty-year'),
-            icon: Boxes,
+            icon: PartyPopper,
+
+        })
+
+        nav.push({
+            title: 'Photos',
+            href: route('media.index'),
+            icon: FileImage,
 
         })
     }
