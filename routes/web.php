@@ -74,6 +74,9 @@ Route::middleware(['auth', 'verified'])
             ->name('payments.destroy')
             ->can('delete', 'payment');
 
+        Route::get('media', [App\Http\Controllers\MediaController::class, 'index'])
+            ->name('media.index')
+            ->can('viewAny', Media::class);
         Route::get('media/create', [App\Http\Controllers\MediaController::class, 'create'])
             ->name('media.create')
             ->can('create', Media::class);

@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/vue-starter-kit",
+    "name": "jamisonvalenta/mankato-west-2005",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Registration system for the 20 year reunion",
     "keywords": [
         "laravel",
         "framework"
@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cloudinary-labs/cloudinary-laravel": "^3.0",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",

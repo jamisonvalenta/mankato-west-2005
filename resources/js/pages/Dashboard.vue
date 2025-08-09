@@ -333,8 +333,11 @@
                             We'll build a slideshow for the reunion, and/or use them as inspiration for event festivities!
                         </p>
 
-                        <div class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
-                            <Link :href="route('media.create')">
+                        <div class="mt-8 p-6 text-gray-500 leading-loose text-center">
+                            <Link
+                                v-if="verified"
+                                :href="route('media.create')"
+                                >
                                 <Button
                                     variant="default"
                                     size="default"
@@ -344,6 +347,19 @@
                                     Start Uploading
                                 </Button>
                             </Link>
+                            <div
+                                v-else
+                                class="flex justify-center items-center rounded-xl border-2 border-gray-200 border-dashed h-24 w-full sm:col-span-6">
+                                <p class="text-gray-500">
+                                    Please
+                                    <TextLink
+                                    :href="route('registration.create')">
+                                        register
+                                    </TextLink>
+                                    and wait to be verified
+
+                                </p>
+                            </div>
                         </div>
 
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Attendee;
+use App\Models\Media;
 use App\Models\Payment;
 use App\Models\Registration;
 use App\Models\Verification;
@@ -54,9 +55,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public function attendees(): HasMany
     {
         return $this->hasMany(Attendee::class);
+    }
+
+    public function media(): HasMany
+    {
+        return $this->hasMany(Media::class);
     }
 
     public function registrations() : HasMany
