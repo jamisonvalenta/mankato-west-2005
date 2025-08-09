@@ -32,7 +32,11 @@ class MediaPolicy
 
     public function create(User $user): Response
     {
-        return $user->verifications()->exists();
+        if ($user->verifications()->exists()) {
+            return Response::allow();
+        }
+
+        return Response::deny();
     }
 
     public function update(User $user, Media $media): Response

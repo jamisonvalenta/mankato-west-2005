@@ -118,6 +118,12 @@
                                                 />
                                             <div v-else class="w-5 h-5 mr-2 inline-block"></div>
                                             Payment
+                                            <TextLink
+                                                v-if="payment?.received_at"
+                                                :href="route('payments.index')"
+                                                class="ml-2 text-sm text-gray-500">
+                                                    view/add
+                                            </TextLink>
                                         </dt>
                                         <dd class="text-gray-700">
                                             <div v-if="attendeesFilled && registration">
@@ -138,8 +144,10 @@
                                                     :href="route('payments.index')"
                                                     class="leading-9 text-gray-600 hover:text-black "
                                                     >
-                                                    <Pill v-if="payment?.received_at" variant="green">
-                                                        Received ${{ payment.amount }}
+                                                    <Pill
+                                                        v-if="payment?.received_at"
+                                                        variant="green">
+                                                            Received ${{ payment.amount }}
                                                     </Pill>
                                                     <Link
                                                         v-else
