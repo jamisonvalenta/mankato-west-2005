@@ -216,7 +216,7 @@
                                                 <TextLink :href="route('media.create', registration)"> Please upload current or archival photos!</TextLink>
                                             </span>
 
-                                            <span v-else> Event Details page Published (<TextLink :href="registration.create">register</TextLink> with the class to upload or view photos)</span>
+                                            <span v-else> Event Details page Published (<TextLink :href="route('registration.create')">register</TextLink> with the class to upload or view photos)</span>
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
