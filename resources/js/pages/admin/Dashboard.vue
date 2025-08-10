@@ -38,7 +38,7 @@
                                         Incomplete registrations
                                     </dt>
                                     <dd class="">
-                                        <Link :href="route('admin.users.index')">
+                                        <Link :href="route('admin.users.index', {filter: 'unregistered'})">
                                             <span class="inline-flex items-center rounded-md bg-gray-50 px-3 py-2 text-xs font-medium text-gray-800 ring-1 ring-inset ring-gray-600/20">
                                                 {{ usersUnregisteredCount }}
                                             </span>
@@ -54,7 +54,7 @@
                                         Users awaiting verification
                                     </dt>
                                     <dd class="">
-                                        <Link :href="route('admin.users.index')">
+                                        <Link :href="route('admin.users.index', {filter: 'unverified'})">
                                             <span
                                                 :class='{
                                                     "bg-yellow-50 text-yellow-800 ring-yellow-600/20": usersAwaitingVerificationCount > 0,
@@ -67,18 +67,39 @@
                                     </dd>
 
                                     <dt class="text-gray-500 text-lg leading-loose">
+                                        <ExclamationCircleIcon
+                                            v-if="usersAwaitingPaymentCount > 0"
+                                            class="text-amber-500 w-5 h-5 inline-block mr-2"
+                                            />
+                                        <div v-else class="w-5 h-5 mr-2 inline-block"></div>
+                                        Users awaiting payment
+                                    </dt>
+                                    <dd class="">
+                                        <Link :href="route('admin.users.index', {filter: 'awaitingpayment'})">
+                                            <span
+                                                :class='{
+                                                    "bg-yellow-50 text-yellow-800 ring-yellow-600/20": usersAwaitingPaymentCount > 0,
+                                                    "bg-green-50 text-green-800 ring-green-600/20": usersAwaitingPaymentCount === 0,
+                                                }'
+                                            class="inline-flex items-center rounded-md  px-3 py-2 text-xs font-medium ring-1 ring-inset ">
+                                                {{ usersAwaitingPaymentCount }}
+                                            </span>
+                                        </Link>
+                                    </dd>
+
+                                    <dt class="text-gray-500 text-lg leading-loose">
                                         <CheckCircleIcon
                                         class="text-green-500 w-5 h-5 inline-block mr-2"
                                         />
                                         # attendees (paid)
                                     </dt>
                                     <dd class="">
-                                        <!-- <Link :href="route('admin.verifications.index')"> -->
+                                        <Link :href="route('admin.users.index', {filter: 'complete'})">
                                             <span
                                                 class="bg-green-50 text-green-800 ring-green-600/20 inline-flex items-center rounded-md  px-3 py-2 text-xs font-medium ring-1 ring-inset ">
                                                 {{ confirmedAttendeesCount }}
                                             </span>
-                                        <!-- </Link> -->
+                                        </Link>
                                     </dd>
                                 </dl>
                             </section>
@@ -152,6 +173,7 @@ defineProps<{
     usersCount?: number;
     usersUnregisteredCount?: number;
     usersAwaitingVerificationCount?: number;
+    usersAwaitingPaymentCount?: number;
     confirmedAttendeesCount?: number;
     paymentReceivedTotal?: number;
     paymentPromisedTotal?: number;

@@ -19,6 +19,22 @@ class AdminDashboardController extends Controller
             'usersCount' => User::count(),
             'usersUnregisteredCount' => User::whereDoesntHave('registrations')->count(),
             'usersAwaitingVerificationCount' => User::whereHas('registrations')->whereDoesntHave('verifications')->count(),
+            'usersAwaitingPaymentCount' => User::query()
+                ->where(function ($query) {
+                    $query->where(function ($query) {
+                        $query->where(function ($query) {
+                            $query->whereHas('attendees')
+                                ->whereHas('payments', function ($query) {
+                                    $query->whereNull('received_at');
+                                });
+                        })->orWhere(function ($query) {
+                            $query->whereHas('attendees')
+                                ->whereDoesntHave('payments');
+                        });
+                    })->orWhereHas('payments', function ($query) {
+                        $query->whereNull('received_at');
+                    });
+                })->count(),
             'confirmedAttendeesCount' => User::query()
                 ->whereHas('attendees')
                 ->whereHas('payments', function ($query) {
