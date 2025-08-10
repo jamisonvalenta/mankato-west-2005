@@ -221,7 +221,7 @@
                                         <dd class="text-gray-700">
                                             <span v-if="user.verifications.length > 0" >
                                                 Photo Uploader active.
-                                                <TextLink :href="route('media.create', registration)"> Please upload current or archival photos!</TextLink>
+                                                <TextLink :href="route('media.create')"> Please upload current or archival photos!</TextLink>
                                             </span>
 
                                             <span v-else> Event Details page Published (<TextLink :href="route('registration.create')">register</TextLink> with the class to upload or view photos)</span>
@@ -334,11 +334,11 @@
                     </div>
                     <div class="text-gray-700 p-4">
                         <p class="my-4 leading-loose">
-                            Have some beloved images from high school? Find a scanner and upload them here!
+                            Have some images from high school or want to share what your life looks like today? Find a scanner and upload them here.
                         </p>
 
                         <p class="my-4 leading-loose">
-                            We'll build a slideshow for the reunion, and/or use them as inspiration for event festivities!
+                            We'll build a slideshow for the reunion!
                         </p>
 
                         <div class="mt-8 p-6 text-gray-500 leading-loose text-center">
@@ -427,6 +427,32 @@
                     </div>
                 </div>
 
+
+                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Reunion Financials
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <p class="my-4 leading-loose">
+                            It is our goal to utilize your money efficiently. Between your donations and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
+                        </p>
+                        <p class="my-4 leading-loose">
+                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current"> email us</a>.
+                        </p>
+                        <p class="my-4 leading-loose">
+                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to offer a refund following the close of the reunion.
+                        </p>
+
+                    </div>
+                </div>
+
+
                 <div
                     v-if="userSpotlight && verified"
                     class="sm:col-span-2 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
@@ -462,31 +488,6 @@
 
 
 
-
-
-                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Reunion Financials
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
-                        </div>
-                    </div>
-                    <div class="text-gray-700 p-4">
-                        <p class="my-4 leading-loose">
-                            It is our goal to utilize your money efficiently. Between your donations and careful budgeting, we hope to practice generosity in Mankato/North Mankato!
-                        </p>
-                        <p class="my-4 leading-loose">
-                            If you know any local charitable causes, or have connections to the Mankato West such that we might be able understand how a donation could be helpful to current students, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current"> email us</a>.
-                        </p>
-                        <p class="my-4 leading-loose">
-                            <span class="font-bold">Refund Policy:</span> In the event you are unable to attend, we can not proactively offer a refund. However, if we have a budget surplus, we may be able to offer a refund following the close of the reunion.
-                        </p>
-
-                    </div>
-                </div>
 
 
             </div>

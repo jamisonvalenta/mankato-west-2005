@@ -8,6 +8,10 @@
                     title="Upload Photos"
                 />
 
+            <p class="my-4">
+                Privacy note: images will only be visible to people who have registered and been verified.
+            </p>
+
             <fieldset class="">
                 <legend class="text-base font-semibold text-gray-500 capitalize">Select a gallery</legend>
                 <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">

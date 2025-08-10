@@ -61,7 +61,9 @@
                                             Food
                                         </dt>
                                         <dd class="text-gray-700">
-                                            Selection of cheese/vegetable platters, appetizers (details TBA)
+                                            Hamburger sliders<br>
+                                            Boneless chicken wings<br>
+                                            Cheese &amp; vegetable platters
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
@@ -122,42 +124,62 @@
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Entertainment -->
-            <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
-                <section class="overflow-scroll-y">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Entertainment
+                <!-- Entertainment -->
+                <div class="sm:col-span-1 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <section >
+                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                            <BellIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                            <div class="text-md font-medium leading-6 text-gray-900">
+                                Entertainment
+                            </div>
                         </div>
-                    </div>
-                    <div class="divide-y divide-gray-100">
-                        <section class="px-4">
-                            <dl class="divide-y divide-gray-100 text-sm leading-6">
-                                <div class="grid grid-cols-[8em,1fr] py-4 gap-4">
-                                    <dt class="text-gray-500 text-md leading-loose">
-                                        Neon-LIVE
-                                    </dt>
-                                    <dd class="text-gray-700">
-                                        <TextLink href="https://neonlivemusic.wixsite.com/neonlive"> Website </TextLink>
-                                        <TextLink href="https://www.facebook.com/neonliveentertainment?rdid=JCvrXX6ImzhIqpt7">(facebook)</TextLink>
-                                    </dd>
+                        <div class="divide-y divide-gray-100">
+                            <section class="px-4">
+                                <dl class="divide-y divide-gray-100 text-sm leading-6">
+                                    <div class="grid grid-cols-[8em,1fr] py-4 gap-4">
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            Neon-LIVE
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <TextLink href="https://neonlivemusic.wixsite.com/neonlive"> Website </TextLink>
+                                            <TextLink href="https://www.facebook.com/neonliveentertainment?rdid=JCvrXX6ImzhIqpt7">(facebook)</TextLink>
+                                        </dd>
 
-                                    <dt class="text-gray-500 text-md leading-loose">
-                                        Emcee
-                                    </dt>
-                                    <dd class="text-gray-700">
-                                        Cara Gorman
-                                    </dd>
-                                </div>
-                            </dl>
-                        </section>
-                    </div>
-                </section>
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            Emcee
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            Cara Gorman
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- What to bring -->
+                <div class="sm:col-span-1 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <section >
+                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                            <List class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                            <div class="text-md font-medium leading-6 text-gray-900">
+                                Dress code
+                            </div>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <section class="px-4">
+                                <dl class="divide-y divide-gray-100 text-sm leading-6">
+                                    <div class="p-6">
+                                            cocktail / cocktail-causal
+                                    </div>
+                                </dl>
+                            </section>
+                        </div>
+                    </section>
+                </div>
             </div>
-
         </div>
     </AppLayout>
 </template>
@@ -172,7 +194,7 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 import { ClockIcon, ListBulletIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
-import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify } from 'lucide-vue-next';
+import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify, List } from 'lucide-vue-next';
 import TextLink from '@/components/TextLink.vue';
 import { computed } from 'vue';
 
