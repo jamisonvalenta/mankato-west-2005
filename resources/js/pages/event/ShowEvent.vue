@@ -63,6 +63,8 @@
                                         <dd class="text-gray-700">
                                             Hamburger sliders<br>
                                             Boneless chicken wings<br>
+                                            Impossible meatballs (vegan)<br>
+                                            Vegetable Skewers (vegan)<br>
                                             Cheese &amp; vegetable platters
                                         </dd>
 
@@ -70,7 +72,7 @@
                                             Dessert
                                         </dt>
                                         <dd class="text-gray-700">
-                                            cookies, cupcakes, brownies?
+                                            Cupcakes from <ExternalTextLink href="https://www.facebook.com/RedShoeBakery.1/">Red Shoe Bakery</ExternalTextLink>
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
@@ -142,8 +144,8 @@
                                             Neon-LIVE
                                         </dt>
                                         <dd class="text-gray-700">
-                                            <TextLink href="https://neonlivemusic.wixsite.com/neonlive"> Website </TextLink>
-                                            <TextLink href="https://www.facebook.com/neonliveentertainment?rdid=JCvrXX6ImzhIqpt7">(facebook)</TextLink>
+                                            <ExternalTextLink href="https://neonlivemusic.wixsite.com/neonlive"> website </ExternalTextLink><br>
+                                            <ExternalTextLink href="https://www.facebook.com/neonliveentertainment?rdid=JCvrXX6ImzhIqpt7">facebook</ExternalTextLink>
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
@@ -163,7 +165,7 @@
                 <div class="sm:col-span-1 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
                     <section >
                         <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                            <List class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                            <Shirt class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                             <div class="text-md font-medium leading-6 text-gray-900">
                                 Dress code
                             </div>
@@ -194,7 +196,8 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 import { ClockIcon, ListBulletIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
-import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify, List } from 'lucide-vue-next';
+import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify, List, Shirt } from 'lucide-vue-next';
+import ExternalTextLink from '@/components/ExternalTextLink.vue';
 import TextLink from '@/components/TextLink.vue';
 import { computed } from 'vue';
 
