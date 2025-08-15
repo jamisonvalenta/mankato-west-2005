@@ -30,13 +30,29 @@
                     v-for="(attendee, i) in attendees"
                     :key="attendee.id"
                     >
-                    <GridCell class="" :class="i % 2 ? '' : 'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 '"> {{ attendee.name }}</GridCell>
-                    <GridCell class="" :class="i % 2 ? '' : 'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 '"> {{ attendee.name != attendee.nametag ? attendee.nametag : '' }}</GridCell>
-                    <GridCell class="" :class="i % 2 ? '' : 'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 '"> {{ attendee.pronouns }}</GridCell>
-                    <GridCell class="" :class="i % 2 ? '' : 'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 '"> {{ attendee.accommodation_requests }}</GridCell>
+                    <GridCell class="" :class="{
+                            'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 ' : ! (i % 2),
+                            'border-b border-b-gray-200 ' : open[attendee.id] === true,
+                        }"> {{ attendee.name }}</GridCell>
+                    <GridCell class="" :class="{
+                            'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 ' : ! (i % 2),
+                            'border-b border-b-gray-200 ' : open[attendee.id] === true,
+                        }"> {{ attendee.name != attendee.nametag ? attendee.nametag : '' }}</GridCell>
+                    <GridCell class="" :class="{
+                            'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 ' : ! (i % 2),
+                            'border-b border-b-gray-200 ' : open[attendee.id] === true,
+                        }"> {{ attendee.pronouns }}</GridCell>
+                    <GridCell class="" :class="{
+                            'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 ' : ! (i % 2),
+                            'border-b border-b-gray-200 ' : open[attendee.id] === true,
+                        }"> {{ attendee.accommodation_requests }}</GridCell>
 
                     <GridCell
-                        class="text-center" :class="i % 2 ? '' : 'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 '"
+                        class="text-center"
+                        :class="{
+                            'bg-gray-50 border-t border-t-gray-200 border-b border-b-gray-200 ' : ! (i % 2),
+                            'border-b border-b-gray-200 ' : open[attendee.id] === true,
+                        }"
                         >
 
                         <Dialog
@@ -93,6 +109,8 @@
 
                             >
 
+                            <!-- Just a Spacer -->
+                            <div></div>
                             <GridDlCell>
                                 <GridDt>
                                     Emergency Contact Name
