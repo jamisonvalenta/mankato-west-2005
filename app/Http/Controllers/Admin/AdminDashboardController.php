@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendee;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -45,9 +46,10 @@ class AdminDashboardController extends Controller
                 ->reduce(function (?int $carry, $user) {
                     return (int) $carry + $user->attendees->count();
                 }),
+            'attendeesCount' => Attendee::count(),
 
-            'paymentReceivedTotal' => Payment::whereNotNull('received_at')->sum('amount'),
-            'paymentPromisedTotal' => Payment::sum('amount'),
+            'paymentReceivedTotal' => ceil(Payment::whereNotNull('received_at')->sum('amount')),
+            'paymentPromisedTotal' => ceil(Payment::sum('amount')),
         ]);
     }
 }

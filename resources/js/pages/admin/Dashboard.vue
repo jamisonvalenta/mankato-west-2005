@@ -101,6 +101,21 @@
                                             </span>
                                         </Link>
                                     </dd>
+
+                                    <dt class="text-gray-500 text-lg leading-loose">
+                                        <CheckCircleIcon
+                                        class="text-green-500 w-5 h-5 inline-block mr-2"
+                                        />
+                                        Attendee list
+                                    </dt>
+                                    <dd class="">
+                                        <Link :href="route('admin.attendees.index')">
+                                            <span
+                                                class="bg-green-50 text-green-800 ring-green-600/20 inline-flex items-center rounded-md  px-3 py-2 text-xs font-medium ring-1 ring-inset ">
+                                                {{ attendeesCount }}
+                                            </span>
+                                        </Link>
+                                    </dd>
                                 </dl>
                             </section>
                         </div>

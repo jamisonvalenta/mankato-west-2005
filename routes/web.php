@@ -98,6 +98,9 @@ Route::middleware([
     ->name('admin.')
     ->prefix('admin/')
     ->group(function () {
+        Route::get('attendees', [App\Http\Controllers\Admin\AttendeeController::class, 'index'])
+            ->name('attendees.index');
+
         Route::get('dashboard', [App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])
             ->name('dashboard');
 
