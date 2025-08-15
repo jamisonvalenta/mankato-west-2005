@@ -28,12 +28,11 @@
                                 Mankato MN 56001
                             </dd>
 
-
                             <dt class="uppercase text-sm font-semibold">6:00pm</dt>
-                            <dd>Guests arrive, mingling &amp; appetizers</dd>
+                            <dd>Guests arrive, mingling</dd>
 
                             <dt class="uppercase text-sm font-semibold">6:30pm</dt>
-                            <dd>Welcomes and introductions, presentations, activities, etc</dd>
+                            <dd>Appetizers, welcomes, presentations, activities, etc</dd>
 
                             <dt class="uppercase text-sm font-semibold">7:30pm</dt>
                             <dd>Live music begins, activities continue</dd>
