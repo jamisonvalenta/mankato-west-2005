@@ -115,6 +115,10 @@ Route::middleware([
         Route::post('payments/{payment}', [App\Http\Controllers\Admin\PaymentController::class, 'update'])
             ->name('payments.update')
             ->can('update', 'payment');
+
+        Route::post('payments', [App\Http\Controllers\Admin\PaymentController::class, 'store'])
+            ->name('payments.store')
+            ->can('create', App\Models\Payment::class);
 });
 
 require __DIR__.'/settings.php';

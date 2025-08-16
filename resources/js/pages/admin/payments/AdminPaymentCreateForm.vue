@@ -2,21 +2,11 @@
     <Dialog v-model:open="open">
         <DialogTrigger as-child>
             <Button
-                v-if="! payment.received_at"
-                variant="default"
-                size="sm"
-                class="col-span-2"
-                @click="form.received = true"
-                >
-                Confirm Payment
-            </Button>
-            <Button
-                v-else
                 variant="outline"
                 size="sm"
-                class="col-span-2"
                 >
-                Edit ${{ payment.amount }}
+                <Plus class="w-4 h-4"/>
+                <Receipt class="w-4 h-4"/>
             </Button>
         </DialogTrigger>
         <DialogContent>
@@ -25,7 +15,7 @@
                 >
                 <DialogHeader class="space-y-3">
                     <DialogDescription>
-                        Did you recieve a payment for <span class="font-semibold">{{ user.registration.name }}</span> for <span class="font-semibold">${{ payment.amount}}</span> ?
+                        Let's add a payment for  <span class="font-semibold">{{ user.registration.name }}</span>:
                     </DialogDescription>
                 </DialogHeader>
 
@@ -45,57 +35,32 @@
                     </div>
 
                     <div class="grid gap-2">
-                        <Label for="user_notes">
-                            User Notes (sending account)
-                       </Label>
-                        <Input
-                            id="user_notes"
-                            type="text"
-                            :tabindex="2"
-                            disabled
-                            v-model="form.user_notes"
-                        />
-                        <InputError :message="form.errors.user_notes" />
-                    </div>
-
-                    <div class="grid gap-2">
-                        <Label for="received" class="flex items-center space-x-3 text-gray-600 cursor-pointer">
-                        <Checkbox id="received" v-model:checked="form.received" :tabindex="3" />
-                        <span>Payment has been received</span>
-                    </Label>
-                        <InputError :message="form.errors.user_notes" />
-                    </div>
-
-                    <div class="grid gap-2">
                         <Label for="admin_notes">
                             Admin Notes
                        </Label>
                         <Textarea
                             id="admin_notes"
                             type="text"
-                            :tabindex="4"
+                            :tabindex="3"p
                             v-model="form.admin_notes"
                         />
                         <InputError :message="form.errors.admin_notes" />
                     </div>
                 </div>
 
-
-
                 <DialogFooter class="gap-2 sm:justify-between">
                     <div class="grid grid-cols-2 gap-4">
                         <DialogClose as-child>
-                            <Button variant="outline"  :tab-index="6"> Cancel </Button>
+                            <Button variant="outline"  :tab-index="5"> Cancel </Button>
                         </DialogClose>
-                        <DeletePayment :payment="payment"/>
                     </div>
 
                     <Button
                         type="submit"
                         variant="default"
                         :disabled="form.processing"
-                        :tab-index="5">
-                        Save
+                        :tab-index="4">
+                        Create
                     </Button>
                 </DialogFooter>
             </form>
@@ -104,7 +69,6 @@
 </template>
 
 <script setup lang="ts">
-import DeletePayment from '@/pages/payment/DeletePayment.vue';
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
@@ -117,7 +81,7 @@ import { Head, useForm, usePage } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 import { type SharedData, type User } from '@/types';
 import { computed, ref } from 'vue';
-import { Plus } from 'lucide-vue-next';
+import { Plus, Receipt } from 'lucide-vue-next';
 
 import {
     Dialog,
@@ -131,8 +95,8 @@ import {
 } from '@/components/ui/dialog';
 
 const props = defineProps([
+    'user',
     'payment',
-    'attendees',
 ]);
 
 const page = usePage<SharedData>();
@@ -140,10 +104,10 @@ const user = page.props.auth.user as User;
 
 
 const open = ref(false)
-const form = useForm({...props.payment, received: props.payment.received_at !== null})
+const form = useForm({...props.payment, received:true, amount: null, admin_notes: '',  })
 
 const submit = () => {
-    form.post(route('admin.payments.update', props.payment), {
+    form.post(route('admin.payments.store', props.payment), {
         preserveScroll: true,
         onSuccess: open.value = false,
     });

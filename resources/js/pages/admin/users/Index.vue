@@ -159,12 +159,21 @@
                             </DialogContent>
                         </Dialog>
 
+                        <div class="grid grid-cols-3 gap-2">
                         <AdminPaymentForm
                             v-if="user.payments.length > 0"
                             v-for="payment in user.payments"
                             :key="payment.id"
                             :payment="payment"
                             />
+                        <div v-else class="col-span-2"></div>
+                        <AdminPaymentCreateForm
+                            :payment="{
+                                user_id: user.id,
+                            }"
+                            :user="user",
+                            />
+                        </div>
                     </GridCell>
 
                     <template v-if="displayDetails">
@@ -265,6 +274,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import AdminPaymentForm from '@/pages/admin/payments/AdminPaymentForm.vue';
+import AdminPaymentCreateForm from '@/pages/admin/payments/AdminPaymentCreateForm.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
 import { GridCell, GridHeading, GridList, GridDl, GridDlCell, GridDt, GridDd,  } from '@/components/ui/gridlist';
