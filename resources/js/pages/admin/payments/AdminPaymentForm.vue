@@ -81,9 +81,12 @@
 
 
                 <DialogFooter class="gap-2 sm:justify-between">
-                    <DialogClose as-child>
-                        <Button variant="outline"  :tab-index="6"> Cancel </Button>
-                    </DialogClose>
+                    <div class="grid grid-cols-2 gap-4">
+                        <DialogClose as-child>
+                            <Button variant="outline"  :tab-index="6"> Cancel </Button>
+                        </DialogClose>
+                        <DeletePayment :payment="payment"/>
+                    </div>
 
                     <Button
                         type="submit"
