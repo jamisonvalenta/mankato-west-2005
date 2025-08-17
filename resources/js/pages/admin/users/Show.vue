@@ -181,8 +181,6 @@
                             </div>
                         </GridCell>
                     </template>
-                </template>
-
             </GridList>
         </div>
     </AppLayout>
