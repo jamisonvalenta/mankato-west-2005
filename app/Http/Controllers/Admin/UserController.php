@@ -67,4 +67,13 @@ class UserController extends Controller
                 ->get(),
         ]);
     }
+
+    public function show(Request $request, User $user): Response
+    {
+        $user->load(['registration', 'verifications', 'payments','images', 'attendees']);
+
+        return Inertia::render('user/Show')
+            ->with('user', $user);
+    }
+
 }

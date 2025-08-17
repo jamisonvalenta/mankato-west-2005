@@ -107,6 +107,9 @@ Route::middleware([
         Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])
             ->name('users.index');
 
+        Route::get('users/{user}', [App\Http\Controllers\Admin\UserController::class, 'show'])
+            ->name('users.show');
+
         Route::post('verifications', [App\Http\Controllers\Admin\VerificationController::class, 'store'])
             ->name('verifications.store')
             ->can('create', Verification::class);

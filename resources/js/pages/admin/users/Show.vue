@@ -1,92 +1,19 @@
 <template>
-    <Head title="Users" />
+    <Head :title="user.registration.name" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
 
         <div class="flex h-full flex-1 flex-col rounded-xl p-4 mb-48">
             <Heading
                 class="mt-4 md:mt-8"
-                title="Users"
+                :title="user.registration.name"
             />
 
             <GridList
-                class="grid-cols-7"
-                >
-                <GridCell class="font-semibold">
-                    Filters:
-                </GridCell>
-                <GridCell class="flex flex-row flex-dense gap-3 col-span-6">
-                    <Link :href="route('admin.users.index', {filter: ''})">
-                        <Pill :variant="filter === '' ? 'indigo' : 'gray'">
-                            all
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'unregistered'})">
-                        <Pill :variant="filter === 'unregistered' ? 'indigo' : 'gray'">
-                            unregistered
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'registered'})">
-                        <Pill :variant="filter === 'registered' ? 'indigo' : 'gray'">
-                            registered
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'unverified'})">
-                        <Pill :variant="filter === 'unverified' ? 'indigo' : 'amber'">
-                            unverified
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'verifiednotattending'})">
-                        <Pill :variant="filter === 'verifiednotattending' ? 'indigo' : 'gray'">
-                            verified, not attending
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'attendeesfilled'})">
-                        <Pill :variant="filter === 'attendeesfilled' ? 'indigo' : 'gray'">
-                            attending
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'awaitingpayment'})">
-                        <Pill :variant="filter === 'awaitingpayment' ? 'indigo' : 'amber'">
-                            awaiting payment
-                        </Pill>
-                    </Link>
-                    <Link :href="route('admin.users.index', {filter: 'complete'})">
-                        <Pill :variant="filter === 'complete' ? 'indigo' : 'gray'">
-                            attending &amp; paid
-                        </Pill>
-                    </Link>
-                </GridCell>
-
-            </GridList>
-
-            <GridList
-                v-if="users.length > 0"
                 class="grid-cols-5"
                 >
-                <GridCell class="col-span-2 text-gray-500 my-5">
-                    Displaying {{ users.length }} matches
-                </GridCell>
-                <GridCell class="col-span-3 text-gray-500 my-5 flex flex-row-reverse gap-3 ">
-                    <Button @click="copyEmails" class="w-32">
-                        {{ copyButtonText }}
-                    </Button>
-                    <Button variant="outline" @click="toggleDetails" class="w-32">
-                        {{ detailsButtonText }}
-                    </Button>
-                </GridCell>
-
-                <GridHeading > Name </GridHeading>
-                <GridHeading class="col-span-3"> Status </GridHeading>
-                <GridHeading> Actions </GridHeading>
-
-                <template
-                    v-for="user in users"
-                    :key="user.id"
-                    >
-                    <GridCell class="bg-gray-100 border-t border-t-gray-400 "> {{ user.name }}</GridCell>
                     <GridCell
-                        class="col-span-3 flex flex-dense gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
+                        class="col-span-5 flex flex-dense gap-4 bg-gray-100 border-t border-t-gray-400 text-center"
                         >
                         <Pill v-if="user.registration" variant="green">
                             registered
@@ -159,24 +86,20 @@
                             </DialogContent>
                         </Dialog>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <AdminPaymentForm
-                                v-if="user.payments.length > 0"
-                                v-for="payment in user.payments"
-                                :key="payment.id"
-                                :payment="payment"
-                                />
-                            <div v-else class="col-span-2"></div>
-
-                            <AdminPaymentCreateForm
-                                :payment="{
-                                    user_id: user.id,
-                                }"
-                                :user="user",
-                                />
-                            <Link :href="route('admin.users.show', user)">
-                                <UserPen class="w-5 h-4"/>
-                            </Link>
+                        <div class="grid grid-cols-3 gap-2">
+                        <AdminPaymentForm
+                            v-if="user.payments.length > 0"
+                            v-for="payment in user.payments"
+                            :key="payment.id"
+                            :payment="payment"
+                            />
+                        <div v-else class="col-span-2"></div>
+                        <AdminPaymentCreateForm
+                            :payment="{
+                                user_id: user.id,
+                            }"
+                            :user="user",
+                            />
                         </div>
                     </GridCell>
 
@@ -261,16 +184,6 @@
                 </template>
 
             </GridList>
-
-            <div
-                v-else
-                class='h-24'
-                >
-                <p class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
-                    No users match search
-                </p>
-
-            </div>
         </div>
     </AppLayout>
 </template>
@@ -289,8 +202,6 @@ import { Pill } from '@/components/ui/pill';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon, CheckCircleIcon, ExclamationCircleIcon, UsersIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
-import { UserPen } from 'lucide-vue-next';
-
 import {
     Dialog,
     DialogClose,
@@ -331,33 +242,6 @@ const form = useForm({
     verify: true,
     user_id: null,
 });
-
-const copyButtonText = ref('Copy Emails')
-
-const copyEmails = () => {
-    navigator.clipboard.writeText(props.users.map((user) => user.email).join(', '))
-
-    copyButtonText.value = 'copied ' + props.users.length + ' emails!'
-
-    setTimeout(function(){
-        copyButtonText.value = 'Copy Emails';
-    }, 1000);
-
-}
-const displayDetails = ref(false)
-const detailsButtonText = ref('Show details')
-
-const toggleDetails = () => {
-
-    if (displayDetails.value) {
-        displayDetails.value = false
-        detailsButtonText.value = 'Show details'
-    } else {
-        displayDetails.value = true
-        detailsButtonText.value = 'Hide details'
-    }
-
-}
 
 const verifyUser = (user) => {
 

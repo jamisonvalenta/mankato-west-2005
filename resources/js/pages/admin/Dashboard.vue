@@ -165,9 +165,59 @@
                     </section>
                 </div>
 
+                <!-- Images -->
+                <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
+                    <section class="overflow-hidden">
+                        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                            <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                            <div class="text-md font-medium leading-6 text-gray-900">Images</div>
+                            <div class="relative ml-auto">
+                                <!-- <ellipsis-menu></ellipsis-menu> -->
+                            </div>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <section class="px-4">
+                                <dl class="text-sm leading-6 grid grid-cols-[1fr,5em] py-4 gap-4">
+                                    <dt class="text-gray-500 text-lg leading-loose">
+                                        <MessageCircleDashed
+                                            class="text-gray-500 w-5 h-5 inline-block mr-2"
+                                            />
+                                        Family Images
+                                    </dt>
+                                    <dd class="">
+                                            <span class="inline-flex items-center rounded-md bg-gray-50 px-3 py-2 text-xs font-medium text-gray-800 ring-1 ring-inset ring-gray-600/20">
+                                            </span>
+                                    </dd>
 
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
+                                    <dt class="text-gray-500 text-lg leading-loose">
+                                        <DollarSign
+                                            class="text-gray-500 w-5 h-5 inline-block mr-2"
+                                            />
+                                        Archive Images
+                                    </dt>
+                                    <dd class="">
+                                            <span class="inline-flex items-center rounded-md bg-gray-50 px-3 py-2 text-xs font-medium text-gray-800 ring-1 ring-inset ring-gray-600/20">
+                                            </span>
+                                    </dd>
+
+                                    <dt class="text-gray-500 text-lg leading-loose">
+                                        <DollarSign
+                                            class="text-gray-500 w-5 h-5 inline-block mr-2"
+                                            />
+                                        20 Year Reunion Images
+                                    </dt>
+                                    <dd class="">
+                                            <span class="inline-flex items-center rounded-md bg-gray-50 px-3 py-2 text-xs font-medium text-gray-800 ring-1 ring-inset ring-gray-600/20">
+                                            </span>
+                                    </dd>
+                                </dl>
+                            </section>
+                        </div>
+                    </section>
                 </div>
+
+
+
             </div>
         </div>
     </AppLayout>
