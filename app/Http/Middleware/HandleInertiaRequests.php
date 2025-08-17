@@ -55,6 +55,10 @@ class HandleInertiaRequests extends Middleware
                 'csrfToken' => csrf_token(),
             ],
 
+            'cloudinary' => [
+                'cloud_name' => config('cloudinary.cloud_name'),
+            ],
+
             'flash' => [
                 'success' => $request->session()->get('success'),
                 'message' => $request->session()->get('message'),
@@ -67,6 +71,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+
         ];
     }
 }

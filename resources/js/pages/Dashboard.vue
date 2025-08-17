@@ -267,6 +267,49 @@
                 </div>
 
 
+                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <FileImage class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Galleries
+                        </div>
+                        <div class="relative ml-auto">
+                            <!-- <ellipsis-menu></ellipsis-menu> -->
+                        </div>
+                    </div>
+                    <div class="text-gray-700 p-4">
+                        <div class="mt-8 p-6 text-gray-500 leading-loose text-center">
+                            <Link
+                                v-if="verified"
+                                :href="route('media.create')"
+                                >
+                                <Button
+                                    variant="default"
+                                    size="default"
+                                    class=""
+                                    >
+
+                                    Start Uploading
+                                </Button>
+                            </Link>
+                            <div
+                                v-else
+                                class="flex justify-center items-center rounded-xl border-2 border-gray-200 border-dashed h-24 w-full sm:col-span-6">
+                                <p class="text-gray-500">
+                                    Please
+                                    <TextLink
+                                    :href="route('registration.create')">
+                                        register
+                                    </TextLink>
+                                    and wait to be verified
+
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="col-span-1 relative min-h-[20em] rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                         <UsersRound class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
@@ -479,7 +522,7 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 import { ClockIcon, ListBulletIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
-import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify } from 'lucide-vue-next';
+import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify, FileImage } from 'lucide-vue-next';
 import TextLink from '@/components/TextLink.vue';
 import { computed } from 'vue';
 
