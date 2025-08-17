@@ -48,12 +48,12 @@ const mainNavItems: NavItem[] = computed(function () {
     ]
 
     if (page.props.auth.user.verifications.length > 0) {
-        nav.push({
-            title: '20-year Reunion Details',
-            href: route('events.twenty-year'),
-            icon: PartyPopper,
+        // nav.push({
+        //     title: '20-year Reunion Details',
+        //     href: route('events.twenty-year'),
+        //     icon: PartyPopper,
 
-        })
+        // })
 
         nav.push({
             title: 'Photos',

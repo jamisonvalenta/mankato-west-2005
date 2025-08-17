@@ -23,12 +23,17 @@ class DashboardController extends Controller
 
         $usersHavingBios = User::whereHas('registrations', fn ($query) => $query->where('bio', "!=", "")->where('show_attendance', true))->get();
 
-        $usersAttending = User::whereHas('verifications')->orderBy('name', 'asc')
-            ->with('attendees')
-            ->get()
+        $verifiedUsers = User::whereHas('verifications')->orderBy('name', 'asc')->get();
+
+        $visibleVerifiedUsers = $verifiedUsers
             ->filter(function ($user) {
                 return $user->registration->show_attendance;
-            });
+            })->values();
+
+        $invisibleVerifiedUsers = $verifiedUsers
+            ->filter(function ($user) {
+                return ! $user->registration->show_attendance;
+            })->values();
 
         return Inertia::render('Dashboard', [
             'registration' => $registration,
@@ -39,7 +44,9 @@ class DashboardController extends Controller
             'payment' => $payment,
             'biosCount' => $usersHavingBios->count(),
             'userSpotlight' => $usersHavingBios->random(),
-            'usersAttending' => $usersAttending,
+            'verifiedUsers' => $verifiedUsers,
+            'visibleVerifiedUsers' => $visibleVerifiedUsers,
+            'invisibleVerifiedUsers' => $invisibleVerifiedUsers,
         ]);
     }
 }

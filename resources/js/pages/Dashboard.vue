@@ -75,7 +75,7 @@
                                                 </Pill>
 
                                         </dd>
-
+<!--
                                         <dt class="text-gray-500 text-lg leading-loose">
                                             <CheckCircleIcon
                                                 v-if="attendeesFilled && registration"
@@ -160,23 +160,23 @@
                                                 </div>
 
                                             </div>
-                                        </dd>
+                                        </dd> -->
 
                                     </div>
                                 </dl>
-                                <div v-if="payment?.received_at" class="w-full grid grid-cols-1 justify-center gap-4 text-center my-4">
+                                <div v-if="verified" class="w-full grid grid-cols-1 justify-center gap-4 text-center my-4">
                                     <hr>
                                     <div>
                                         <StarIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
                                         <span class="font-semibold text-lg text-gray-500 inline-block variant-smallcaps leading-loose">
-                                            Registration Complete
+                                            Class Registration Complete
                                         </span>
                                         <StarIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
                                     </div>
-
+<!--
                                     <span class="text-gray-500">
                                         Check back occasionally as we continue to add information and features!
-                                    </span>
+                                    </span> -->
                                 </div>
                                 <div v-else class="w-full grid grid-cols-1 justify-center gap-4 text-center my-4">
                                     <hr>
@@ -187,7 +187,7 @@
                                         </span>
                                         <ExclamationCircleIcon class="text-yellow-500 w-6 h-6 inline-block mx-4 -mt-2"/>
                                     </div>
-
+<!--
                                     <span class="text-gray-500">
                                         <template v-if="payment && ! payment.received_at">
                                             Please send your payment (<TextLink :href="route('payments.index')">review instructions</TextLink>)
@@ -195,7 +195,7 @@
                                         <template v-else>
                                             Please fill out your class registration, add attendees, payment forms!
                                         </template>
-                                    </span>
+                                    </span> -->
                                 </div>
                             </section>
                         </div>
@@ -216,12 +216,20 @@
                                 <dl class="divide-y divide-gray-100 text-sm leading-6">
                                     <div class="grid grid-cols-[4em,1fr] py-4 gap-4">
                                         <dt class="text-gray-500 text-md leading-loose">
+                                            Aug 16
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <span v-if="verified" >
+                                                100 people attended the 20 Year Reunion!
+                                            </span>
+                                        </dd>
+                                        <dt class="text-gray-500 text-md leading-loose">
                                             Aug 9
                                         </dt>
                                         <dd class="text-gray-700">
-                                            <span v-if="user.verifications.length > 0" >
+                                            <span v-if="verified" >
                                                 Photo Uploader active.
-                                                <TextLink :href="route('media.create')"> Please upload current or archival photos!</TextLink>
+                                                <TextLink :href="route('media.create')"> Upload archival, current, or reunion photos</TextLink>
                                             </span>
 
                                             <span v-else> Event Details page Published (<TextLink :href="route('registration.create')">register</TextLink> with the class to upload or view photos)</span>
@@ -231,11 +239,7 @@
                                             Aug 8
                                         </dt>
                                         <dd class="text-gray-700">
-                                            <span v-if="user.verifications.length > 0">
-                                                <TextLink  :href="route('events.twenty-year')">Event details  </TextLink> published
-                                            </span>
-
-                                            <span v-else> Event details published </span>
+                                            Reunion event details published
                                         </dd>
 
                                         <dt class="text-gray-500 text-md leading-loose">
@@ -265,62 +269,35 @@
 
                 <div class="col-span-1 relative min-h-[20em] rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <PartyPopper class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <UsersRound class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
                         <div class="text-md font-medium leading-6 text-gray-900">
-                            Who's Registered
+                            Who's Registered ({{ verifiedUsers.length }})
                         </div>
                     </div>
                     <div class="text-gray-700 p-4 overflow-y-auto max-h-[25em]">
                         <ul v-if="verified">
                             <li
-                                v-for="userAttending in usersAttending"
+                                v-for="user in visibleVerifiedUsers"
                                 class="list-none"
                                 >
-                                {{ userAttending.name }}
-                                <span v-if="userAttending.registration.original_name">
-                                    ({{ userAttending.registration.original_name }})
+                                {{ user.name }}
+                                <span v-if="user.registration.original_name">
+                                    ({{ user.registration.original_name }})
                                 </span>
                             </li>
+                            <li v-if="invisibleVerifiedUsers.length > 0"
+                                class="list-none"
+                                >
+                                + {{ invisibleVerifiedUsers.length }} others!
+                            </li>
+
                         </ul>
                         <p v-else class="mt-8 border-2 p-6 border-dashed border-gray-200 rounded-lg bg-gray-50/50 text-gray-500 leading-loose text-center">
-                            You need to be verified before you can view this section
+                            Before viewing this seciton, you need to be verified
                         </p>
                     </div>
                 </div>
 
-
-
-                <!-- <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <HomeModernIcon class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Hotel Information
-                        </div>
-                    </div>
-                    <div class="text-gray-700 p-4">
-                        <p class="my-4 leading-loose">
-                            We will likely be reserving a room block at the Fairfield Inn and Suites in Mankato, walking distance from The Venue
-                        </p>
-                    </div>
-                </div> -->
-
-                <!-- <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <Baby class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Childcare
-                        </div>
-                    </div>
-                    <div class="text-gray-700 p-4">
-                        <p class="my-4 leading-loose">
-                            If you have a child who would like to offer babysitting services during the event, either at a private home or hotel, please <a href="mailto:westscarlets2005@gmail.com" class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:!decoration-current "> email us</a>.
-                        </p>
-                        <p class="my-4 leading-loose">
-                            Note: Being listed is in no way a recommendation. Parents are responsible for vetting any services offered.
-                        </p>
-
-                    </div>
-                </div> -->
 
                 <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
@@ -372,7 +349,7 @@
 
                     </div>
                 </div>
-
+<!--
                 <div
                     v-if="verified"
                     class="sm:col-span-1 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
@@ -425,9 +402,9 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
 
-
+<!--
                 <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
                         <PiggyBank class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
@@ -435,7 +412,6 @@
                             Reunion Financials
                         </div>
                         <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
                         </div>
                     </div>
                     <div class="text-gray-700 p-4">
@@ -450,9 +426,9 @@
                         </p>
 
                     </div>
-                </div>
+                </div> -->
 
-
+<!--
                 <div
                     v-if="userSpotlight && verified"
                     class="sm:col-span-2 relative  overflow-hidden rounded-xl border border-sidebar-border/70">
@@ -463,9 +439,6 @@
                             <TextLink v-if="user.registration" :href="route('registration.edit', registration)" class="text-gray-400">
                                 edit my bio
                             </TextLink>
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
                         </div>
                     </div>
                     <div class="text-gray-700 p-4">
@@ -484,7 +457,7 @@
                             You need to be verified before you can view this section
                         </p>
                     </div>
-                </div>
+                </div> -->
 
 
 
@@ -517,7 +490,9 @@ const props = defineProps([
     'attendeesFilled',
     'attendeeCount',
     'payment',
-    'usersAttending',
+    'verifiedUsers',
+    'invisibleVerifiedUsers',
+    'visibleVerifiedUsers',
     'userSpotlight',
     'biosCount',
 ]);
