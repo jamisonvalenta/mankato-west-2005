@@ -9,12 +9,10 @@ import { usePage } from '@inertiajs/vue3';
 
 interface Props {
     media?: object;
-    src: string;
     class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    src: '',
     class: '',
 });
 

@@ -5,6 +5,8 @@ import path from 'path';
 import tailwindcss from 'tailwindcss';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import Components from 'unplugin-vue-components/vite';
+import {PrimeVueResolver} from '@primevue/auto-import-resolver';
 
 export default defineConfig({
     plugins: [
@@ -21,6 +23,12 @@ export default defineConfig({
                 },
             },
         }),
+        Components({
+            resolvers: [
+              PrimeVueResolver()
+            ]
+        })
+
     ],
     resolve: {
         alias: {

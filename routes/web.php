@@ -56,6 +56,24 @@ Route::middleware(['auth', 'verified'])
             ->name('attendee.destroy')
             ->can('delete', 'attendee');
 
+        Route::get('media', [App\Http\Controllers\MediaController::class, 'index'])
+            ->name('media.index')
+            ->can('viewAny', Media::class);
+        Route::get('media/create', [App\Http\Controllers\MediaController::class, 'create'])
+            ->name('media.create')
+            ->can('create', Media::class);
+
+        Route::delete('media/{media}', [App\Http\Controllers\MediaController::class, 'destroy'])
+            ->name('media.destroy')
+            ->can('delete', 'media');
+
+        Route::post('media-batch', [App\Http\Controllers\MediaBatchController::class, 'store'])
+            ->name('media-batch.store')
+            ->can('create', Media::class);
+
+        Route::get('media/gallery/{gallery}', [App\Http\Controllers\Media\GalleryController::class, 'show'])
+            ->name('media.gallery.show');
+
         Route::get('payments', [App\Http\Controllers\PaymentController::class, 'index'])
             ->name('payments.index')
             ->can('viewAny', Payment::class);
@@ -74,20 +92,6 @@ Route::middleware(['auth', 'verified'])
             ->name('payments.destroy')
             ->can('delete', 'payment');
 
-        Route::get('media', [App\Http\Controllers\MediaController::class, 'index'])
-            ->name('media.index')
-            ->can('viewAny', Media::class);
-        Route::get('media/create', [App\Http\Controllers\MediaController::class, 'create'])
-            ->name('media.create')
-            ->can('create', Media::class);
-
-        Route::delete('media/{media}', [App\Http\Controllers\MediaController::class, 'destroy'])
-            ->name('media.destroy')
-            ->can('delete', 'media');
-
-        Route::post('media-batch', [App\Http\Controllers\MediaBatchController::class, 'store'])
-            ->name('media-batch.store')
-            ->can('create', Media::class);
 });
 
 Route::middleware([
