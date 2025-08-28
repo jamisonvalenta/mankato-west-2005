@@ -71,8 +71,8 @@ Route::middleware(['auth', 'verified'])
             ->name('media-batch.store')
             ->can('create', Media::class);
 
-        Route::get('media/gallery/{gallery}', [App\Http\Controllers\Media\GalleryController::class, 'show'])
-            ->name('media.gallery.show');
+        Route::get('media/galleries/{gallery}', [App\Http\Controllers\Media\GalleryController::class, 'show'])
+            ->name('media.galleries.show');
 
         Route::get('payments', [App\Http\Controllers\PaymentController::class, 'index'])
             ->name('payments.index')

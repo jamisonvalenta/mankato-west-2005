@@ -201,6 +201,119 @@
                         </div>
                     </section>
                 </div>
+<!-- Galleries -->
+                <div class="relative overflow-hidden rounded-xl border border-sidebar-border/70">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
+                        <FileImage class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
+                        <div class="text-md font-medium leading-6 text-gray-900">
+                            Galleries
+                        </div>
+
+                        <div class="relative ml-auto">
+                            <Link
+                                v-if="verified"
+                                :href="route('media.galleries.show', 'archive')"
+                                >
+                                <Button
+                                    variant="default"
+                                    size="default"
+                                    >
+
+                                    View Galleries
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+                    <div class="text-gray-700">
+                        <div class="text-gray-500 leading-loose text-center">
+                            <div
+                                v-if="! verified"
+                                class="flex justify-center items-center rounded-xl border-2 border-gray-200 border-dashed h-24 w-full sm:col-span-6">
+                                <p class="text-gray-500">
+                                    Please
+                                    <TextLink
+                                    :href="route('registration.create')">
+                                        register
+                                    </TextLink>
+                                    and wait to be verified
+
+                                </p>
+                            </div>
+                            <div
+                                v-if="images.length > 0"
+                                class="flex justify-center w-full"
+                                >
+
+                                <Galleria
+                                    ref="galleria"
+                                    v-model:activeIndex="activeIndex"
+                                    :value="images"
+                                    containerStyle="width:100%; background-color: transparent; border:none;"
+                                    :showThumbnails="false"
+                                    :showItemNavigators="true"
+                                    :showItemNavigatorsOnHover="true"
+                                    :circular="true"
+                                    :autoPlay="isAutoPlay"
+                                    :transitionInterval="3000"
+                                    :responsiveOptions="responsiveOptions"
+                                    :pt="{
+                                        root: {
+                                            class: [{ 'flex flex-col bg-black': fullScreen }]
+                                        },
+                                        content: {
+                                            class: [
+                                                'relative w-full',
+                                                { 'flex-1 justify-center bg-black': fullScreen }
+                                            ]
+                                        },
+                                        itemscontainer: 'w-full min-h-[300px] min-w-full ',
+                                        items: 'w-full rounded-none',
+                                        item: 'flex w-full content-center align-items-center',
+                                        footer: 'bg-gray-100',
+
+                                    }"
+                                >
+                                    <template #item="slotProps">
+                                        <AdvancedImage
+                                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(725).width(725))"
+                                            :alt="slotProps.item.alt"
+                                            :className="(fullScreen ? 'max-w-full h-auto' : 'max-h-full max-w-full')
+                                            "
+                                          />
+                                        <!-- Preload next image -->
+                                        <AdvancedImage
+                                            v-if="images.hasOwnProperty(activeIndex + 1)"
+                                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(300).width(450))"
+                                            className="hidden"
+                                          />
+                                    </template>
+                                    <template #footer>
+                                        <div class="flex items-stretch bg-surface-950 text-black h-10">
+                                            <button type="button" @click="toggleAutoSlide" class="bg-transparent border-none rounded-none hover:bg-white/10 text-black inline-flex justify-center items-center cursor-pointer px-3">
+                                                <Pause v-if="isAutoPlay" class="w-4 h-4 inline-block"/>
+                                                <Play v-else class="w-4 h-4 inline-block"/>
+                                            </button>
+                                            <span v-if="images.length" class="flex items-center gap-4 ml-3">
+                                                <span class="text-sm">{{ activeIndex + 1 }}/{{ images.length }}</span>
+
+                                                <span class="text-sm">
+                                                    from {{ images[activeIndex].user.registration.name }}
+                                                </span>
+                                            </span>
+                                            <button type="button" @click="toggleFullScreen" class="bg-transparent border-none rounded-none hover:bg-white/10 text-black inline-flex justify-center items-center cursor-pointer px-3 ml-auto">
+                                                <Minimize2 v-if="fullScreen" class="w-4 h-4 inline-block"/>
+                                                <Maximize2 v-else class="w-4 h-4 inline-block"/>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </Galleria>
+
+                             </div>
+                        </div>
+
+                    </div>
+                </div>
+
 
                 <!-- Announcements -->
                 <div class="relative aspect-video rounded-xl border border-sidebar-border/70">
@@ -215,6 +328,14 @@
                             <section class="px-4">
                                 <dl class="divide-y divide-gray-100 text-sm leading-6">
                                     <div class="grid grid-cols-[4em,1fr] py-4 gap-4">
+                                        <dt class="text-gray-500 text-md leading-loose">
+                                            Aug 28
+                                        </dt>
+                                        <dd class="text-gray-700">
+                                            <span v-if="verified" >
+                                                Photo Galleries, images have descriptions
+                                            </span>
+                                        </dd>
                                         <dt class="text-gray-500 text-md leading-loose">
                                             Aug 16
                                         </dt>
@@ -267,48 +388,7 @@
                 </div>
 
 
-                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <FileImage class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Galleries
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
-                        </div>
-                    </div>
-                    <div class="text-gray-700 p-4">
-                        <div class="mt-8 p-6 text-gray-500 leading-loose text-center">
-                            <Link
-                                v-if="verified"
-                                :href="route('media.create')"
-                                >
-                                <Button
-                                    variant="default"
-                                    size="default"
-                                    class=""
-                                    >
 
-                                    Start Uploading
-                                </Button>
-                            </Link>
-                            <div
-                                v-else
-                                class="flex justify-center items-center rounded-xl border-2 border-gray-200 border-dashed h-24 w-full sm:col-span-6">
-                                <p class="text-gray-500">
-                                    Please
-                                    <TextLink
-                                    :href="route('registration.create')">
-                                        register
-                                    </TextLink>
-                                    and wait to be verified
-
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
                 <div class="col-span-1 relative min-h-[20em] rounded-xl border border-sidebar-border/70">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
@@ -341,57 +421,6 @@
                     </div>
                 </div>
 
-
-                <div class="relative min-h-[20em] overflow-hidden rounded-xl border border-sidebar-border/70">
-                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-3">
-                        <Camera class="h-10 w-10 flex-none rounded-lg bg-white object-cover border border-gray-900/10" />
-                        <div class="text-md font-medium leading-6 text-gray-900">
-                            Photo Uploads
-                        </div>
-                        <div class="relative ml-auto">
-                            <!-- <ellipsis-menu></ellipsis-menu> -->
-                        </div>
-                    </div>
-                    <div class="text-gray-700 p-4">
-                        <p class="my-4 leading-loose">
-                            Have some images from high school or want to share what your life looks like today? Find a scanner and upload them here.
-                        </p>
-
-                        <p class="my-4 leading-loose">
-                            We'll build a slideshow for the reunion!
-                        </p>
-
-                        <div class="mt-8 p-6 text-gray-500 leading-loose text-center">
-                            <Link
-                                v-if="verified"
-                                :href="route('media.create')"
-                                >
-                                <Button
-                                    variant="default"
-                                    size="default"
-                                    class=""
-                                    >
-
-                                    Start Uploading
-                                </Button>
-                            </Link>
-                            <div
-                                v-else
-                                class="flex justify-center items-center rounded-xl border-2 border-gray-200 border-dashed h-24 w-full sm:col-span-6">
-                                <p class="text-gray-500">
-                                    Please
-                                    <TextLink
-                                    :href="route('registration.create')">
-                                        register
-                                    </TextLink>
-                                    and wait to be verified
-
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 <!--
                 <div
                     v-if="verified"
@@ -522,9 +551,12 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { BellIcon,CheckCircleIcon,StarIcon, InformationCircleIcon, HomeModernIcon } from '@heroicons/vue/24/outline';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 import { ClockIcon, ListBulletIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
-import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify, FileImage } from 'lucide-vue-next';
+import { Baby, Camera, PiggyBank, UsersRound, PartyPopper, AlignJustify, FileImage, GalleryHorizontal, Pause, Play, Maximize2, Minimize2 } from 'lucide-vue-next';
 import TextLink from '@/components/TextLink.vue';
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
+import { Cloudinary } from '@cloudinary/url-gen';
+import {thumbnail} from "@cloudinary/url-gen/actions/resize";
+import { AdvancedImage } from '@cloudinary/vue'
 
 const props = defineProps([
     'registration',
@@ -538,6 +570,7 @@ const props = defineProps([
     'visibleVerifiedUsers',
     'userSpotlight',
     'biosCount',
+    'media'
 ]);
 
 
@@ -550,5 +583,94 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const page = usePage();
 const user = page.props.auth.user as User;
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: page.props.cloudinary.cloud_name,
+  },
+});
+
+const galleria = ref();
+
+const images = ref(props.media);
+
+const activeIndex = ref(0);
+const showThumbnails = ref(false);
+const fullScreen = ref(false);
+const isAutoPlay = ref(true);
+
+
+onMounted(() => {
+    bindDocumentListeners();
+});
+
+
+const toggleAutoSlide = () => {
+    isAutoPlay.value  = !isAutoPlay.value ;
+};
+const onThumbnailButtonClick = () => {
+    showThumbnails.value  = !showThumbnails.value ;
+};
+
+const responsiveOptions = ref([
+    {
+        breakpoint: '1300px',
+        numVisible: 4
+    },
+    {
+        breakpoint: '575px',
+        numVisible: 1
+    }
+]);
+
+const toggleFullScreen = () => {
+    if (fullScreen.value ) {
+        closeFullScreen();
+    } else {
+        openFullScreen();
+    }
+};
+const onFullScreenChange = () => {
+    fullScreen.value  = !fullScreen.value ;
+};
+const openFullScreen = () =>{
+    let elem = galleria.value.$el;
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+        /* Firefox */
+        elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+        /* Chrome, Safari & Opera */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        /* IE/Edge */
+        elem.msRequestFullscreen();
+    }
+};
+const closeFullScreen = () => {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+};
+const bindDocumentListeners = () => {
+    document.addEventListener('fullscreenchange', onFullScreenChange);
+    document.addEventListener('mozfullscreenchange', onFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullScreenChange);
+    document.addEventListener('msfullscreenchange', onFullScreenChange);
+};
+const unbindDocumentListeners = () => {
+    document.removeEventListener('fullscreenchange', onFullScreenChange);
+    document.removeEventListener('mozfullscreenchange', onFullScreenChange);
+    document.removeEventListener('webkitfullscreenchange', onFullScreenChange);
+    document.removeEventListener('msfullscreenchange', onFullScreenChange);
+};
 
 </script>

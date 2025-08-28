@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -35,6 +36,10 @@ class DashboardController extends Controller
                 return ! $user->registration->show_attendance;
             })->values();
 
+        $media = Media::query()->orderBy('id')->with('user')->get()->all();
+        shuffle($media);
+        $media = collect($media)->values();
+
         return Inertia::render('Dashboard', [
             'registration' => $registration,
             'verified' => $user->verifications()->exists(),
@@ -47,6 +52,7 @@ class DashboardController extends Controller
             'verifiedUsers' => $verifiedUsers,
             'visibleVerifiedUsers' => $visibleVerifiedUsers,
             'invisibleVerifiedUsers' => $invisibleVerifiedUsers,
+            'media' => $media,
         ]);
     }
 }

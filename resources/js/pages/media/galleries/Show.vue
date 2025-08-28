@@ -142,7 +142,6 @@ const props = defineProps([
 
 const page = usePage();
 
-// Create a Cloudinary instance and set your cloud name.
 const cld = new Cloudinary({
   cloud: {
     cloudName: page.props.cloudinary.cloud_name,
@@ -230,14 +229,6 @@ const unbindDocumentListeners = () => {
     document.removeEventListener('webkitfullscreenchange', onFullScreenChange);
     document.removeEventListener('msfullscreenchange', onFullScreenChange);
 };
-
-const fullScreenIcon = computed(() => {
-    return `pi ${fullScreen.value ? 'pi-window-minimize' : 'pi-window-maximize'}`;
-});
-const slideButtonIcon = computed(() => {
-    return `pi ${isAutoPlay.value ? 'pi-pause' : 'pi-play'}`;
-});
-
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
