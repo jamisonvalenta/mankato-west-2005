@@ -63,6 +63,10 @@ Route::middleware(['auth', 'verified'])
             ->name('media.create')
             ->can('create', Media::class);
 
+        Route::post('media/{media}', [App\Http\Controllers\MediaController::class, 'update'])
+            ->name('media.update')
+            ->can('update', 'media');
+
         Route::delete('media/{media}', [App\Http\Controllers\MediaController::class, 'destroy'])
             ->name('media.destroy')
             ->can('delete', 'media');

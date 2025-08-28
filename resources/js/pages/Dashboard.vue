@@ -275,7 +275,11 @@
                                 >
                                     <template #item="slotProps">
                                         <AdvancedImage
-                                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(725).width(725))"
+                                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(
+                                                    thumbnail()
+                                                    .height(300)
+                                                    .width(450)
+                                                )"
                                             :alt="slotProps.item.alt"
                                             :className="(fullScreen ? 'max-w-full h-auto' : 'max-h-full max-w-full')
                                             "
@@ -283,27 +287,43 @@
                                         <!-- Preload next image -->
                                         <AdvancedImage
                                             v-if="images.hasOwnProperty(activeIndex + 1)"
-                                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(300).width(450))"
+                                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(
+                                                    thumbnail()
+                                                    .height(300)
+                                                    .width(450)
+                                                )"
                                             className="hidden"
                                           />
                                     </template>
                                     <template #footer>
-                                        <div class="flex items-stretch bg-surface-950 text-black h-10">
-                                            <button type="button" @click="toggleAutoSlide" class="bg-transparent border-none rounded-none hover:bg-white/10 text-black inline-flex justify-center items-center cursor-pointer px-3">
-                                                <Pause v-if="isAutoPlay" class="w-4 h-4 inline-block"/>
-                                                <Play v-else class="w-4 h-4 inline-block"/>
-                                            </button>
-                                            <span v-if="images.length" class="flex items-center gap-4 ml-3">
-                                                <span class="text-sm">{{ activeIndex + 1 }}/{{ images.length }}</span>
-
-                                                <span class="text-sm">
+                                        <div class="grid grid-cols-1 w-full gap-2">
+                                            <div class="flex items-stretch bg-surface-950 text-black h-10">
+                                                <button type="button" @click="toggleAutoSlide" class="bg-transparent border-none rounded-none hover:bg-white/10 text-black inline-flex justify-center items-center cursor-pointer px-3">
+                                                    <Pause v-if="isAutoPlay" class="w-4 h-4 inline-block"/>
+                                                    <Play v-else class="w-4 h-4 inline-block"/>
+                                                </button>
+                                                <span v-if="images.length" class="flex items-center gap-4 ml-3">
+                                                    <span class="text-sm">{{ activeIndex + 1 }}/{{ images.length }}</span>
+                                                    <span class="text-sm">
                                                     from {{ images[activeIndex].user.registration.name }}
                                                 </span>
-                                            </span>
-                                            <button type="button" @click="toggleFullScreen" class="bg-transparent border-none rounded-none hover:bg-white/10 text-black inline-flex justify-center items-center cursor-pointer px-3 ml-auto">
-                                                <Minimize2 v-if="fullScreen" class="w-4 h-4 inline-block"/>
-                                                <Maximize2 v-else class="w-4 h-4 inline-block"/>
-                                            </button>
+                                                </span>
+                                                <button type="button" @click="toggleFullScreen" class="bg-transparent border-none rounded-none hover:bg-white/10 text-black inline-flex justify-center items-center cursor-pointer px-3 ml-auto">
+                                                    <Minimize2 v-if="fullScreen" class="w-4 h-4 inline-block"/>
+                                                    <Maximize2 v-else class="w-4 h-4 inline-block"/>
+                                                </button>
+                                            </div>
+                                            <div
+                                                class="text-left px-4 leading-6 mb-2"
+                                                v-if="images[activeIndex].description"
+                                            >
+                                                <span
+                                                    class="text-sm"
+                                                    >
+                                                    {{ images[activeIndex].description }}
+                                                </span>
+
+                                            </div>
                                         </div>
                                     </template>
                                 </Galleria>
@@ -556,7 +576,7 @@ import TextLink from '@/components/TextLink.vue';
 import { computed, ref, onMounted } from 'vue';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import { AdvancedImage } from '@cloudinary/vue'
+import { AdvancedImage, placeholder } from '@cloudinary/vue'
 
 const props = defineProps([
     'registration',
@@ -589,6 +609,9 @@ const cld = new Cloudinary({
     cloudName: page.props.cloudinary.cloud_name,
   },
 });
+const plugins = [
+    placeholder({mode: 'blur'})
+]
 
 const galleria = ref();
 

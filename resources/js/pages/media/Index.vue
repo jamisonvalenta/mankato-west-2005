@@ -34,7 +34,7 @@
                         {{ gallery.title }}
                     </h2>
                     <div
-                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md: gap-8 rounded-xl border-2 border-gray-200 bg-gray-100 p-4 md:p-8 shadow-inset-md">
+                    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md: gap-8 rounded-xl border-2 border-gray-200 bg-gray-100 p-4 md:p-8 shadow-inset-md">
                     <GalleryImage
                         v-for="media in gallery.images"
                         :media="media"

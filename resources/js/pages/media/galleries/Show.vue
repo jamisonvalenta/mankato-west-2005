@@ -26,7 +26,7 @@
 
             <div
                 v-if="media.length > 0"
-                class="flex justify-center w-full"
+                class="flex justify-center w-full pb-24"
                 >
 
                 <Galleria
@@ -34,10 +34,10 @@
                     v-model:activeIndex="activeIndex"
                     :value="images"
                     :numVisible="5"
-                    containerStyle="width:100%; max-width:640px; background-color: black; "
+                    containerStyle="width:100%; max-width:1200px; background-color: black; "
                     :showThumbnails="showThumbnails"
                     :showItemNavigators="true"
-                    :showItemNavigatorsOnHover="true"
+                    :showItemNavigatorsOnHover="userAgentSupportsHover ? false : true"
                     :circular="true"
                     :autoPlay="isAutoPlay"
                     :transitionInterval="3000"
@@ -48,14 +48,14 @@
                         },
                         content: {
                             class: [
-                                'relative h-[500px]',
+                                'relative max-h-[800px] min-h-[500px]',
                                 { 'flex-1 justify-center bg-black': fullScreen }
                             ]
                         },
                         itemscontainer: 'h-full',
                         items: 'h-full',
                         item: 'flex h-full content-center align-items-center',
-                        thumbnails: 'absolute w-full left-0 bottom-0 bg-black'
+                        thumbnails: 'absolute w-full left-0 bottom-0'
                     }"
                 >
                     <template #item="slotProps">
@@ -85,7 +85,7 @@
                         </div>
                     </template>
                     <template #footer>
-                        <div class="flex items-stretch bg-surface-950 text-white h-10">
+                        <div class="flex items-stretch bg-surface-950 text-white min-h-10 py-2">
                             <button type="button" @click="onThumbnailButtonClick" class="bg-transparent border-none rounded-none hover:bg-white/10 text-white inline-flex justify-center items-center cursor-pointer px-3">
                                 <GalleryHorizontal class="w-4 h-4 inline-block"/>
                             </button>
@@ -96,8 +96,17 @@
                             <span v-if="images" class="flex items-center gap-4 ml-3">
                                 <span class="text-sm">{{ activeIndex + 1 }}/{{ images.length }}</span>
 
-                                <span class="text-sm">
-                                    from {{ images[activeIndex].user.registration.name }}
+                                <span class="grid grid-cols-1 gap-2">
+                                    <span
+                                        v-if="images[activeIndex].description"
+                                        class="text-sm"
+
+                                        >
+                                        {{ images[activeIndex].description }}
+                                    </span>
+                                    <span class="text-sm">
+                                        from {{ images[activeIndex].user.registration.name }}
+                                    </span>
                                 </span>
                             </span>
                             <button type="button" @click="toggleFullScreen" class="bg-transparent border-none rounded-none hover:bg-white/10 text-white inline-flex justify-center items-center cursor-pointer px-3 ml-auto">
@@ -162,6 +171,8 @@ onMounted(() => {
 });
 
 
+const userAgentSupportsHover = window.matchMedia('(hover: none)').matches
+
 const toggleAutoSlide = () => {
     isAutoPlay.value  = !isAutoPlay.value ;
 };
@@ -176,7 +187,7 @@ const responsiveOptions = ref([
     },
     {
         breakpoint: '575px',
-        numVisible: 1
+        numVisible: 2
     }
 ]);
 
@@ -238,6 +249,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Photos',
         href: route('media.index'),
+    },
+    {
+        title: 'Galleries',
+        href: route('media.galleries.show', 'archive'),
     },
 ];
 </script>

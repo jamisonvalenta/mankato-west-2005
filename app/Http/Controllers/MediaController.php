@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Registration\RegistrationStoreRequest;
+use App\Http\Requests\Media\MediaUpdateRequest;
 use App\Models\Media;
-use App\Models\Registration;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -35,6 +31,15 @@ class MediaController extends Controller
         return Inertia::render('media/CreateMedia', [
             'galleries' => Media::GALLERIES,
         ]);
+    }
+
+
+    public function update(MediaUpdateRequest $request, Media $media): RedirectResponse
+    {
+        $media->update($request->validated());
+
+        return redirect()->back()
+            ->with('success', "Description saved");
     }
 
     public function destroy(Media $media): RedirectResponse

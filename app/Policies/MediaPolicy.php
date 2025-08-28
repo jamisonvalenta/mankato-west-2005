@@ -41,6 +41,10 @@ class MediaPolicy
 
     public function update(User $user, Media $media): Response
     {
+        if ($user->media()->where('id', $media->id)->exists()) {
+            return Response::allow();
+        }
+
         return Response::deny();
     }
 

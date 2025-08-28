@@ -9,5 +9,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Galleria: typeof import('primevue/galleria')['default']
+    TextArea: typeof import('primevue/textarea')['default']
   }
 }
