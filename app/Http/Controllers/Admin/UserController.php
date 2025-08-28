@@ -70,9 +70,9 @@ class UserController extends Controller
 
     public function show(Request $request, User $user): Response
     {
-        $user->load(['registration', 'verifications', 'payments','images', 'attendees']);
+        $user->load(['verifications', 'payments','media', 'attendees']);
 
-        return Inertia::render('user/Show')
+        return Inertia::render('admin/users/Show')
             ->with('user', $user);
     }
 

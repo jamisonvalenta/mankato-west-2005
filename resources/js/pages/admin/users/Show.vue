@@ -103,7 +103,7 @@
                         </div>
                     </GridCell>
 
-                    <template v-if="displayDetails">
+                    <template >
                         <GridDl
                             v-if="user.registration"
                             class="col-span-5 grid-cols-4 grid-flow-row-dense p-4 "
@@ -214,7 +214,7 @@ import queryString from 'query-string';
 import { ref, computed } from 'vue';
 
 const props = defineProps([
-    'users'
+    'user'
 ])
 
 const open = ref(false)
