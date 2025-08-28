@@ -67,7 +67,7 @@ import { useForm, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import { LoaderCircle, Pencil } from 'lucide-vue-next';
 import { type SharedData, type User } from '@/types';
-import { AdvancedImage, placeholder, responsive } from '@cloudinary/vue';
+import { AdvancedImage, responsive } from '@cloudinary/vue';
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { Cloudinary } from '@cloudinary/url-gen';
 
@@ -96,7 +96,6 @@ const cld = new Cloudinary({
 });
 const plugins = [
     responsive({steps: [360, 750, 1200]}),
-    placeholder({mode: 'blur'})
 ]
 
 const form = useForm(props.media)
