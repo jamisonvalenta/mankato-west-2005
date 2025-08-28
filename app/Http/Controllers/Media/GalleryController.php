@@ -19,7 +19,16 @@ class GalleryController extends Controller
 {
     public function show(Request $request, $gallery): Response
     {
-        $galleries = collect(Media::GALLERIES)->keyBy('key');
+        $galleries = collect(Media::GALLERIES)
+            ->keyBy('key')
+            ->transform(function ($gallery) {
+                $gallery['media'] = Media::where('gallery', $gallery['key'])
+                    ->orderBy('id', 'desc')
+                    ->with('user')
+                    ->get();
+
+                return $gallery;
+            });
 
         if (! $galleries->has($gallery)) {
             return abort(404);
@@ -33,6 +42,7 @@ class GalleryController extends Controller
             ->get();
 
         return Inertia::render('media/galleries/Show', [
+            'galleries' => $galleries,
             'gallery' => $gallery,
             'media' => $media,
         ]);

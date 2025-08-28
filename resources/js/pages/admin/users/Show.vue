@@ -214,7 +214,7 @@ import queryString from 'query-string';
 import { ref, computed } from 'vue';
 
 const props = defineProps([
-    'user'
+    'user',
 ])
 
 const open = ref(false)

@@ -22,20 +22,20 @@
                         :aria-description="`${gallery.description}`"
                         class="group relative flex rounded-lg border border-gray-300 bg-white p-4 has-[:checked]:outline has-[:focus-visible]:outline has-[:checked]:outline-2 has-[:focus-visible]:outline-[3px] has-[:checked]:-outline-offset-2 has-[:focus-visible]:-outline-offset-1 has-[:checked]:outline-indigo-600 has-[:checked]:bg-indigo-50"
                         >
-                    <input
-                        type="radio"
-                        name="gallery"
-                        v-model="galleryModel"
-                        :value="gallery.key"
-                        :checked="gallery === galleries[0]"
-                        class="absolute inset-0 appearance-none focus:outline focus:outline-0"
-                        />
-                    <div class="flex-1">
-                        <span class="block text-sm font-medium text-gray-900">{{ gallery.title }}</span>
-                        <span class="mt-1 block text-sm text-gray-600">{{ gallery.description }}</span>
-                        <span class="mt-6 block text-sm font-medium text-gray-900">{{ gallery.users }}</span>
-                    </div>
-                    <CircleCheck class="invisible size-5 text-indigo-600 group-has-[:checked]:visible" aria-hidden="true" />
+                        <input
+                            type="radio"
+                            name="gallery"
+                            v-model="galleryModel"
+                            :value="gallery.key"
+                            :checked="gallery === galleries[0]"
+                            class="absolute inset-0 appearance-none focus:outline focus:outline-0"
+                            />
+                        <div class="flex-1">
+                            <span class="block text-sm font-medium text-gray-900">{{ gallery.title }}</span>
+                            <span class="mt-1 block text-sm text-gray-600">{{ gallery.description }}</span>
+                            <span class="mt-6 block text-sm font-medium text-gray-900">{{ gallery.users }}</span>
+                        </div>
+                        <CircleCheck class="invisible size-5 text-indigo-600 group-has-[:checked]:visible" aria-hidden="true" />
                     </label>
                 </div>
             </fieldset>
@@ -51,7 +51,7 @@
                     @error="setError"
                     :multiple="true"
                     accept="image/*"
-                    :maxFileSize="10000000"
+                    :maxFileSize="15000000"
                     @select="onSelectedFiles"
                     >
                     <template #header="{ chooseCallback, uploadCallback, clearCallback, files, messages }">
@@ -83,7 +83,7 @@
 
                             </div>
                             <ProgressBar :value="totalSizePercent" :showValue="false" class="md:w-20rem h-1 w-full md:ml-auto">
-                                <span class="whitespace-nowrap">{{ totalSize }}B / 1Mb</span>
+                                <span class="whitespace-nowrap">{{ totalSize }}B / 10Mb</span>
                             </ProgressBar>
                         </div>
                     </template>

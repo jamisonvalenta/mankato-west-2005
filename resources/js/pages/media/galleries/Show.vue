@@ -4,12 +4,33 @@
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col rounded-xl p-4">
 
+            <fieldset class="">
+                <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4 mb-4">
+                    <Link
+                        v-for="gallery in galleries"
+                        :href="route('media.galleries.show', gallery.key)"
+                        :aria-label="gallery.title"
+                        :aria-description="`${gallery.description}`">
+                        <div
+                            class="group relative flex rounded-lg border border-gray-300 bg-white p-4"
+                            :class="{
+                                'outline outline-2  -outline-offset-2 outline-indigo-600 bg-indigo-50 cursor-pointer': galleryModel === gallery.key}"
+                             >
+                            <div class="flex-1">
+                                <span class="block text-sm font-medium text-gray-900">{{ gallery.title }} ({{ gallery.media.length }})</span>
+                                <span class="mt-1 block text-sm text-gray-600">{{ gallery.description }}</span>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </fieldset>
+
             <div class="grid grid-cols-2 mt-4 md:mt-8">
                 <Heading
-                        class=""
-                        :title="gallery.title"
-                        :description="gallery.description"
-                    />
+                    class=""
+                    :title="gallery.title"
+                    :description="gallery.description"
+                />
                 <div  class="text-right">
                     <Link :href="route('media.create', {gallery: gallery.key})">
                         <Button
@@ -22,6 +43,7 @@
                     </Link>
                 </div>
             </div>
+
 
 
             <div
@@ -48,31 +70,57 @@
                         },
                         content: {
                             class: [
-                                'relative max-h-[800px] min-h-[500px]',
-                                { 'flex-1 justify-center bg-black': fullScreen }
+                                'relative min-h-[500px]',
+                                { 'max-h-[800px] ': ! fullScreen },
+                                { 'flex-1 justify-center bg-black max-h-full': fullScreen },
                             ]
                         },
                         itemscontainer: 'h-full',
-                        items: 'h-full',
+                        items: 'h-full z-1',
                         item: 'flex h-full content-center align-items-center',
-                        thumbnails: 'absolute w-full left-0 bottom-0'
+                        thumbnails: 'absolute w-full left-0 bottom-0',
+                        footer: 'bg-black z-20'
                     }"
                 >
                     <template #item="slotProps">
-                        <AdvancedImage
-                            :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(900))"
-                            :alt="slotProps.item.alt"
-                            :className="
-                                ' shadow-lg ' +
-                                (fullScreen ? 'max-w-full h-auto' : 'max-h-full max-w-full')
-                            "
-                          />
-                        <!-- Preload next image -->
-                        <AdvancedImage
-                            v-if="images.hasOwnProperty(activeIndex + 1)"
-                            :cldImg="cld.image(images[activeIndex + 1].cloudinary_public_id).resize(thumbnail().height(900))"
-                            className="hidden"
-                          />
+                        <template v-if="fullScreen">
+                            <AdvancedImage
+                                :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(1200))"
+                                :alt="slotProps.item.alt"
+                                className="shadow-lg max-w-full h-auto"
+                              />
+                            <!-- Preload previous image -->
+                            <!-- Preload next image -->
+                            <AdvancedImage
+                                v-if="images.hasOwnProperty(activeIndex + 1)"
+                                :cldImg="cld.image(images[activeIndex + 1].cloudinary_public_id).resize(thumbnail().height(1200))"
+                                className="hidden"
+                              />
+                            <AdvancedImage
+                                v-if="images.hasOwnProperty(activeIndex - 1)"
+                                :cldImg="cld.image(images[activeIndex - 1].cloudinary_public_id).resize(thumbnail().height(1200))"
+                                className="hidden"
+                              />
+                        </template>
+                        <template v-else>
+                            <AdvancedImage
+                                :cldImg="cld.image(slotProps.item.cloudinary_public_id).resize(thumbnail().height(800))"
+                                :alt="slotProps.item.alt"
+                                className="shadow-lg max-h-full max-w-full"
+                              />
+                            <!-- Preload previous image -->
+                            <!-- Preload next image -->
+                            <AdvancedImage
+                                v-if="images.hasOwnProperty(activeIndex + 1)"
+                                :cldImg="cld.image(images[activeIndex + 1].cloudinary_public_id).resize(thumbnail().height(800))"
+                                className="hidden"
+                              />
+                            <AdvancedImage
+                                v-if="images.hasOwnProperty(activeIndex - 1)"
+                                :cldImg="cld.image(images[activeIndex - 1].cloudinary_public_id).resize(thumbnail().height(800))"
+                                className="hidden"
+                              />
+                        </template>
                     </template>
                     <template #thumbnail="slotProps">
                         <div class="grid gap-4 justify-center bg-black">
@@ -85,7 +133,7 @@
                         </div>
                     </template>
                     <template #footer>
-                        <div class="flex items-stretch bg-surface-950 text-white min-h-10 py-2">
+                        <div class="flex items-stretch bg-surface-950 text-white min-h-10 py-2 z-20">
                             <button type="button" @click="onThumbnailButtonClick" class="bg-transparent border-none rounded-none hover:bg-white/10 text-white inline-flex justify-center items-center cursor-pointer px-3">
                                 <GalleryHorizontal class="w-4 h-4 inline-block"/>
                             </button>
@@ -137,7 +185,7 @@ import { PhotoService } from '@/service/PhotoService';
 import { Link, usePage } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { GalleryHorizontal, Pause, Play, Maximize2, Minimize2 } from 'lucide-vue-next';
+import { GalleryHorizontal, Pause, Play, Maximize2, Minimize2, CircleCheck } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
@@ -145,6 +193,7 @@ import { AdvancedImage } from '@cloudinary/vue'
 
 
 const props = defineProps([
+    'galleries',
     'gallery',
     'media',
 ])
@@ -156,6 +205,8 @@ const cld = new Cloudinary({
     cloudName: page.props.cloudinary.cloud_name,
   },
 });
+
+const galleryModel = ref(props.gallery.key)
 
 const galleria = ref();
 
