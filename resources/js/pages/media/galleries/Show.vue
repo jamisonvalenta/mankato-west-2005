@@ -67,6 +67,12 @@
                                 (fullScreen ? 'max-w-full h-auto' : 'max-h-full max-w-full')
                             "
                           />
+                        <!-- Preload next image -->
+                        <AdvancedImage
+                            v-if="images.hasOwnProperty(activeIndex + 1)"
+                            :cldImg="cld.image(images[activeIndex + 1].cloudinary_public_id).resize(thumbnail().height(900))"
+                            className="hidden"
+                          />
                     </template>
                     <template #thumbnail="slotProps">
                         <div class="grid gap-4 justify-center bg-black">
