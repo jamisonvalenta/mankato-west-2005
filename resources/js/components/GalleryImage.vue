@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { computed, ref } from 'vue';
 import DeleteMedia from '@/pages/media/DeleteMedia.vue';
 import EditMedia from '@/pages/media/EditMedia.vue';
-import { AdvancedImage, lazyload } from '@cloudinary/vue';
+import { AdvancedImage, lazyload, placeholder } from '@cloudinary/vue';
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { Cloudinary } from '@cloudinary/url-gen';
 import { usePage } from '@inertiajs/vue3';
